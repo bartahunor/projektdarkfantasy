@@ -1,0 +1,25 @@
+.fejlec{
+    height: 60px;
+    background-color: black;
+    font-family: "Jacquard 24", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    text-align: center;
+    font-size: 4rem;
+    padding: 20px 0 20px 0;
+
+}
+
+.fejlec h1{
+    margin: 0;
+    padding: 0;
+}
+
+
+.felulet{
+    background-image: url(pictures/hatter.jpg);
+    background-size: cover;
+    height: 87vh;
+    background-color: black;
+}
