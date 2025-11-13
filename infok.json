@@ -1,5 +1,4 @@
-{
-  "cards": [
+[
     {
       "id":1,
       "text":"Belöknek a lenti alagútba, és rád zárják az ajtót, kizárva ezzel a nyíláson át beszűrődő természetes világosságot. Innentől kezdve kizárólag a falra rögzített fáklyáktól remélhetsz valamennyi fényt. Ahogy szemed hozzászokik a homályhoz, látod, hogy az alagút észak felé indul. Nagyot sóhajtasz a dolog igazságtalansága felett, majd elindulsz abba az irányba. Lapozz a 41-re.",
@@ -7,7 +6,7 @@
         { "text": "Lapozz a 41-re", "target": 41 }
       ],
       "enemy": null,
-      "effects": [],
+      "action": null,
       "items": [],
       "end": false
     },
@@ -18,7 +17,7 @@
         { "text": "Lapozz a 148-ra.", "target": 148 }
       ],
       "enemy": null,
-      "effects": [],
+      "action": null,
       "items": [],
       "end": false
     },
@@ -27,7 +26,7 @@
       "text": "Ahogy óvatosan a drótok között lépkedve eléred a Szobrot, az hirtelen eltünik! A következő pillanatban vészjósló morajlás hangzik fel a fejed fölött, és ahogy arra nézel, látod, hogy hatalmas szikladarabok kezdenek feléd zuhanni. A hatalmas súly porrá örli csontjaidat. Kalandod itt véget ér.",
       "choices": null,
       "enemy": null,
-      "effects": [],
+      "action": null,
       "items": [],
       "end": true
     },
@@ -36,7 +35,7 @@
       "text": "A kötél igen rossz állapotban van, és még félúton sem jársz, mikor elszakad... Kalandod itt véget ér.",
       "choices": null,
       "enemy": null,
-      "effects": [],
+      "action": null,
       "items": [],
       "end": true
     },
@@ -55,10 +54,33 @@
         }
       ],
       "enemy": null,
-      "effects": [],
+      "action": null,
+      "items": ["kötél"],
+      "end": false
+    },
+
+    
+
+
+    {
+      "id": 41,
+      "text": "Az alagút, bár folyamatosan jobbra-balra kanyarog, nagyjából mégis tartja az északi irányt, végül élesen oldalra kanyarodik, és ekkor majdnem belefutsz egy fekete köpenybe öltözött alakba. Tört tart a kezében, az arcán ülő tekintet rettegésről árulkodik! Rájössz, hogy nem te vagy az egyetlen, akit most próbára tesznek, és hogy mindketten ugyanazon Szobor után kutattok. A fickó rád veti magát, nyilvánvaló, hogy mielőbb végezni akar veled. Harcolnod kell!\n\nTolvaj\nÜGYESSÉG 7\nÉLETERŐ 6\n\nHa győzöl, lapozz a 85-re.",
+      "choices": [
+        {
+          "text": "Van nálad Aranykulcs?",
+          "condition": "has_item:aranykulcs",
+          "target": 110
+        },
+        {
+          "text": "Nincs kulcs, távozol észak felé",
+          "target": 14
+        }
+      ],
+      "enemy": null,
+      "action": "combat",
       "items": ["kötél"],
       "end": false
     }
-  ]
-}
+]
+
 
