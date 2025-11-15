@@ -6,10 +6,6 @@ async function start() {
   const response = await fetch('infok.json');
   allCards = await response.json();
   console.log('✓ Betöltve!');
-  
-  // Most már használhatod:
-  //showCard(1);
-  // stb...
 }
 
 function showCard(cardId) {
@@ -19,15 +15,17 @@ function showCard(cardId) {
         return;
     }
     console.log('Kártya:', currentCard.id);
-
-
+    
 
     const carouselItem = document.createElement('div');
     carouselItem.classList.add('carousel-item');
     carouselItem.innerHTML = `
         <div class="page-container">
             <div class="page left-page">
-                <div>
+                <div class="page-title">
+                    ${String(currentCard.id)}. oldal
+                </div>
+                <div class="page-content">
                     ${currentCard.text || ''}
                 </div>
             </div>
@@ -36,8 +34,10 @@ function showCard(cardId) {
                     ${currentCard.choices ? currentCard.choices.map((choice, index) => 
                         `<p>${index + 1}. ${choice.text}</p>`
                     ).join('') : ''}
+                    ${currentCard.choices ? currentCard.choices.map((choice, index) => 
+                        `<button type="button" class="next-btn" onclick="showCard(${currentCard.choices[index].target})">${String(currentCard.choices[index].target)}.</button>`
+                    ).join('') : ''}
                 </div>
-                <button type="button" class="next-btn" onclick="showCard(${currentCard.choices[0].target})">KÖVETKEZŐ</button>
             </div>
         </div>
     `;

@@ -67,16 +67,15 @@
       "text": "Az alagút, bár folyamatosan jobbra-balra kanyarog, nagyjából mégis tartja az északi irányt, végül élesen oldalra kanyarodik, és ekkor majdnem belefutsz egy fekete köpenybe öltözött alakba. Tört tart a kezében, az arcán ülő tekintet rettegésről árulkodik! Rájössz, hogy nem te vagy az egyetlen, akit most próbára tesznek, és hogy mindketten ugyanazon Szobor után kutattok. A fickó rád veti magát, nyilvánvaló, hogy mielőbb végezni akar veled. Harcolnod kell!\n\nTolvaj\nÜGYESSÉG 7\nÉLETERŐ 6\n\nHa győzöl, lapozz a 85-re.",
       "choices": [
         {
-          "text": "Van nálad Aranykulcs?",
-          "condition": "has_item:aranykulcs",
-          "target": 110
-        },
-        {
-          "text": "Nincs kulcs, távozol észak felé",
-          "target": 14
+          "text": "Ha győzöl, lapozz a 85-re.",
+          "target": 85
         }
       ],
-      "enemy": null,
+      "enemy": {
+          "name": "Tolvaj",
+          "skill": 7,
+          "stamina": 6
+      },
       "action": "combat",
       "items": ["kötél"],
       "end": false

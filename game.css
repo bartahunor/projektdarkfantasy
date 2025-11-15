@@ -312,7 +312,12 @@
             padding: 20px 0 20px 20px;
             &:after {
               content: counter(curpage);
-            }
+            };
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: auto;
           }
 
           .right-page {
@@ -328,6 +333,16 @@
     }
   }
 }
+
+.page-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+
 
 @media (width < 748px) {
   .container {
