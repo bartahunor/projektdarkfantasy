@@ -3,7 +3,7 @@ let currentCard = null;
 
 async function start() {
   // Betöltés
-  const response = await fetch('infok.json');
+  const response = await fetch('converter/infok_generated.json');
   allCards = await response.json();
   console.log('✓ Betöltve!');
 }
@@ -44,6 +44,16 @@ function showCard(cardId) {
 
     const carousel = document.querySelector('.carousel');
     carousel.appendChild(carouselItem);
+
+    // ⭐ IDE KELL EZ A SOR! ⭐
+    const totalSlides = carousel.querySelectorAll('.carousel-item').length;
+    carousel.style.setProperty('--slides', totalSlides);
+    
+    // Opcionális: automatikus görgetés az új oldalra
+    carouselItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
 }
+
+
+
 
 start();  // Indítás
