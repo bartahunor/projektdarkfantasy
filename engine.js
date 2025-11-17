@@ -79,7 +79,6 @@ nextBtn.addEventListener("click", () => {
 });
 
 
-
 function getSelectedCharacterIndex() {
     return currentSlide; // a mini slider aktuális pozíciója
 }
@@ -97,6 +96,10 @@ function acceptCharacter() {
     };
 
     console.log("Kiválasztott karakter:", selectedCharacter);
+
+    const nextBtn = document.getElementById("nextBtn");
+    nextBtn.style.display = "inline-block";
+
 }
 
 
