@@ -56,4 +56,71 @@ function showCard(cardId) {
 
 
 
+// karakter SLIDER
+const miniViewport = document.querySelector(".mini-slider__viewport");
+const miniSlides = document.querySelectorAll(".mini-slide");
+const prevBtn = document.querySelector(".mini-prev");
+const nextBtn = document.querySelector(".mini-next");
+
+let currentSlide = 0;
+
+function updateMiniSlider() {
+    miniViewport.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+prevBtn.addEventListener("click", () => {
+    currentSlide = (currentSlide - 1 + miniSlides.length) % miniSlides.length;
+    updateMiniSlider();
+});
+
+nextBtn.addEventListener("click", () => {
+    currentSlide = (currentSlide + 1) % miniSlides.length;
+    updateMiniSlider();
+});
+
+
+
+function getSelectedCharacterIndex() {
+    return currentSlide; // a mini slider aktuális pozíciója
+}
+
+let selectedCharacter = null;
+
+function acceptCharacter() {
+    const index = getSelectedCharacterIndex();
+    const slide = miniSlides[index];
+    
+    selectedCharacter = {
+        name: slide.querySelector("h2").innerText,
+        description: slide.querySelector("p").innerText,
+        image: slide.querySelector("img").src
+    };
+
+    console.log("Kiválasztott karakter:", selectedCharacter);
+}
+
+
+/*<div id="chosen-character"></div>     
+function displayChosenCharacter() {
+    if (!selectedCharacter) return;
+
+    const box = document.getElementById("chosen-character");
+    box.innerHTML = `
+        <img src="${selectedCharacter.image}" style="width:120px; border-radius:50%; border:3px solid #000;">
+        <h3>${selectedCharacter.name}</h3>
+        <p>${selectedCharacter.description}</p>
+    `;
+}
+    displayChosenCharacter(); */
+
+
+
+
+
 start();  // Indítás
+
+
+
+
+
+

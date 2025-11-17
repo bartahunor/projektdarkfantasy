@@ -357,14 +357,6 @@ body{
   width: fit-content;
 }
 
-.next-btn{
-  width: 40%;
-  margin-right: 10px;
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: auto;
-  padding: 2px;
-}
 
 
 
@@ -455,3 +447,106 @@ body{
     animation: none;
   }
 }
+
+
+/* karakter slide*/
+
+.mini-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.mini-prev, .mini-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;          /* háttér NINCS */
+    border: none;              /* keret NINCS */
+    padding: 0;                /* ne legyen extra méret */
+    cursor: pointer;
+    z-index: 50;
+}
+
+/* kép méret */
+.mini-prev img,
+.mini-next img {
+    width: 40px;               /* itt állítod a nyíl méretét */
+    height: 40px;
+    object-fit: contain;
+    rotate: 0deg;
+}
+
+.mini-prev {
+    left: 5px;
+}
+
+.mini-prev img{
+  transform: scaleX(-1);
+}
+
+
+.mini-next {
+    right: 5px;
+}
+
+
+/* viewport */
+.mini-slider__viewport {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    transition: transform 0.4s ease;
+}
+
+/* slide */
+.mini-slide {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* kör alakú képek */
+.mini-slide img {
+    width: 65%;
+    height: auto;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #000;
+    box-shadow: 0 0 10px #000;
+}
+
+.mini-slider h2{
+  margin-left: 10px;
+}
+
+.mini-slider p{
+  width: 90%;
+}
+
+.button-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* két szélre teszi */
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.accept-btn {
+    width: 40%;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.next-btn {
+    width: 40%;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 5px;
+}
+
