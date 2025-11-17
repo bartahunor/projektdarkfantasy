@@ -73,8 +73,12 @@
     "text": "Az ajtó egy nyugat felé haladó alagútba nyílik. Követed, míg egy elágazáshoz nem érsz. Ha észak felé akarsz fordulni, lapozz a 172-re. Ha nem akarsz letérni ebből a járatból. lapozz a 168-ra.",
     "choices": [
       {
-        "text": "észak felé akarsz fordulni",
+        "text": "Ha észak felé akarsz fordulni, lapozz a 172-re.",
         "target": 172
+      },
+      {
+        "text": "Ha nem akarsz letérni ebből a járatból. lapozz a 168-ra.",
+        "target": 168
       }
     ],
     "enemy": null,
@@ -87,11 +91,11 @@
     "text": "Mikor végül eléred a verem alját, semmit nem látsz. A falakat végigtapogatva annyit meg tudsz állapítani, hogy az alagút kelet felé megy tovább. Ha a vaksötét ellenére is bevállalod ezt a járatot, lapozz a 165-re. Ha inkább visszatérnél a fenti folyosóra és északnak folytatnád az utad, lapozz a 96-ra.",
     "choices": [
       {
-        "text": "a vaksötét ellenére is bevállalod ezt a járatot",
+        "text": "Ha a vaksötét ellenére is bevállalod ezt a járatot, lapozz a 165-re.",
         "target": 165
       },
       {
-        "text": "inkább visszatérnél a fenti folyosóra és északnak folytatnád az utad",
+        "text": "Ha inkább visszatérnél a fenti folyosóra és északnak folytatnád az utad, lapozz a 96-ra.",
         "target": 96
       }
     ],
@@ -110,14 +114,23 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": [
+      {
+        "healthChange": 0
+      }
+    ],
     "items": [],
     "end": false
   },
   {
     "id": 9,
     "text": "Elsietsz a halott fenevad teteme mellett és gyorsan az északi járathoz lépsz. Lapozz az 52-rc.",
-    "choices": null,
+    "choices": [
+      {
+        "text": "Lapozz az 52-re.",
+        "target": 52
+      }
+    ],
     "enemy": null,
     "action": null,
     "items": [],
@@ -128,11 +141,11 @@
     "text": "Az ajtó recsegve nyílik ki és fed fel egy helyiséget, mely alig szélesebb a folyosónál. Hosszában két részre van osztva. Az egyik oldalon egy cellát látsz, míg a másik egyenesen egy ajtóhoz tart az északi falon. A fogdában egy rongyos férfi áll, aki meredten néz téged és fenyegető mozdulatokat tesz. irányodba. Gyanítod, hogy szabadságáért cserébe esetleg hasznos információkkal tudna szolgálni számodra. Ha beszélni akarsz vele, lapozz a 149-re. Ha jobban éreznéd magad, ha holtan tudhatnád magad mögött, ezért a cella rácsai közt átnyúlva kardélre hánynád, lapozz a 24-re.",
     "choices": [
       {
-        "text": "beszélni akarsz vele",
+        "text": "Ha beszélni akarsz vele, lapozz a 149-re.",
         "target": 149
       },
       {
-        "text": "jobban éreznéd magad, ha holtan tudhatnád magad mögött, ezért a cella rácsai közt átnyúlva kardélre hánynád",
+        "text": "a jobban éreznéd magad, ha holtan tudhatnád magad mögött, ezért a cella rácsai közt átnyúlva kardélre hánynád, lapozz a 24-re.",
         "target": 24
       }
     ],
@@ -146,11 +159,11 @@
     "text": "Elérsz az alagút végére, de semmi feltünöt nem látsz. Ha tovább akarsz keresgélni, lapozz a 38-ra. Ha inkább visszatérnél az előző elágazáshoz és ott keletre indulnál, lapozz a 31-re.",
     "choices": [
       {
-        "text": "tovább akarsz keresgélni",
+        "text": "Ha tovább akarsz keresgélni, lapozz a 38-ra.",
         "target": 38
       },
       {
-        "text": "inkább visszatérnél az előző elágazáshoz és ott keletre indulnál",
+        "text": "Ha inkább visszatérnél az előző elágazáshoz és ott keletre indulnál, lapozz a 31-re.",
         "target": 31
       }
     ],
@@ -164,21 +177,21 @@
     "text": "A válladra csapod a köpenyt, de legnagyobb meglepetésedre semmi nem történik. Mivel egy kicsit azért hűvös van, nem dobod le. Bár nem tudod, de ez a Lebegés Köpenye. Ha fel akarod próbálni a gyűrűt, és még nem tetted meg, lapozz a 119-re. Amennyiben a folyadék még az üvegben van, és most felhajtanád, lapozz a 71-re. Ha bezárnád a csapóajtót és az ajtón kilépve észak felé távoznál, lapozz a 80-ra.",
     "choices": [
       {
-        "text": "fel akarod próbálni a gyűrűt, és még nem tetted meg",
+        "text": "Ha fel akarod próbálni a gyűrűt, és még nem tetted meg, lapozz a 119-re.",
         "target": 119
       },
       {
-        "text": "bezárnád a csapóajtót és az ajtón kilépve észak felé távoznál",
+        "text": "Amennyiben a folyadék még az üvegben van, és most felhajtanád, lapozz a 71-re.",
+        "target": 71
+      },
+      {
+        "text": "Ha bezárnád a csapóajtót és az ajtón kilépve észak felé távoznál, lapozz a 80-ra.",
         "target": 80
       }
     ],
     "enemy": null,
     "action": null,
-    "items": [
-      "köpeny",
-      "gyűrű",
-      "üveg"
-    ],
+    "items": [],
     "end": false
   },
   {
@@ -186,7 +199,7 @@
     "text": "A zárba helyezed a kulcsot, de az sajnos nem illik bele, így nincs más választásod, minthogy megpróbáld betörni. Lapozz a 196-ra.",
     "choices": [
       {
-        "text": "Lapozz a 196-re",
+        "text": "Lapozz a 196-ra.",
         "target": 196
       }
     ],
@@ -214,16 +227,18 @@
     "text": "Az áramlat túl erős, és tovább sodor egy hid alá. Magad elött megpillantasz egy sziklát, és megpróbálod elkapni. Tedd próbára SZERENCSED! Ha szerencséd van, lapozz a 92-re Ha nincs, lapozz a 132-re.",
     "choices": [
       {
-        "text": "szerencséd van",
+        "text": "Ha szerencséd van, lapozz a 92-re.",
+        "condition": "fortunresult == true",
         "target": 92
       },
       {
-        "text": "nincs",
+        "text": "Ha nincs, lapozz a 132-re.",
+        "condition": "fortunresult == false",
         "target": 132
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "tryFortune",
     "items": [],
     "end": false
   },
@@ -237,7 +252,11 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": [
+      {
+        "healthChange": -2
+      }
+    ],
     "items": [],
     "end": false
   },
@@ -251,7 +270,11 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": [
+      {
+        "fortuneChange": -1
+      }
+    ],
     "items": [],
     "end": false
   },
@@ -260,7 +283,8 @@
     "text": "Amint belépsz a szobába, rémülten eszmélsz rá, hogy előbb alaposan szét kellett volna nézned a plafonon ugyanis egy hatalmas Pók kapaszkodik, ami minden szemével téged bámul. Négy ezüstszínű gubó lóg mellette, és összeszorul a szíved, mikor rájössz, hogy két ember, egy Törpe és egy Elf van beléjük csavarva, akik bizonyára leendő ellenfeled legutóbbi áldozatai voltak, és már csak arra várnak, hogy a bestia egy jót lakmározzon belőlük. A Pók némán a padlóra pottyan, csáprágói mohón feléd nyúlnak. Óriáspók",
     "choices": [
       {
-        "text": "végzel ezzel a teremtménnyel",
+        "text": "Ha végzel ezzel a teremtménnyel, lapozz a 94-re.",
+        "condition": "healthpoint != 0",
         "target": 94
       }
     ],
@@ -278,16 +302,18 @@
     "text": "Igyekezeted, hogy szilárd talajra juss, hiábavalónak tűnik, ám teszel még egy utolsó, kétségbeesett próbálkozást a kijárat felé veted magad. Tedd próbára SZERENCSED! Ha szerencséd van, lapozz a 176-ra. Ha nines, lapozz a 151-re.",
     "choices": [
       {
-        "text": "szerencséd van",
+        "text": "Ha szerencséd van, lapozz a 176-ra.",
+        "condition": "fortunresult == true",
         "target": 176
       },
       {
-        "text": "nines",
+        "text": "Ha nines, lapozz a 151-re.",
+        "condition": "fortunresult == false",
         "target": 151
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "tryFortune",
     "items": [],
     "end": false
   },
@@ -319,15 +345,17 @@
     "text": "Az ajtó egy kis terembe nyílik. Egyik sarkában, egy kosárban egy hatalmas, kutyaszerű teremtmény hever. A szemben lévő falon egy ajtót látsz, mely mellett szögre akasztva egy Bronz Kulcs lóg hívogatóan. Ha megpróbálsz csendben átlopózni a helyiségen, lapozz a 81-re. Ha semmiképp nem akarod felkelteni a kutyát, és az ajtó becsukása után inkább visszatérnél az elágazáshoz, hogy észak felé folytasd az utad. lapozz a 108-ra.",
     "choices": [
       {
-        "text": "megpróbálsz csendben átlopózni a helyiségen",
+        "text": "Ha megpróbálsz csendben átlopózni a helyiségen, lapozz a 81-re.",
         "target": 81
+      },
+      {
+        "text": "Ha semmiképp nem akarod felkelteni a kutyát, és az ajtó becsukása után inkább visszatérnél az elágazáshoz, hogy észak felé folytasd az utad. lapozz a 108-ra.",
+        "target": 108
       }
     ],
     "enemy": null,
     "action": null,
-    "items": [
-      "bronz kulcs"
-    ],
+    "items": [],
     "end": false
   },
   {
@@ -341,9 +369,7 @@
     ],
     "enemy": null,
     "action": null,
-    "items": [
-      "köpeny"
-    ],
+    "items": [],
     "end": false
   },
   {
@@ -388,11 +414,11 @@
     "text": "Egy hatalmas völgy lábánál állsz, melyet egy gyors folyású folyó vájt ki. Próbálsz valami megoldást találni az átkelésre. de csak egy kicsi, eléggé rozoga és korhadt hidat látsz. Ahogy megközelíted, a látod, amint két óriási termesz eszi a fát. Hófehér testükön igen nyugtalanítóan hat két vérvörös szemük. A lények bármelyike bármikor beléd marhatna. Ha sietsz, talán még sikerül átkelned rajta azelőtt, hogy végleg összeroskadna. A másik lehetőséged, hogy megpróbálsz átúszni a sebes folyón. Ha az első megoldást választod, lapozz a 40-re. Ha úgy gondolod, elég jó úszó vagy, és ezzel próbálkoznál, lapozz a 2-re.",
     "choices": [
       {
-        "text": "sietsz, talán még sikerül átkelned rajta azelőtt, hogy végleg összeroskadna. A másik lehetőséged, hogy megpróbálsz átúszni a sebes folyón. Ha az első megoldást választod",
+        "text": "Ha az első megoldást választod lapozz a 40-re",
         "target": 40
       },
       {
-        "text": "úgy gondolod, elég jó úszó vagy, és ezzel próbálkoznál",
+        "text": "Ha úgy gondolod, elég jó úszó vagy, és ezzel próbálkoznál, lapozz a 2-re",
         "target": 2
       }
     ],
@@ -434,11 +460,11 @@
     "text": "A járat nyugati irányba indul, ám hamarosan északnak fordul. Végül elérsz egy ajtóig. mely a keleti falban áll. Ha be akarsz nyitni rajta, lapozz a 124-re. Ha a folyosón folytatnád az utad, lapozz a 129-re.",
     "choices": [
       {
-        "text": "be akarsz nyitni rajta",
+        "text": "Ha be akarsz nyitni rajta, lapozz a 124-re.",
         "target": 124
       },
       {
-        "text": "a folyosón folytatnád az utad",
+        "text": "Ha a folyosón folytatnád az utad, lapozz a 129-re.",
         "target": 129
       }
     ],
@@ -480,11 +506,11 @@
     "text": "Az alagút egy ideig kanyarog, de végig észak felé megy. Hamarosan egy ajtó jelenik meg a jobb oldali falban. Ha megnézed, nyitva van-e, lapozz az 5-re. Ha inkább hagynád az ajtót és tovább folytatnád az utadat, lapozz a 14-re.",
     "choices": [
       {
-        "text": "megnézed, nyitva van-e",
+        "text": "Ha megnézed, nyitva van-e, lapozz az 5-re.",
         "target": 5
       },
       {
-        "text": "inkább hagynád az ajtót és tovább folytatnád az utadat",
+        "text": "Ha inkább hagynád az ajtót és tovább folytatnád az utadat, lapozz a 14-re.",
         "target": 14
       }
     ],
@@ -498,19 +524,17 @@
     "text": "A fiola erős mentaillatot áraszt magából. Ha meg akarod inni, lapozz a 102-re. Ha inkább hagyod, ahol van, lapozz a 169-re.",
     "choices": [
       {
-        "text": "meg akarod inni",
+        "text": "Ha meg akarod inni, lapozz a 102-re.",
         "target": 102
       },
       {
-        "text": "inkább hagyod, ahol van",
+        "text": "Ha inkább hagyod, ahol van, lapozz a 169-re.",
         "target": 169
       }
     ],
     "enemy": null,
     "action": null,
-    "items": [
-      "fiola"
-    ],
+    "items": [],
     "end": false
   },
   {
@@ -527,7 +551,7 @@
     "text": "Semmit nem találsz, így északra folytatod az utad. Lapozz a 98-ra.",
     "choices": [
       {
-        "text": "Lapozz a 98-re",
+        "text": "Lapozz a 98-ra",
         "target": 98
       }
     ],
@@ -541,16 +565,18 @@
     "text": "A törmelékek közt kutatva belerúgsz valami fémes dologba. Miután eltakarítottad a környékéről a szemetet, egy masszív csapóajtó körvonalai rajzolódnak ki elötted a padlóban. Nem tudod megállapítani, hogy túl rozsdás-e ahhoz, hogy fel lehessen nyitni, te mindenesetre megpróbálod. Tedd próbára SZERENCSED! Ha szerencsés vagy, lapozz a 199-re. Hogyha nincs szerencséd, lapozz a 130-ra.",
     "choices": [
       {
-        "text": "szerencsés vagy",
+        "text": "Ha szerencséd van, lapozz a 199-re.",
+        "condition": "fortunresult == true",
         "target": 199
       },
       {
-        "text": "nincs szerencséd",
+        "text": "Ha nines, lapozz a 130-ra.",
+        "condition": "fortunresult == false",
         "target": 130
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "tryFortune",
     "items": [],
     "end": false
   },
@@ -559,16 +585,18 @@
     "text": "Átkutatod a zsákutcát, remélve, hogy találsz valamit. Tedd próbára SZERENCSED! Hogyha szerencsés vagy, lapozz a 114-re. Ha nincs szerencséd, lapozz az 55-re.",
     "choices": [
       {
-        "text": "szerencsés vagy",
+        "text": "Ha szerencséd van, lapozz a 114-re.",
+        "condition": "fortunresult == true",
         "target": 114
       },
       {
-        "text": "nincs szerencséd",
+        "text": "Ha nines, lapozz a 55-re.",
+        "condition": "fortunresult == false",
         "target": 55
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "tryFortune",
     "items": [],
     "end": false
   },
@@ -577,15 +605,17 @@
     "text": "A szobába belépve az eddig látott legcivilizáltabb teremben találod magad. A falakat fa burkolólapok borítják, fáklyák helyett itt egy lágy fényt árasztó gömb biztosítja a világítást, mely a szoba közepén álló asztal felett lebeg. E mellett egy férfi görnyedt alakját veszed észre. Miközben becsukod magad mögött az ajtót, az öregember felemelkedik, és üdvözlően feléd nyújtja mindkét karját. Hangja vékony és remegő, és csak ekkor jössz rá, mennyire vén is lehet. Megtaláltad a Szobrot? kérdezi tőled. Ha nálad van a tárgy, lapozz a 91-re. Ha nincs nálad, lapozz a 131-re. Ha nem bizol meg benne és rá akarsz támadni, lapozz a 77-re.",
     "choices": [
       {
-        "text": "nálad van a tárgy",
+        "text": "Ha nálad van a tárgy, lapozz a 91-re.",
+        "condition": "has_item:szobor",
         "target": 91
       },
       {
-        "text": "nincs nálad",
+        "text": "Ha nincs nálad, lapozz a 131-re.",
+        "condition": "has_item:szobor == false",
         "target": 131
       },
       {
-        "text": "nem bizol meg benne és rá akarsz támadni",
+        "text": "Ha nem bizol meg benne és rá akarsz támadni, lapozz a 77-re.",
         "target": 77
       }
     ],
@@ -599,39 +629,37 @@
     "text": "Miközben a termeszektől nyüzsgő építményen haladsz, az baljósan recseg-ropog a talpad alatt. Minden egyes lépéssel újabb darabjai esnek bele a vizbe. Végül már csak egyetlen kötél marad épen, ami az utolsó deszkadarabot tartja. Tedd próbára sZERENCSED! Ha szerencsés vagy, lapozz a 60-ra. Ha nem, lapozz a 75-re.",
     "choices": [
       {
-        "text": "szerencsés vagy",
+        "text": "Ha szerencséd van, lapozz a 60-ra.",
+        "condition": "fortunresult == true",
         "target": 60
       },
       {
-        "text": "nem",
+        "text": "Ha nines, lapozz a 75-re.",
+        "condition": "fortunresult == false",
         "target": 75
       }
     ],
     "enemy": null,
-    "action": null,
-    "items": [
-      "kötél"
-    ],
+    "action": "tryFortune",
+    "items": [],
     "end": false
   },
   {
     "id": 41,
-    "text": "Az alagút, bár folyamatosan jobbra-balra kanyarog, nagyjából mégis tartja az északi irányt, végül élesen oldalra kanyarodik, és ekkor majdnem belefutsz egy fekete köpenybe öltözött alakba. Tört tart a kezében, az arcán ülő tekintet rettegésről árulkodik! Rájössz, hogy nem te vagy az egyetlen, akit most próbára tesznek, és hogy mindketten ugyanazon Szobor után kutattok. A fickó rád veti magát, nyilvánvaló, hogy mielőbb végezni akar veled. Harcolnod kell! Tolvaj",
+    "text": "Az alagút, bár folyamatosan jobbra-balra kanyarog, nagyjából mégistartja az északi irányt, végül élesen oldalra kanyarodik, és ekkor majdnembelefutsz egy fekete köpenybe öltözött alakba. Tört tart a kezében, az arcánülő tekintet rettegésről árulkodik! Rájössz, hogy nem te vagy az egyetlen, akitmost próbára tesznek, és hogy mindketten ugyanazon Szobor után kutattok. Afickó rád veti magát, nyilvánvaló, hogy mielőbb végezni akar veled. Harcolnodkell!\n\nTolvaj\nÜGYESSÉG 7\nÉLETERŐ 6\n\nHa győzöl, lapozz a 85-re.",
     "choices": [
       {
-        "text": "győzöl",
+        "text": "Ha győzöl, lapozz a 85-re.",
         "target": 85
       }
     ],
     "enemy": {
-      "name": "Tolvaj",
-      "skill": 7,
-      "stamina": 6
+        "name": "Tolvaj",
+        "skill": 7,
+        "stamina": 6
     },
     "action": "combat",
-    "items": [
-      "köpeny"
-    ],
+    "items": [],
     "end": false
   },
   {
@@ -659,9 +687,7 @@
     ],
     "enemy": null,
     "action": null,
-    "items": [
-      "köpeny"
-    ],
+    "items": [],
     "end": false
   },
   {
@@ -683,8 +709,12 @@
     "text": "",
     "choices": [
       {
-        "text": "be akarsz nyitni az ajtón",
+        "text": "Ha be akarsz nyitni az ajtón, lapozz a 90-re.",
         "target": 90
+      },
+      {
+        "text": "Ha tovább mennél keleti irányba, lapozz a 16-ra.",
+        "target": 16
       }
     ],
     "enemy": null,
@@ -711,19 +741,19 @@
     "text": "Az ajtóhoz lépsz és kezelésbe veszed a hatalmas zárat: tekerni kezded a tárcsákat, míg a helyes kombinációt nem sikerül beállítanod rajta. Ahogy az utolsót is a megfelelő helyzetbe fordítod, az ajtó kinyilik és egy szoba tárul fel előtted, melynek falait könyvekkel megrakott polcok szegélyezik Egy könyvtárban találod magad. A középen álló asztalon három nyitott könyvet látsz.. Ha a pirosba akarsz beleolvasni, lapozz az 59-re. Hogyha a kékre vagy kíváncsi, lapozz a 104-re. Ha a zöld érdekel, lapozz a 88-ra. Ha nem tudsz olvasni és úgy döntesz, távozol az északi ajtón át, lapozz a 10-re.",
     "choices": [
       {
-        "text": "a pirosba akarsz beleolvasni",
+        "text": "Ha a pirosba akarsz beleolvasni, lapozz az 59-re.",
         "target": 59
       },
       {
-        "text": "a kékre vagy kíváncsi",
+        "text": "Hogyha a kékre vagy kíváncsi, lapozz a 104-re.",
         "target": 104
       },
       {
-        "text": "a zöld érdekel",
+        "text": "Ha a zöld érdekel, lapozz a 88-ra.",
         "target": 88
       },
       {
-        "text": "nem tudsz olvasni és úgy döntesz, távozol az északi ajtón át",
+        "text": "Ha nem tudsz olvasni és úgy döntesz, távozol az északi ajtón át, lapozz a 10-re.",
         "target": 10
       }
     ],
@@ -756,7 +786,11 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": [
+      {
+        "healthChange": 4
+      }
+    ],
     "items": [],
     "end": false
   },
@@ -771,19 +805,19 @@
     ],
     "enemy": null,
     "action": null,
-    "items": [],
+    "items": [ "aranytallér, aranytallér, Pergamenen lévő számok: 15, 10, 22"],
     "end": false
   },
   {
     "id": 51,
-    "text": "Egy kis helyiségbe nyitsz be, mely első ránézésre nem tartalmaz semmi mást, csak nagy halom törmeléket a padlón. Ahogy beljebb lépsz, kellemetlen szag csapja meg az orrodat, és egy éles, magas és amenynyire meg tudod állapítani &#8211; dühödt visitás kezd egyre erősödni. Végül egy rikoltás kiséretében két hatalmas Denevér ereszti el a plafont a szoba két sarkában, és feléd kezdenek repülni. Ahogy ösztönösen lebuksz, sikerül észrevenned a lények vicsorgó agyarait, melyek készek szétcincálni a torkodat. Ha gyorsan kihátrálsz, majd becsapod magad mögött a bejárati ajtót, lapozz a 80-ra. Hogyha megveted a lábad és megküzdesz ezekkel a szörnyű teremtményekkel, lapozz a 140-re.",
+    "text": "Egy kis helyiségbe nyitsz be, mely első ránézésre nem tartalmaz semmi mást, csak nagy halom törmeléket a padlón. Ahogy beljebb lépsz, kellemetlen szag csapja meg az orrodat, és egy éles, magas és amenynyire meg tudod állapítani &; dühödt visitás kezd egyre erősödni. Végül egy rikoltás kiséretében két hatalmas Denevér ereszti el a plafont a szoba két sarkában, és feléd kezdenek repülni. Ahogy ösztönösen lebuksz, sikerül észrevenned a lények vicsorgó agyarait, melyek készek szétcincálni a torkodat. Ha gyorsan kihátrálsz, majd becsapod magad mögött a bejárati ajtót, lapozz a 80-ra. Hogyha megveted a lábad és megküzdesz ezekkel a szörnyű teremtményekkel, lapozz a 140-re.",
     "choices": [
       {
-        "text": "gyorsan kihátrálsz, majd becsapod magad mögött a bejárati ajtót",
+        "text": "Ha gyorsan kihátrálsz, majd becsapod magad mögött a bejárati ajtót, lapozz a 80-ra.",
         "target": 80
       },
       {
-        "text": "megveted a lábad és megküzdesz ezekkel a szörnyű teremtményekkel",
+        "text": "Hogyha megveted a lábad és megküzdesz ezekkel a szörnyű teremtményekkel, lapozz a 140-re.",
         "target": 140
       }
     ],
@@ -811,20 +845,24 @@
     "text": "A part teljesen kihaltnak tűnik, te pedig eléggé óvatlanul járkálsz, így a homokban bujkáló apró, bíbor rák minden gond nélkül csíp bele a lábadba. Vesztesz 2 ÉLETERŐ pontot. A három ajtó bármelyiken át távozhatsz. Ha az északi ajtón át távoznál, lapozz a 87-re. Ha a nyugatin lépnél be, lapozz a 6-ra. Ha a keletivel próbálnál szerencsét, lapozz a 111-re.",
     "choices": [
       {
-        "text": "az északi ajtón át távoznál",
+        "text": "Ha az északi ajtón át távoznál, lapozz a 87-re.",
         "target": 87
       },
       {
-        "text": "a nyugatin lépnél be",
+        "text": "Ha a nyugatin lépnél be, lapozz a 6-ra.",
         "target": 6
       },
       {
-        "text": "a keletivel próbálnál szerencsét",
+        "text": "Ha a keletivel próbálnál szerencsét, lapozz a 111-re",
         "target": 111
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": [
+      {
+        "healthChange": -2
+      }
+    ],
     "items": [],
     "end": false
   },
@@ -838,7 +876,11 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": [
+      {
+        "healthChange": -2
+      }
+    ],
     "items": [],
     "end": false
   },
@@ -875,40 +917,20 @@
     "text": "Egy alkov mellett vezet el az utad, melyben három kis üveget látsz. Az elsőben tiszta, átlátszó, szagtalan folyadékot látsz és szagolsz. A másodikban aranyszínű anyag van, melynek enyhén édeskés az illata, míg a harmadik tartalma faközöld színű és kesernyés, csípős szaga van. Ha felhajtanád az első üveg tartalmát, lapozz a 139-re. Ha a második érdekel, lapozz a 150-re. Hogyha a harmadik a szimpatikus, lapozz a 197-re. Ha nem mered megkóstolni öket, lapozz a 29-re és folytasd az utad keletre.",
     "choices": [
       {
-        "text": "felhajtanád az első üveg tartalmát",
+        "text": "Ha felhajtanád az első üveg tartalmát, lapozz a 139-re.",
         "target": 139
       },
       {
-        "text": "a második érdekel",
+        "text": " Ha a második érdekel, lapozz a 150-re.",
         "target": 150
       },
       {
-        "text": "a harmadik a szimpatikus",
+        "text": "Hogyha a harmadik a szimpatikus, lapozz a 197-re.",
         "target": 197
       },
       {
-        "text": "nem mered megkóstolni öket",
+        "text": "Ha nem mered megkóstolni öket, lapozz a 29-re és folytasd az utad keletre.",
         "target": 29
-      }
-    ],
-    "enemy": null,
-    "action": null,
-    "items": [
-      "üveg"
-    ],
-    "end": false
-  },
-  {
-    "id": 58,
-    "text": "Ahogy belépsz a szobába, a padlónak azon része, melyre ráléptél. lezuhan. Tedd próbára SZERENCSED! Hogyha szerencsés vagy, lapozz a 176-ra. Ha nem, lapozz a 19-re.",
-    "choices": [
-      {
-        "text": "szerencsés vagy",
-        "target": 176
-      },
-      {
-        "text": "nem",
-        "target": 19
       }
     ],
     "enemy": null,
@@ -917,11 +939,39 @@
     "end": false
   },
   {
-    "id": 59,
-    "text": "Felemeled a piros színű könyvet és átfutod a tartalmát, remélve, hogy találsz benne valami hasznosat, amit felhasználhatnál a labirintusból való kijutásra. A szöveg azonban sajnos ősi Elf nyelven íródott, igy egyetlen rúnáját sem érted. Ha még nem tetted, most belenézhetsz a kék &#8211; lapozz a 104-re vagy a zöld lapozz a 88-ra könyvbe. Hogyha meguntad az olvasást és távoznál az északi ajtón át, lapozz a 10-re.",
+    "id": 58,
+    "text": "Ahogy belépsz a szobába, a padlónak azon része, melyre ráléptél. lezuhan. Tedd próbára SZERENCSED! Hogyha szerencsés vagy, lapozz a 176-ra. Ha nem, lapozz a 19-re.",
     "choices": [
       {
-        "text": "még nem tetted, most belenézhetsz a kék &#8211; lapozz a 104-re vagy a zöld lapozz a 88-ra könyvbe. Hogyha meguntad az olvasást és távoznál az északi ajtón át",
+        "text": "Ha szerencséd van, lapozz a 176-ra.",
+        "condition": "fortunresult == true",
+        "target": 176
+      },
+      {
+        "text": "Ha nines, lapozz a 19-re.",
+        "condition": "fortunresult == false",
+        "target": 19
+      }
+    ],
+    "enemy": null,
+    "action": "tryFortune",
+    "items": [],
+    "end": false
+  },
+  {
+    "id": 59,
+    "text": "Felemeled a piros színű könyvet és átfutod a tartalmát, remélve, hogy találsz benne valami hasznosat, amit felhasználhatnál a labirintusból való kijutásra. A szöveg azonban sajnos ősi Elf nyelven íródott, igy egyetlen rúnáját sem érted. Ha még nem tetted, most belenézhetsz a kék; lapozz a 104-re vagy a zöld lapozz a 88-ra könyvbe. Hogyha meguntad az olvasást és távoznál az északi ajtón át, lapozz a 10-re.",
+    "choices": [
+      {
+        "text": "Ha még nem tetted, most belenézhetsz a kékbe; lapozz a 104-re",
+        "target": 104
+      },
+      {
+        "text": "Ha még nem tetted, most belenézhetsz a zöldbe; lapozz a 88-ra",
+        "target": 88
+      },
+      {
+        "text": "Hogyha meguntad az olvasást és távoznál az északi ajtón át, lapozz a 10-re.",
         "target": 10
       }
     ],
@@ -935,7 +985,7 @@
     "text": "A hid épp elég ideig marad épen ahhoz, hogy átérj a túloldalra. Ahogy lelépsz róla, összeomlik. Lapozz a 76-ra.",
     "choices": [
       {
-        "text": "Lapozz a 76-re",
+        "text": "Lapozz a 76-ra",
         "target": 76
       }
     ],
@@ -949,16 +999,18 @@
     "text": "A hatalmas Galon tetemét melynek madárszerű karmai még mindig megfeszülnek és elernyednek, mintha még holtukban is szét akarnának tépni téged megkerülve kiutat keresel a helyiségből. E közben szépen lassan az oszlás büze tölti be a levegőt. A Madárember teste felé fordulsz, és még éppen megpillantod, amint bőrszárnyai eltünnek egy csapat vonagló lárva alatt. Néhány másodperccel később már csak a lerágott csontok maradnak meg egykori ellenfeledből. Amint elfogy élelmük, a férgek feled indulnak, te pedig ráébredsz, hogy halálos veszélyben vagy. Mivel a fura teremtmények közted és a bejárat között állnak, egy másik kiutat kell találnod. Tedd próbára SZERENCSED! Ha szerencséd van, lapozz a 109-re. Hogyha nincs szerencséd, lapozz a 175-re.",
     "choices": [
       {
-        "text": "még holtukban is szét akarnának tépni téged megkerülve kiutat keresel a helyiségből. E közben szépen lassan az oszlás büze tölti be a levegőt. A Madárember teste felé fordulsz, és még éppen megpillantod, amint bőrszárnyai eltünnek egy csapat vonagló lárva alatt. Néhány másodperccel később már csak a lerágott csontok maradnak meg egykori ellenfeledből. Amint elfogy élelmük, a férgek feled indulnak, te pedig ráébredsz, hogy halálos veszélyben vagy. Mivel a fura teremtmények közted és a bejárat között állnak, egy másik kiutat kell találnod. Tedd próbára SZERENCSED! Ha szerencséd van",
+        "text": "Ha szerencséd van, lapozz a 109-re.",
+        "condition": "fortunresult == true",
         "target": 109
       },
       {
-        "text": "nincs szerencséd",
+        "text": "Ha nines, lapozz a 175-re.",
+        "condition": "fortunresult == false",
         "target": 175
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "tryFortune",
     "items": [],
     "end": false
   },
@@ -986,7 +1038,11 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": [
+      {
+        "fortuneChange": -1
+      }
+    ],
     "items": [],
     "end": false
   },
@@ -995,16 +1051,18 @@
     "text": "Ahogy leugrasz, hátizsákod beleakad valamibe, te pedig egy pillanatra elveszted az egyensúlyod, épp mikor földet érsz. Tedd próbára SZERENCSED! Ha szerencséd van, lapozz a 117-re. Hogyha nincs szerencséd, lapozz a 186-ra.",
     "choices": [
       {
-        "text": "szerencséd van",
+        "text": "Ha szerencséd van, lapozz a 117-re.",
+        "condition": "fortunresult == true",
         "target": 117
       },
       {
-        "text": "nincs szerencséd",
+        "text": "Ha nines, lapozz a 186-ra.",
+        "condition": "fortunresult == false",
         "target": 186
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "tryFortune",
     "items": [],
     "end": false
   },
@@ -1036,7 +1094,12 @@
       "skill": 8,
       "stamina": 5
     },
-    "action": "combat",
+    "action": [
+      "combat",
+      {
+        "healthChange": -1
+      }
+    ],
     "items": [],
     "end": false
   },
@@ -1045,15 +1108,19 @@
     "text": "Az alagút hamarosan tágulni kezd és csodálatos látvány tárul a szemed elé. Egy földalatti völgyet határoló magas sziklafal kellös közepén, egy keskeny szirten találod magad. Nem látsz lefelé vezető utat, és nem mered megkockáztatni, hogy visszafordulj. Nálad van a Lebegés Köpenye? Ha igen. lapozz a 105-re. Ha nem, lapozz a 86-ra.",
     "choices": [
       {
-        "text": "igen. lapozz a 105-re. Ha nem",
+        "text": "Ha igen. lapozz a 105-re.",
+        "condition": "has_item:lebegeskopenye",
+        "target": 105
+      },
+      {
+        "text": "Ha nem, lapozz a 86-ra.",
+        "condition": "has_item:lebegeskopenye == false",
         "target": 86
       }
     ],
     "enemy": null,
     "action": null,
-    "items": [
-      "köpeny"
-    ],
+    "items": [],
     "end": false
   },
   {
@@ -1075,11 +1142,11 @@
     "text": "Elérsz egy keletre letérő oldaljárathoz. Az előre haladó út, úgy tűnik, hirtelen véget ér, vagy élesen oldalra kanyarodik. Ha a keleti járattal próbálnál szerencsét, lapozz a 31-re. Ha tovább mennél északra és megvizsgálnád a folyosó végét, lapozz a 11-re.",
     "choices": [
       {
-        "text": "a keleti járattal próbálnál szerencsét",
+        "text": "Ha a keleti járattal próbálnál szerencsét, lapozz a 31-re.",
         "target": 31
       },
       {
-        "text": "tovább mennél északra és megvizsgálnád a folyosó végét",
+        "text": "Ha tovább mennél északra és megvizsgálnád a folyosó végét, lapozz a 11-re.",
         "target": 11
       }
     ],
@@ -1093,11 +1160,11 @@
     "text": "Az ajtó egy kis szobába nyílik. Ahogy a nyílásban állsz, a fáklyák ragyogó fényében valami tiszta, vérvörös szín csillan meg. Egy hatalmas rubin az, ami örök életedre gazdaggá tenne, ha ki tudnád juttatni a labirintusból. Hogyha a drágaköhöz lépnél és magadhoz vennéd, lapozz a 18-ra. Ha úgy gondold, jobb lenne, ha itt hagynád (elvégre elég nehéz), lapozz a 106-ra.",
     "choices": [
       {
-        "text": "ki tudnád juttatni a labirintusból. Hogyha a drágaköhöz lépnél és magadhoz vennéd",
+        "text": "Hogyha a drágaköhöz lépnél és magadhoz vennéd, lapozz a 18-ra.",
         "target": 18
       },
       {
-        "text": "úgy gondold, jobb lenne, ha itt hagynád (elvégre elég nehéz)",
+        "text": "Ha úgy gondold, jobb lenne, ha itt hagynád (elvégre elég nehéz), lapozz a 106-ra.",
         "target": 106
       }
     ],
@@ -1111,22 +1178,27 @@
     "text": "Ajkadhoz emeled a kis fiolát és megiszod a tartalmát. Meglepve tapasztalod, hogy a folyadék teljesen íztelen, de egészen felfrissít. Szentelt Víz volt benne, amit egy ősi Druida áldott meg. Az ezután következő harcok során 1-el megnövelheted majd Támadóerődet. Nyersz 1 SZERENCSE pontot. Ha még nem próbáltad fel, és most ujjadra húznád a gyürüt, lapozz a 119-re. Ha fel szeretnéd venni a köpenyt, és eddig még nem tetted, lapozz a 12-re. Ha távozol a helyiségből és észak felé folytatod az utad, lapozz a 80-ra.",
     "choices": [
       {
-        "text": "még nem próbáltad fel, és most ujjadra húznád a gyürüt",
+        "text": "Ha még nem próbáltad fel, és most ujjadra húznád a gyürüt, lapozz a 119-re.",
         "target": 119
       },
       {
-        "text": "fel szeretnéd venni a köpenyt, és eddig még nem tetted",
+        "text": "Ha fel szeretnéd venni a köpenyt, és eddig még nem tetted, lapozz a 12-re.",
         "target": 12
       },
       {
-        "text": "távozol a helyiségből és észak felé folytatod az utad",
+        "text": "Ha távozol a helyiségből és észak felé folytatod az utad, lapozz a 80-ra.",
         "target": 80
       }
     ],
     "enemy": null,
     "action": null,
     "items": [
-      "köpeny"
+      {
+        "fortuneChange": 1
+      },
+      {
+        "attackChange": 1
+      }
     ],
     "end": false
   },
@@ -1191,19 +1263,19 @@
     "text": "Homokos parton találod magad, melynek félhold alakja van. Az elötted lévő sziklafal egy kis alkóvot alkot, és három ajtót foglal magában. Ezek közül választhatsz majd, mikor eljön a távozás ideje, előtte azonban még el kell döntened, át akarod-e kutatni a folyópartot ékkövek vagy aranyérmék után. Hogyha az északi ajtón át távoznál, lapozz a 87-re. Ha a nyugatin lépnél be, lapozz a 6-ra. Ha a keletivel próbálnál szerencsét, lapozz a 111-re. Ha előbb átkutatnád a partot, lapozz az 53-ra.",
     "choices": [
       {
-        "text": "az északi ajtón át távoznál",
+        "text": "Hogyha az északi ajtón át távoznál, lapozz a 87-re.",
         "target": 87
       },
       {
-        "text": "a nyugatin lépnél be",
+        "text": "Ha a nyugatin lépnél be, lapozz a 6-ra.",
         "target": 6
       },
       {
-        "text": "a keletivel próbálnál szerencsét",
+        "text": "Ha a keletivel próbálnál szerencsét, lapozz a 111-re.",
         "target": 111
       },
       {
-        "text": "előbb átkutatnád a partot",
+        "text": "Ha előbb átkutatnád a partot, lapozz az 53-ra.",
         "target": 53
       }
     ],
@@ -1217,12 +1289,17 @@
     "text": "Mielőtt lehetőséged lenne elöhúzni a kardodat, az öreg férfi felemeli jobb kezét. Mosolya eltűnik arcáról, hangja pedig, mely hirtelen felerősödik, megszólal a fejedben, ám ajkai közben nem mozognak. Ne próbálj meg ártani nekem. Eröm hatalmas, és bármikor olyan tömör sziklává változtathatlak mint egy oszlop a Nagyteremben. Ha nem törödsz a figyelmeztetésével és folytatod a támadást, lapozz a 135-re. Ha nálad van a szobor és válaszolni kívánsz a kérdésére, lapozz a 91-re. Ha nincs nálad, vagy nem vallod be, hogy megszerezted, úgy lapozz a 131-re.",
     "choices": [
       {
-        "text": "nem törödsz a figyelmeztetésével és folytatod a támadást",
+        "text": "Ha nem törödsz a figyelmeztetésével és folytatod a támadást, lapozz a 135-re.",
         "target": 135
       },
       {
-        "text": "nálad van a szobor és válaszolni kívánsz a kérdésére",
+        "text": "Ha nálad van a szobor és válaszolni kívánsz a kérdésére, lapozz a 91-re.",
+        "condition": "has_item:szobor",
         "target": 91
+      },
+      {
+        "text": "Ha nincs nálad, vagy nem vallod be, hogy megszerezted, úgy lapozz a 131-re.",
+        "target": 131
       }
     ],
     "enemy": null,
@@ -1240,7 +1317,11 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": [
+      {
+        "healthChange": -4
+      }
+    ],
     "items": [],
     "end": false
   },
@@ -1249,11 +1330,11 @@
     "text": "A keleti járat elég keskeny és sötét, és újabb leágazásba fut bele, ezúttal a balodon. Ha erre mennél tovább, északi irányba, lapozz a 141-re. Ha egyenesen folytatnád az utadat, lapozz a 122-re.",
     "choices": [
       {
-        "text": "erre mennél tovább, északi irányba",
+        "text": "Ha erre mennél tovább, északi irányba, lapozz a 141-re.",
         "target": 141
       },
       {
-        "text": "egyenesen folytatnád az utadat",
+        "text": "Ha egyenesen folytatnád az utadat, lapozz a 122-re.",
         "target": 122
       }
     ],
@@ -1281,16 +1362,18 @@
     "text": "Olyan csendben lopakodsz előre, amennyire csak tudsz, ám kardod véletlenül nekicsapódik a kőnek, és éles, csengő hangot ad ki. Tedd próbára SZERENCSED! Ha szerencsés vagy, lapozz a 97-re. Ha nincs szerencséd, lapozz a 138-ra.",
     "choices": [
       {
-        "text": "szerencsés vagy",
+        "text": "Ha szerencsés vagy, lapozz a 97-re.",
+        "condition": "fortunresult == true",
         "target": 97
       },
       {
-        "text": "nincs szerencséd",
+        "text": "Ha nincs szerencséd, lapozz a 138-ra.",
+        "condition": "fortunresult == false",
         "target": 138
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "tryFortune",
     "items": [],
     "end": false
   },
@@ -1310,20 +1393,20 @@
   },
   {
     "id": 83,
-    "text": "Az öreg arcra megkönnyebbülés ül ki. Kinyitja a fal egyik titkos rekeszét és elővesz egy börerszényt. Előrenyújtott kezeidbe önti annak tartalmát &#8211; 27 Aranytallért és egy Gyémántot, amiket azonnal a hátizsákodba pakolsz. Ha most az északi falon álló ajtón át távozol, lapozz a 180-ra. Ha úgy döntesz, megszeged adott szavad és a pénz ellenére is végzel vele, lapozz a 17-re.",
+    "text": "Az öreg arcra megkönnyebbülés ül ki. Kinyitja a fal egyik titkos rekeszét és elővesz egy börerszényt. Előrenyújtott kezeidbe önti annak tartalmát; 27 Aranytallért és egy Gyémántot, amiket azonnal a hátizsákodba pakolsz. Ha most az északi falon álló ajtón át távozol, lapozz a 180-ra. Ha úgy döntesz, megszeged adott szavad és a pénz ellenére is végzel vele, lapozz a 17-re.",
     "choices": [
       {
-        "text": "most az északi falon álló ajtón át távozol",
+        "text": "Ha most az északi falon álló ajtón át távozol, lapozz a 180-ra.",
         "target": 180
       },
       {
-        "text": "úgy döntesz, megszeged adott szavad és a pénz ellenére is végzel vele",
+        "text": "Ha úgy döntesz, megszeged adott szavad és a pénz ellenére is végzel vele, lapozz a 17-re.",
         "target": 17
       }
     ],
     "enemy": null,
     "action": null,
-    "items": [],
+    "items": [ "aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, aranytallér, gyémánt"],
     "end": false
   },
   {
@@ -1331,7 +1414,11 @@
     "text": "Balodon egy masszív tölgyfa ajtót látsz, melyet acélszegecsek hada tarkit. Kilincse, mely az ajtólap közepéből mered kifelé, leginkább egy hatalmas madárra emlékeztet. Könnyen megeshet, hogy ez a díszes kapu a Szobrot őrzi! Ha be szeretnél nyitni. lapozz a 157-re. Ha úgy gondolod, ez túl nyilvánvaló megoldás lenne és tovább mennél észak felé, lapozz a 125-re.",
     "choices": [
       {
-        "text": "be szeretnél nyitni. lapozz a 157-re. Ha úgy gondolod, ez túl nyilvánvaló megoldás lenne és tovább mennél észak felé",
+        "text": " Ha be szeretnél nyitni. lapozz a 157-re.",
+        "target": 157
+      },
+      {
+        "text": "Ha úgy gondolod, ez túl nyilvánvaló megoldás lenne és tovább mennél észak felé, lapozz a 125-re.",
         "target": 125
       }
     ],
@@ -1345,17 +1432,17 @@
     "text": "A Tolvajnál mindössze 3 Aranytallért és egy háromszög alakú, penészes gyümölcsöt találsz. Még soha nem láttál ehhez hasonlót, de gyanítod, hogy ez lehet a Xentos, a hosszú élet gyümölcse. Ha nem lenne ilyen borzalmas állapotban, gond nélkül megkockáztatnád, hogy belekóstolj, igy azonban úgy döntesz, hogy itt hagyod és folytatod az utad észak felé. Hamarosan egy útelágazáshoz érsz. Ha továbbra is északnak tartasz, lapozz a 108-ra. Ha a nyugati irányba leágazó új járaton mennél tovább, lapozz a 147-re.",
     "choices": [
       {
-        "text": "nem láttál ehhez hasonlót, de gyanítod, hogy ez lehet a Xentos, a hosszú élet gyümölcse. Ha nem lenne ilyen borzalmas állapotban, gond nélkül megkockáztatnád, hogy belekóstolj, igy azonban úgy döntesz, hogy itt hagyod és folytatod az utad észak felé. Hamarosan egy útelágazáshoz érsz. Ha továbbra is északnak tartasz",
+        "text": "Ha továbbra is északnak tartasz, lapozz a 108-ra.",
         "target": 108
       },
       {
-        "text": "a nyugati irányba leágazó új járaton mennél tovább",
+        "text": "Ha a nyugati irányba leágazó új járaton mennél tovább, lapozz a 147-re.",
         "target": 147
       }
     ],
     "enemy": null,
     "action": null,
-    "items": [],
+    "items": [ "aranytallér, aranytallér, aranytallér, Xentos"],
     "end": false
   },
   {
@@ -1363,16 +1450,18 @@
     "text": "Ahogy körbenézel, észreveszel egy kötelet, amit egy nagyméretű sziklához kötöztek. Amennyire elnézed, nincs túl jó állapotban. és azt sem látod. milyen mélyen ér le a szakadékba, de úgy tűnik, ez az egyetlen lehetőséged a lejutásra. Tedd próbára SZERENCSED! Hogyha szerencséd van, lapozz a 190-re. Ha nincs, lapozz a 4-re.",
     "choices": [
       {
-        "text": "szerencséd van",
+        "text": "Hogyha szerencséd van, lapozz a 190-re.",
+        "condition": "fortunresult == true",
         "target": 190
       },
       {
-        "text": "nincs",
+        "text": "Ha nincs, lapozz a 4-re.",
+        "condition": "fortunresult == false",
         "target": 4
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "tryFortune",
     "items": [],
     "end": false
   },
@@ -1381,12 +1470,13 @@
     "text": "Az alagutat egy jókora, vasveretes ajtó zárja le. Megpróbálod lenyomni a kilincset, de zárva van. A méretes kulcslyukon átnézve nem sokat tudsz kivenni a túloldalból. Mikor a füledet hozzászorítod, tollak suhogását és fütyülés-szerű sóhajtást hallasz. Ha van nálad egy Arany Kulcs, lapozz a 13-ra. Ha nincsen, lapozz a 121-re.",
     "choices": [
       {
-        "text": "van nálad egy Arany Kulcs",
+        "text": "Ha van nálad egy Arany Kulcs, lapozz a 13-ra.",
         "target": 13,
-        "condition": "has_item:arany"
+        "condition": "has_item:aranykulcs"
       },
       {
-        "text": "nincsen",
+        "text": "Ha nincsen, lapozz a 121-re.",
+        "condition": "has_item:aranykulcs == false", 
         "target": 121
       }
     ],
@@ -1397,18 +1487,18 @@
   },
   {
     "id": 88,
-    "text": "A zöld könyvet kézzel írták, és valamiféle naplóra emlékeztet. Az utolsó bejegyzés, legnagyobb döbbenetedre, a te nevedet tartalmazza. Ez a próbára küldött bünözök listája. Szerencsére egyelőre nem látsz ítéletet beleírva. Sikerül megállapítanod, hogy mióta te beléptél, azóta nem küldtek újabb embert a próbára, ám elötted egy nappal korábban egy tolvaj lépett be, és az ő neve mellett már ott szerepel a döntés: bünös! Ha még nem tetted, most belenézhetsz a piros-lapozz az 59-revagy a kék -lapozz a 104-re-könyvbe. A könyvtárból való távozáshoz lapozz a 10-re.",
+    "text": "A zöld könyvet kézzel írták, és valamiféle naplóra emlékeztet. Az utolsó bejegyzés, legnagyobb döbbenetedre, a te nevedet tartalmazza. Ez a próbára küldött bünözök listája. Szerencsére egyelőre nem látsz ítéletet beleírva. Sikerül megállapítanod, hogy mióta te beléptél, azóta nem küldtek újabb embert a próbára, ám elötted egy nappal korábban egy tolvaj lépett be, és az ő neve mellett már ott szerepel a döntés: bünös! Ha még nem tetted, most belenézhetsz a piros-lapozz az 59-re vagy a kék -lapozz a 104-re-könyvbe. A könyvtárból való távozáshoz lapozz a 10-re.",
     "choices": [
       {
-        "text": "Lapozz a 59-re",
+        "text": "Ha még nem tetted, most belenézhetsz a piros-lapozz az 59-re",
         "target": 59
       },
       {
-        "text": "Lapozz a 104-re",
+        "text": "Ha még nem tetted, most belenézhetsz a kékbe, lapozz a 104-re",
         "target": 104
       },
       {
-        "text": "Lapozz a 10-re",
+        "text": "A könyvtárból való távozáshoz lapozz a 10-re.",
         "target": 10
       }
     ],
@@ -1422,16 +1512,20 @@
     "text": "A járat meredeken emelkedik, te pedig gyorsan fáradni kezdesz. Figyelmed ellankad, és nem veszed észre a padlóban lévő, meglazult kõdarabot. Megbotlasz és elesel, közben pajzsod a fal egyik repedésébe ékelődik. Miközben próbálod kiszabadítani, elferdül. Sérült pajzsod miatt a soron következő csatákban 2-vel csökkentened kell majd Támadóerődet. Morogva mész tovább. míg végül egy újabb elágazáshoz nem érsz. Hogyha a nyugati ágon folytatnád az utad, lapozz a 95-re. Ha egyenesen mész tovább, lapozz a 127-re.",
     "choices": [
       {
-        "text": "a nyugati ágon folytatnád az utad",
+        "text": "Hogyha a nyugati ágon folytatnád az utad, lapozz a 95-re.",
         "target": 95
       },
       {
-        "text": "egyenesen mész tovább",
+        "text": "Ha egyenesen mész tovább, lapozz a 127-re.",
         "target": 127
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": [
+      {
+        "attackChange": -2
+      }
+    ],
     "items": [],
     "end": false
   },
@@ -1440,8 +1534,12 @@
     "text": "Az ajtón benyitva vaksötét fogad. Ha szeretnél végigtapogatózni a sötétben, lapozz a 167-re. Ha inkább távoznál innen, lapozz a 154-re.",
     "choices": [
       {
-        "text": "szeretnél végigtapogatózni a sötétben",
+        "text": "Ha szeretnél végigtapogatózni a sötétben, lapozz a 167-re.",
         "target": 167
+      },
+      {
+        "text": "Ha inkább távoznál innen, lapozz a 154-re.",
+        "target": 154
       }
     ],
     "enemy": null,
@@ -1452,7 +1550,12 @@
   {
     "id": 91,
     "text": "Előveszed hátizsákodból a Szobrot, és miután megdörzsölöd a kabátod ujjával, az öregember felé tartod. Elveszi tőled és közömbösen az íróasztal fiókjába helyezi. Még csak arra sem veszi a fáradtságot, hogy rázárja a kulcsot. Int neked, hogy kövesd, és egy csigalépcsőn elindul fölfelé. A lépcső egy széles pódiumon ér véget, és boldogsággal tölt el, hogy ismét bőrödön érezheted a nap meleg sugarait, a szellőt. Mintha egy éve nem jártál volna a felszinen. Lapozz a 200-ra.",
-    "choices": null,
+    "choices": [
+      {
+        "text": "Lapozz a 200-ra.",
+        "target": 200
+      }
+    ],
     "enemy": null,
     "action": null,
     "items": [],
@@ -1463,7 +1566,7 @@
     "text": "Elkapod a követ és egy pillanatra megpihensz, miközben a folyó megpróbál magával ragadni életmentő horgonyodról. Végül felkapaszkodsz a sziklára és lihegve elterülsz rajta. Ekkor valami arany csillogás vonja magára a figyelmedet. Előre mászol, és legnagyobb örömödre megpillantod az Aranyszobrot, melynek keresésére indultál, pihenőhelyed egyik mélyedésében! Teljesen megfeledkezel kimerültségedről, magadhoz veszed és a túlpartra ugrasz. Lapozz a 76-ra.",
     "choices": [
       {
-        "text": "Lapozz a 76-re",
+        "text": "Lapozz a 76-ra",
         "target": 76
       }
     ],
@@ -1478,9 +1581,7 @@
     "choices": null,
     "enemy": null,
     "action": null,
-    "items": [
-      "kötél"
-    ],
+    "items": [],
     "end": true
   },
   {
@@ -1488,7 +1589,7 @@
     "text": "Betekered ellenfeled saját ezüstszínü hálójába. Ezután megragadod a rubint és az ajtó felé indulsz. Már alig várod, hogy kikerülj ebből a selyemmel bevont kriptából! A Pók hatalmas teteme, melyet ragacsos selyemszálak borítanak, az út kellős közepén hever. Kénytelen vagy átmászni rajta, és az enyves massza érintésétől valósággal rosszul leszel. Mikor végre eléred a kijáratot, meghemperegsz a porban, hogy megszabadulj a ragacsos érzéstől. Koszos vagy és fáradt. Magad mögött hagyod a helyet és északnak indulsz. Lapozz a 106-ra.",
     "choices": [
       {
-        "text": "Lapozz a 106-re",
+        "text": "Lapozz a 106-ra",
         "target": 106
       }
     ],
@@ -1516,7 +1617,7 @@
     "text": "Az alagút kanyarulata mögül túlvilági ragyogás árad. Ahogy a falra vetült játékot nézed, úgy érzed, a fény magától lüktet és változtatja a színét. Nagyon óvatosan fordulsz be a kanyarban, amin túl igen bizarr látvány fogad. Három nagyon alacsony, ezüstszínű, lebegő köpenybe öltözött alak táncol valamilyen rituális táncot a fény forrása körül. Az üreg falát itt mindenhol tükrök borítják, és a változó színek oda-vissza ugrálnak ezek közt, a lüktető ragyogástól erős szédülés tör rád. A forrás egy hatalmas kristály, mely egy magas talapzaton nyugszik, és képtelen vagy megállapítani, pontosan miféle kö is ez. Egyébként sincs idöd sokat spekulálni ezen, mivel az ezernyi tükörképnek köszönhetően az alakok felfigyelnek egy óvatlan mozdulatodra. A lények dühödten felkiáltva vetik rád magukat. Egy ellenfélként küzdj meg vele. Fényimádók",
     "choices": [
       {
-        "text": "győzöl",
+        "text": "Ha győzöl, lapozz a 191-re.",
         "target": 191
       }
     ],
@@ -1526,9 +1627,7 @@
       "stamina": 11
     },
     "action": "combat",
-    "items": [
-      "köpeny"
-    ],
+    "items": [],
     "end": false
   },
   {
@@ -1536,7 +1635,7 @@
     "text": "Kezed egyből a kardod markolatára teszed, hogy elállítsd a csengő hangot. A kutya mocorog egy kicsit, de nem ébred fel. Szíved a torkodban dobog, ahogy haladsz, de végül gond nélkül elérsz a túloldalra, leemeled a kulcsot a szögről, csendesen kinyitod az ajtót és becsapod magad mögött. Miközben odakinn ráfordítod a kulcsot, a túloldalról félelmetes morgást és repedő fa hangja szűrődik át, ahogy az állat újra és újra nekiugrik. Lapozz a 30-ra.",
     "choices": [
       {
-        "text": "Lapozz a 30-re",
+        "text": "Lapozz a 30-ra",
         "target": 30
       }
     ],
@@ -1550,16 +1649,18 @@
     "text": "Az ajtó ugyan zárva van, de a korábban talált kulccsal gond nélkül sikerül kinyitnod. Ahogy belépsz, két dárda repül elő az ajtóban lévő egyik lyukból. Tedd próbára SZERENCSED! Ha a szerencsés vagy, lapozz a 44-re. Ha nincs szerencséd, lapozz a 8-ra.",
     "choices": [
       {
-        "text": "a szerencsés vagy",
+        "text": "Ha a szerencsés vagy, lapozz a 44-re.",
+        "condition": "fortunresult == true",
         "target": 44
       },
       {
-        "text": "nincs szerencséd",
+        "text": "Ha nincs szerencséd, lapozz a 8-ra.",
+        "condition": "fortunresult == false",
         "target": 8
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "tryFortune",
     "items": [],
     "end": false
   },
@@ -1568,20 +1669,19 @@
     "text": "A fáklyák halovány fényében súlyos vasrácsot látsz a fal jobb oldalán. Zárva van, és bármennyire is erölködsz, semmit nem látsz mögötte. Ha van nálad egy Bronz Kulcs, és azzal próbálod meg kinyitni a zárat, lapozz a 159-re. Ha nincs nálad a Kulcs, vagy nem akarod kinyitni a ketrecszerű kaput, lapozz a 68-ra és folytasd az utad észak felé.",
     "choices": [
       {
-        "text": "van nálad egy Bronz Kulcs, és azzal próbálod meg kinyitni a zárat",
+        "text": "Ha van nálad egy Bronz Kulcs, és azzal próbálod meg kinyitni a zárat, lapozz a 159-re.",
         "target": 159,
-        "condition": "has_item:bronz"
+        "condition": "has_item:bronzkulcs"
       },
       {
-        "text": "nincs nálad a Kulcs, vagy nem akarod kinyitni a ketrecszerű kaput",
-        "target": 68
+        "text": "Ha nincs nálad a Kulcs, vagy nem akarod kinyitni a ketrecszerű kaput, lapozz a 68-ra és folytasd az utad észak felé.",
+        "target": 68,
+        "condition": "has_item:bronzkulcs == false"
       }
     ],
     "enemy": null,
     "action": null,
-    "items": [
-      "bronz kulcs"
-    ],
+    "items": [],
     "end": false
   },
   {
@@ -1589,13 +1689,13 @@
     "text": "A szörnyeteg holtan hever elötted. Nyáladzó pofájának tartalmát gyorsan magába szívja a poros talaj. Karmai színaranyak; egyesével letéped öket a hatalmas mancsról, majd zsebre vágod öket. Ezután leemeled a kulcsot a szegről, kinyitod az ajtót és távozol. Lapozz a 30-ra.",
     "choices": [
       {
-        "text": "Lapozz a 30-re",
+        "text": "Lapozz a 30-ra",
         "target": 30
       }
     ],
     "enemy": null,
     "action": null,
-    "items": [],
+    "items": [ "aranykarmok"],
     "end": false
   },
   {

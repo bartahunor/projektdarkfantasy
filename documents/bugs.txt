@@ -1,0 +1,6 @@
+20. kártya a jsonbe
+49. kártya a jsonbe
+51. kárty jsonbe
+63. kártya jsonbe
+91. kártya a jsonbe
+100. kártya a jsonbe --> eddig van ellenőrizve
