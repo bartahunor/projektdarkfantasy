@@ -3,4 +3,6 @@
 51. kárty jsonbe
 63. kártya jsonbe
 91. kártya a jsonbe
-100. kártya a jsonbe --> eddig van ellenőrizve
+100. kártya a jsonbe 
+102. kártya jsonbe
+119. kártya jsonbe -->126.ig ellenőrizve
