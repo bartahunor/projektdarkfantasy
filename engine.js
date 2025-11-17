@@ -102,7 +102,7 @@ function acceptCharacter() {
 
 }
 
-
+//karakter megjelenítés
 /*<div id="chosen-character"></div>     
 function displayChosenCharacter() {
     if (!selectedCharacter) return;
@@ -115,6 +115,16 @@ function displayChosenCharacter() {
     `;
 }
     displayChosenCharacter(); */
+
+//inventori
+
+
+const tab = document.getElementById("inventoryTab");
+const panel = document.getElementById("inventoryPanel");
+
+tab.addEventListener("click", () => {
+    panel.classList.toggle("open");
+});
 
 
 

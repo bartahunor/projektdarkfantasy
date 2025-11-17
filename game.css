@@ -575,3 +575,50 @@ body{
     box-shadow: 0 0 10px 3px #A69D7D; 
     transform: translateY(-2px);   
 }
+
+
+/*INVENTORI*/
+.inventory-wrapper {
+    position: fixed;
+    top: 200px;
+    right: 0;
+    z-index: 9999;
+}
+
+.inventory-tab {
+    width: 40px;
+    height: 120px;
+    background: #8c4bff;
+    color: white;
+    font-size: 30px;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    transition: background 0.3s;
+}
+
+.inventory-tab:hover {
+    background: #a87bff;
+}
+
+.inventory-panel {
+    position: absolute;
+    right: -320px;
+    top: 0;
+    width: 320px;
+    height: 400px;
+    padding: 20px;
+    background: #8c4bff;
+    color: white;
+    border-radius: 20px 0 0 20px;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.3);
+    transition: right 0.4s ease;
+}
+
+.inventory-panel.open {
+    right: 40px;
+}
