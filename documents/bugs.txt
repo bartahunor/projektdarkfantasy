@@ -5,4 +5,10 @@
 91. kártya a jsonbe
 100. kártya a jsonbe 
 102. kártya jsonbe
-119. kártya jsonbe -->126.ig ellenőrizve
+119. kártya jsonbe 
+140. kártya jsonbe
+148. kártya jsonbe
+155. kártya jsonbe
+165. kártya jsonbe --> eddig ellenőrizve
+
+131. kártyáról nem enged tovább lapozni

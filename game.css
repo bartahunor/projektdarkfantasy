@@ -622,3 +622,13 @@ body{
 .inventory-panel.open {
     right: 40px;
 }
+
+
+
+/* tovább gomb */
+.next-btn {}
+
+.next-btn.disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}

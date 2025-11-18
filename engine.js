@@ -8,6 +8,18 @@ async function start() {
   console.log('✓ Betöltve!');
 }
 
+
+const inventory = ["lebegeskopenye"]; // Példa inventory tárgyak
+
+// Feltétel ellenőrzése - van e az inventory-ban a szükséges tárgy
+function condHaving(condition, inventory) {
+    let cond = condition.replace('tombNev', 'inventory');
+    const hasItem = eval(cond);
+    return hasItem;
+}
+
+
+// Kártya megjelenítése
 function showCard(cardId) {
     currentCard = allCards.find(card => card.id === cardId);
     if (!currentCard) {
@@ -16,6 +28,15 @@ function showCard(cardId) {
     }
     console.log('Kártya:', currentCard.id);
     
+
+    const availableChoices = currentCard.choices.filter(choice => { //EZ EGY TÖMB LESZ!!!!!
+        if (choice.condition && choice.condition.includes('tombNev')) {
+            return condHaving(choice.condition, inventory); 
+        }
+        return true; // Ha nincs feltétel, mindig elérhető
+    });
+
+
 
     const carouselItem = document.createElement('div');
     carouselItem.classList.add('carousel-item');
@@ -34,9 +55,17 @@ function showCard(cardId) {
                     ${currentCard.choices ? currentCard.choices.map((choice, index) => 
                         `<p>${index + 1}. ${choice.text}</p>`
                     ).join('') : ''}
-                    ${currentCard.choices ? currentCard.choices.map((choice, index) => 
-                        `<button type="button" class="next-btn" onclick="showCard(${currentCard.choices[index].target})">${String(currentCard.choices[index].target)}.</button>`
-                    ).join('') : ''}
+                    
+                   ${currentCard.choices.map((choice, index) => {
+                        const isAvailable = availableChoices.includes(choice);
+                        return `<button 
+                            type="button" 
+                            class="next-btn${isAvailable ? '' : '.disabled'}" 
+                            onclick="showCard(${choice.target})"
+                            ${isAvailable ? '' : 'disabled'}
+                        >${String(choice.target)}.</button>`;
+                    }).join('')}
+                    
                 </div>
             </div>
         </div>
