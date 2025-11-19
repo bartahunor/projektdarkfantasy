@@ -11,4 +11,17 @@
 155. kártya jsonbe
 165. kártya jsonbe --> eddig ellenőrizve
 
-131. kártyáról nem enged tovább lapozni
+
+ESET KEZELÉS
+1. Inventoryban lévő itemek alapján feltétel ellenőrzés - kész
+2. Befejező kártya lekezelése - kész
+3. combat esemény
+4. tryFortune esemény
+5. healthChange esemény
+6. fortuneChange esemény
+7. attackChange esemény
+8. visited cards lekezelése *
+
+
+
+nincs szobor megszerzés

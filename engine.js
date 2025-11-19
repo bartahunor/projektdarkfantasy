@@ -29,6 +29,40 @@ function showCard(cardId) {
     console.log('Kártya:', currentCard.id);
     
 
+    //Befejező kártya kezelése
+    if (currentCard.end === true) {
+        const carouselItem = document.createElement('div');
+        carouselItem.classList.add('carousel-item');
+        carouselItem.innerHTML = `
+            <div class="page-container">
+                <div class="page left-page">
+                    <div class="page-title">
+                        ${String(currentCard.id)}. oldal
+                    </div>
+                    <div class="page-content">
+                        ${currentCard.text || ''}
+                    </div>
+                </div>
+                <div class="page right-page">
+                    <div>
+                        Halott vagy. Játék vége.
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const carousel = document.querySelector('.carousel');
+        carousel.appendChild(carouselItem);
+
+        const totalSlides = carousel.querySelectorAll('.carousel-item').length;
+        carousel.style.setProperty('--slides', totalSlides);
+        
+        carouselItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        return;
+    }
+
+
+    //Választható opciók szűrése 
     const availableChoices = currentCard.choices.filter(choice => { //EZ EGY TÖMB LESZ!!!!!
         if (choice.condition && choice.condition.includes('tombNev')) {
             return condHaving(choice.condition, inventory); 
@@ -56,7 +90,7 @@ function showCard(cardId) {
                         `<p>${index + 1}. ${choice.text}</p>`
                     ).join('') : ''}
                     
-                   ${currentCard.choices.map((choice, index) => {
+                   ${currentCard.choices.map((choice) => {
                         const isAvailable = availableChoices.includes(choice);
                         return `<button 
                             type="button" 

@@ -288,7 +288,6 @@
     "choices": [
       {
         "text": "Ha végzel ezzel a teremtménnyel, lapozz a 94-re.",
-        "condition": "healthpoint != 0",
         "target": 94
       }
     ],
@@ -406,7 +405,7 @@
   },
   {
     "id": 26,
-    "text": "Vagy száz Elf áll körülötted, megfeszített nyilvesszőkkel, melyek feléd mutatnak. A halott Fönök fia előre lép és az idős férfire néz, aki alig észrevehetően megrázza a fejét. Az Elf komoran elmosolyodik. Bünös! &#8211; jelenti ki. Az utolsó dolog, amit hallasz, az a feléd suhanó nyílvesszők zaja. Kalandod itt véget ér.",
+    "text": "Vagy száz Elf áll körülötted, megfeszített nyilvesszőkkel, melyek feléd mutatnak. A halott Fönök fia előre lép és az idős férfire néz, aki alig észrevehetően megrázza a fejét. Az Elf komoran elmosolyodik. Bünös! jelenti ki. Az utolsó dolog, amit hallasz, az a feléd suhanó nyílvesszők zaja. Kalandod itt véget ér.",
     "choices": null,
     "enemy": null,
     "action": null,
