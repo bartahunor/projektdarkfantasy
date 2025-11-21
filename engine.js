@@ -9,7 +9,7 @@ async function start() {
 }
 
 
-const inventory = ["lebegeskopenye"]; // Példa inventory tárgyak
+const inventory = []; // Példa inventory tárgyak
 
 // Feltétel ellenőrzése - van e az inventory-ban a szükséges tárgy
 function condHaving(condition, inventory) {
@@ -17,6 +17,8 @@ function condHaving(condition, inventory) {
     const hasItem = eval(cond);
     return hasItem;
 }
+
+
 
 
 // Kártya megjelenítése
@@ -59,6 +61,10 @@ function showCard(cardId) {
         
         carouselItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
         return;
+    }
+
+    if (currentCard.action === 'sumCombination' && inventory.includes('Pergamenen lévő számok: 15, 10, 22')) {
+        currentCard.choices[0].target = 47;
     }
 
 

@@ -1,15 +1,15 @@
-20. kártya a jsonbe
+20. kártya a jsonbe --> de kinézet nem tökéletes
 49. kártya a jsonbe
-51. kárty jsonbe
 63. kártya jsonbe
-91. kártya a jsonbe
-100. kártya a jsonbe 
 102. kártya jsonbe
 119. kártya jsonbe 
 140. kártya jsonbe
 148. kártya jsonbe
 155. kártya jsonbe
-165. kártya jsonbe --> eddig ellenőrizve
+165. kártya jsonbe 
+182. kártya jsonbe
+196. kártya jsonbe
+197. kártya jsonbe
 
 
 ESET KEZELÉS
