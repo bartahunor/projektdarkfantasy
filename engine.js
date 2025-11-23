@@ -9,7 +9,7 @@ async function start() {
 }
 
 
-const inventory = []; // Példa inventory tárgyak
+let inventory = []; // Példa inventory tárgyak
 
 // Feltétel ellenőrzése - van e az inventory-ban a szükséges tárgy
 function condHaving(condition, inventory) {
@@ -18,10 +18,25 @@ function condHaving(condition, inventory) {
     return hasItem;
 }
 
+// Szerencse próbálás feltétel ellenőrzése
+function tryFortune(condition) {
+
+}
+
+// Oldal lapozása
+function turnPage() {
+    const carousel = document.querySelector('.carousel');
+    const lastItem = carousel.lastElementChild;
+    
+    if (lastItem) {
+        const totalSlides = carousel.querySelectorAll('.carousel-item').length;
+        carousel.style.setProperty('--slides', totalSlides);
+        lastItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    }
+}
 
 
-
-// Kártya megjelenítése
+// ---------------------- Kártya megjelenítése ---------------------- //
 function showCard(cardId) {
     currentCard = allCards.find(card => card.id === cardId);
     if (!currentCard) {
@@ -29,54 +44,62 @@ function showCard(cardId) {
         return;
     }
     console.log('Kártya:', currentCard.id);
+
+    let rightPageContent = '';
     
 
-    //Befejező kártya kezelése
-    if (currentCard.end === true) {
-        const carouselItem = document.createElement('div');
-        carouselItem.classList.add('carousel-item');
-        carouselItem.innerHTML = `
-            <div class="page-container">
-                <div class="page left-page">
-                    <div class="page-title">
-                        ${String(currentCard.id)}. oldal
-                    </div>
-                    <div class="page-content">
-                        ${currentCard.text || ''}
-                    </div>
-                </div>
-                <div class="page right-page">
-                    <div>
-                        Halott vagy. Játék vége.
-                    </div>
-                </div>
-            </div>
-        `;
-
-        const carousel = document.querySelector('.carousel');
-        carousel.appendChild(carouselItem);
-
-        const totalSlides = carousel.querySelectorAll('.carousel-item').length;
-        carousel.style.setProperty('--slides', totalSlides);
-        
-        carouselItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-        return;
-    }
-
+    //Kombinációs kártya kezelése
     if (currentCard.action === 'sumCombination' && inventory.includes('Pergamenen lévő számok: 15, 10, 22')) {
         currentCard.choices[0].target = 47;
     }
 
-
-    //Választható opciók szűrése 
-    const availableChoices = currentCard.choices.filter(choice => { //EZ EGY TÖMB LESZ!!!!!
-        if (choice.condition && choice.condition.includes('tombNev')) {
-            return condHaving(choice.condition, inventory); 
+    //Szerencse próbálásos kártya kezelése
+    if (currentCard.action === 'tryFortune') {
+        const response = fetch("tryfortune.html");
+        if (response.ok) {
+            document.getElementById("popuppage").innerHTML = response.text();
+        } else {
+            console.error(`Nem sikerült betölteni: tryfortune.html`);
         }
-        return true; // Ha nincs feltétel, mindig elérhető
-    });
+    }
 
 
+    if (currentCard.end === true) {  //Halál kártya kezelése
+        rightPageContent = "Halott vagy. Játék vége.";
+    }
+    else if (currentCard.end === false && !currentCard.choices) {   //Nyerő kártya kezelése
+        rightPageContent = "NYERTÉL.";
+    }
+    else if (currentCard.choices && currentCard.choices.length > 0) {       //Választható opciók szűrése 
+        const availableChoices = currentCard.choices.filter(choice => { //EZ EGY TÖMB LESZ!!!!!
+            if (choice.condition && choice.condition.includes('tombNev')) {
+                return condHaving(choice.condition, inventory); 
+            }
+            if (choice.condition && currentCard.action === 'tryFortune') {
+                return tryFortune(choice.condition); 
+            }
+            return true; // Ha nincs feltétel, mindig elérhető
+        });
+
+
+        rightPageContent = `
+            ${currentCard.choices ? currentCard.choices.map((choice, index) => 
+                `<p>${index + 1}. ${choice.text}</p>`
+            ).join('') : ''}
+                        
+            ${currentCard.choices.map((choice) => {
+                const isAvailable = availableChoices.includes(choice);
+                return `<button 
+                    type="button" 
+                    class="next-btn${isAvailable ? '' : '.disabled'}" 
+                    onclick="showCard(${choice.target})"
+                    ${isAvailable ? '' : 'disabled'}
+                >${String(choice.target)}.</button>`;
+            }).join('')}
+        `;
+        
+    }
+    
 
     const carouselItem = document.createElement('div');
     carouselItem.classList.add('carousel-item');
@@ -92,20 +115,7 @@ function showCard(cardId) {
             </div>
             <div class="page right-page">
                 <div>
-                    ${currentCard.choices ? currentCard.choices.map((choice, index) => 
-                        `<p>${index + 1}. ${choice.text}</p>`
-                    ).join('') : ''}
-                    
-                   ${currentCard.choices.map((choice) => {
-                        const isAvailable = availableChoices.includes(choice);
-                        return `<button 
-                            type="button" 
-                            class="next-btn${isAvailable ? '' : '.disabled'}" 
-                            onclick="showCard(${choice.target})"
-                            ${isAvailable ? '' : 'disabled'}
-                        >${String(choice.target)}.</button>`;
-                    }).join('')}
-                    
+                    ${rightPageContent}                   
                 </div>
             </div>
         </div>
@@ -113,14 +123,12 @@ function showCard(cardId) {
 
     const carousel = document.querySelector('.carousel');
     carousel.appendChild(carouselItem);
-
-    // ⭐ IDE KELL EZ A SOR! ⭐
-    const totalSlides = carousel.querySelectorAll('.carousel-item').length;
-    carousel.style.setProperty('--slides', totalSlides);
-    
-    // Opcionális: automatikus görgetés az új oldalra
-    carouselItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    turnPage();
 }
+
+
+
+
 
 
 
