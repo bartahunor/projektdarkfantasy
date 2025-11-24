@@ -18,10 +18,106 @@ function condHaving(condition, inventory) {
     return hasItem;
 }
 
-// Szerencse próbálás feltétel ellenőrzése
-function tryFortune(condition) {
+function initDice() {
+    const elDiceOne = document.getElementById('dice1');
+    const elComeOut = document.getElementById('roll');
+
+    if (!elDiceOne || !elComeOut) return;
+
+    elComeOut.onclick = function () {
+        rollDice(elDiceOne);
+    };
+}
+
+function rollDice(elDiceOne) {
+    const diceOne = Math.floor(Math.random() * 6 + 1);
+
+    for (let i = 1; i <= 6; i++) {
+        elDiceOne.classList.remove('show-' + i);
+        if (i === diceOne) elDiceOne.classList.add('show-' + i);
+    }
+
 
 }
+
+// Szerencse próbálás feltétel ellenőrzése
+async function tryFortune() {
+    try {
+        const response = await fetch("pieces/tryfortune.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: tryfortune.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        
+        // Popup megjelenítése
+        popupEl.style.display = "flex";
+        popupEl.style.position = "fixed";
+        popupEl.style.top = "0";
+        popupEl.style.left = "0";
+        popupEl.style.width = "100vw";
+        popupEl.style.height = "100vh";
+        popupEl.style.background = "rgba(0,0,0,0.8)";
+        popupEl.style.zIndex = "99999";
+        popupEl.style.justifyContent = "center";
+        popupEl.style.alignItems = "center";
+        
+        console.log("✓ Szerencseproba oldal betöltve.");
+        
+        // Kocka inicializálása
+        initDice();
+
+    } catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }
+}
+
+function closePopup() {
+    const popupEl = document.getElementById("popuppage");
+    if (popupEl) {
+        popupEl.style.display = "none";
+        popupEl.innerHTML = '';
+    }
+}
+
+function initDice() {
+    var elDiceOne       = document.getElementById('dice1');
+    var elComeOut       = document.getElementById('roll');
+
+    elComeOut.onclick   = function () {rollDice();};
+
+    function rollDice() {
+
+    var diceOne   = Math.floor((Math.random() * 6) + 1);
+    
+    console.log(diceOne);
+
+    for (var i = 1; i <= 6; i++) {
+        elDiceOne.classList.remove('show-' + i);
+        if (diceOne === i) {
+        elDiceOne.classList.add('show-' + i);
+        }
+    }
+
+    }
+
+}
+
+
+
 
 // Oldal lapozása
 function turnPage() {
@@ -53,15 +149,7 @@ function showCard(cardId) {
         currentCard.choices[0].target = 47;
     }
 
-    //Szerencse próbálásos kártya kezelése
-    if (currentCard.action === 'tryFortune') {
-        const response = fetch("tryfortune.html");
-        if (response.ok) {
-            document.getElementById("popuppage").innerHTML = response.text();
-        } else {
-            console.error(`Nem sikerült betölteni: tryfortune.html`);
-        }
-    }
+
 
 
     if (currentCard.end === true) {  //Halál kártya kezelése
@@ -70,13 +158,16 @@ function showCard(cardId) {
     else if (currentCard.end === false && !currentCard.choices) {   //Nyerő kártya kezelése
         rightPageContent = "NYERTÉL.";
     }
+    else if (currentCard.action === 'tryFortune') {
+        rightPageContent = `<button 
+                    type="button" 
+                    class="luck-btn" 
+                    onclick="tryFortune()">PRÓBÁLD MEG A SZERENCSÉD</button>`;
+    }
     else if (currentCard.choices && currentCard.choices.length > 0) {       //Választható opciók szűrése 
         const availableChoices = currentCard.choices.filter(choice => { //EZ EGY TÖMB LESZ!!!!!
             if (choice.condition && choice.condition.includes('tombNev')) {
                 return condHaving(choice.condition, inventory); 
-            }
-            if (choice.condition && currentCard.action === 'tryFortune') {
-                return tryFortune(choice.condition); 
             }
             return true; // Ha nincs feltétel, mindig elérhető
         });
