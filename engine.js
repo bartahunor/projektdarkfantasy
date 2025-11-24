@@ -286,12 +286,15 @@ function displayChosenCharacter() {
 
 //inventori
 
+document.addEventListener("DOMContentLoaded", function() {
 
-const tab = document.getElementById("inventoryTab");
-const panel = document.getElementById("inventoryPanel");
+  const wrapper = document.getElementById("inventoryWrapper");
+  const tab = document.getElementById("inventoryTab");
 
-tab.addEventListener("click", () => {
-    panel.classList.toggle("open");
+  tab.addEventListener("click", () => {
+    wrapper.classList.toggle("open");
+  });
+
 });
 
 
