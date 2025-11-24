@@ -61,18 +61,7 @@ async function tryFortune() {
         
         // HTML betöltése
         popupEl.innerHTML = html;
-        
-        // Popup megjelenítése
-        popupEl.style.display = "flex";
-        popupEl.style.position = "fixed";
-        popupEl.style.top = "0";
-        popupEl.style.left = "0";
-        popupEl.style.width = "100vw";
-        popupEl.style.height = "100vh";
-        popupEl.style.background = "rgba(0,0,0,0.8)";
-        popupEl.style.zIndex = "99999";
-        popupEl.style.justifyContent = "center";
-        popupEl.style.alignItems = "center";
+        popupEl.classList.add("popuppage-active");
         
         console.log("✓ Szerencseproba oldal betöltve.");
         
@@ -101,16 +90,16 @@ function initDice() {
 
     function rollDice() {
 
-    var diceOne   = Math.floor((Math.random() * 6) + 1);
-    
-    console.log(diceOne);
+        var diceOne   = Math.floor((Math.random() * 6) + 1);
+        
+        console.log(diceOne);
 
-    for (var i = 1; i <= 6; i++) {
-        elDiceOne.classList.remove('show-' + i);
-        if (diceOne === i) {
-        elDiceOne.classList.add('show-' + i);
+        for (var i = 1; i <= 6; i++) {
+            elDiceOne.classList.remove('show-' + i);
+            if (diceOne === i) {
+            elDiceOne.classList.add('show-' + i);
+            }
         }
-    }
 
     }
 
