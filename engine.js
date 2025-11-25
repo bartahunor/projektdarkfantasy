@@ -259,7 +259,7 @@ function acceptCharacter() {
 
 }
 
-//karakter megjelenítés
+
 /*<div id="chosen-character"></div>     
 function displayChosenCharacter() {
     if (!selectedCharacter) return;
@@ -272,6 +272,11 @@ function displayChosenCharacter() {
     `;
 }
     displayChosenCharacter(); */
+
+
+
+
+
 
 //inventori
 
