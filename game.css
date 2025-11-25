@@ -184,6 +184,7 @@ body{
         animation: frame var(--sprite-as) var(--sprite-at) 0s var(--sprite-ad) 
                var(--sprite-af) var(--sprite-ap);
         animation-timeline: --carousel-timeline;
+        
       }
 
       .carousel {
@@ -480,6 +481,7 @@ body{
 
 .mini-prev {
     left: 5px;
+    
 }
 
 .mini-prev img{
@@ -489,6 +491,7 @@ body{
 
 .mini-next {
     right: 5px;
+    z-index: 10000;
 }
 
 
@@ -528,6 +531,8 @@ body{
 .mini-slider p{
   width: 90%;
 }
+
+
 
 .button-row {
     width: 100%;
@@ -580,6 +585,7 @@ body{
 
 
 /*INVENTORI*/
+/* Alapból az egész pointer events none de a tab és az open verzió all tehát kattintható*/
 .inventory-wrapper {
   position: absolute;
   top: 10%;
@@ -588,12 +594,14 @@ body{
   height: auto;
   transform: translateX(0);
   transition: transform 0.35s ease;
-  z-index: 9999;
+    pointer-events: none;
+
   overflow: visible;
 }
 
 .inventory-wrapper.open {
   transform: translateX(100%);
+    pointer-events: all;
 }
 
 /* FÜL (mindig látszik) */
@@ -613,6 +621,7 @@ body{
   cursor: pointer;
   z-index: 10000;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  pointer-events: all;
 }
 
 /* PANEL – alapból rejtve */
@@ -906,6 +915,7 @@ input[type="range"]
 
 
 /* popup ablakok stílusa */
+
 .popuppage-active{
     position: fixed;
     top: 0;

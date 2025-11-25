@@ -77,6 +77,7 @@ async function tryFortune() {
 function closePopup() {
     const popupEl = document.getElementById("popuppage");
     if (popupEl) {
+        popupEl.classList.remove("popuppage-active"); 
         popupEl.style.display = "none";
         popupEl.innerHTML = '';
     }
