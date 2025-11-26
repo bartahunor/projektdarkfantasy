@@ -948,52 +948,77 @@ input[type="range"]
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150px;
+    height: fit fit-content;
     margin-bottom: 20px;
 }
 
 .tryfortune-popup {
-    position: relative;
-    background-color: brown;
+    background-image: url(pictures/kockadobas2.png);
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-    min-height: 300px;
-    width: 400px;
+    height: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .roll-button {
-  position: relative;
-  top:80px;
-  left:10px;
   padding: 15px 50px;
-  color: #fff;
-  background-color: #f4d35e;
-  border: none;
-  font-size: 20px;
-  border-radius: 20px; 
-  box-shadow: 1px 3px #50514F;
-  outline: none;
-  transition: .3s; 
-  margin-top: 50px;
+    color: #2f2f2f;
+    background-color: #f4d35e;
+    border: none;
+    font-size: 20px;
+    font-weight: bolder;
+    box-shadow: inset -4px -4px  #d4a949;
+    /*box-shadow: 0 4px 0 #d4a949;*/
+    outline: none;
+    transition: all .2s;
+    cursor: pointer;
+    margin-top: 30px;
+    font-family: 'PixelText', serif;
+    border: 3px solid #d4a949;
 }
 
-.roll-button:hover, .roll-button:active {
-  outline: none;
-  background: #50514F;
-  cursor: pointer;
-  transform: translateY(5px); 
+.roll-button:hover {
+    background: #f5da6f;
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #d4a949;
+    box-shadow: inset -5px -5px  #d4a949;
+}
+
+.roll-button:active {
+    background: #d4a949;
+    transform: translateY(4px);
+    box-shadow: none;
 }
 /**/
+.dice-container{
+  display: flex;
+  flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* Távolság a két kocka között */
+    height: auto;
+    margin-bottom: 110px;
+    position: relative;
+
+}
 .dice {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  transform-style: preserve-3d;
-  transition: transform 1s; 
+   position: relative;
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    transition: transform 1s;
 }
 
 .dot {
@@ -1001,15 +1026,12 @@ input[type="range"]
   width: 20px;
   height: 20px;
   margin: -10px 5px 5px -10px;
-  border-radius: 20px;
-  background-color: #f25f5c;
-  box-shadow: inset 2px 2px #d90429;
+  /*border-radius: 20px;*/
+  background-color: rgb(61, 61, 61);
+  box-shadow: inset -2px -2px  rgba(0,0,0);
 }
 
-.dice-one {
-  position: absolute;
-  left: 150px; 
-}
+
 
 .dice-two {
   position: absolute;
@@ -1019,11 +1041,11 @@ input[type="range"]
 
 .side {
   position: absolute;
-  background-color: #ffF;
-  border-radius:5px;
+  background-color: rgb(242, 242, 242);
+  box-shadow: inset -2px -2px  rgb(61, 61, 61);
   width: 100px;
   height: 100px;
-  border: 1px solid #e5e5e5;
+  border: 2px solid black;
   text-align: center;
   line-height: 2em;
 }

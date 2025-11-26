@@ -18,27 +18,7 @@ function condHaving(condition, inventory) {
     return hasItem;
 }
 
-function initDice() {
-    const elDiceOne = document.getElementById('dice1');
-    const elComeOut = document.getElementById('roll');
 
-    if (!elDiceOne || !elComeOut) return;
-
-    elComeOut.onclick = function () {
-        rollDice(elDiceOne);
-    };
-}
-
-function rollDice(elDiceOne) {
-    const diceOne = Math.floor(Math.random() * 6 + 1);
-
-    for (let i = 1; i <= 6; i++) {
-        elDiceOne.classList.remove('show-' + i);
-        if (i === diceOne) elDiceOne.classList.add('show-' + i);
-    }
-
-
-}
 
 // Szerencse próbálás feltétel ellenőrzése
 async function tryFortune() {
@@ -92,13 +72,13 @@ function initDice() {
     function rollDice() {
 
         var diceOne   = Math.floor((Math.random() * 6) + 1);
-        
         console.log(diceOne);
 
         for (var i = 1; i <= 6; i++) {
             elDiceOne.classList.remove('show-' + i);
             if (diceOne === i) {
-            elDiceOne.classList.add('show-' + i);
+                elDiceOne.classList.add('show-' + i);
+
             }
         }
 
