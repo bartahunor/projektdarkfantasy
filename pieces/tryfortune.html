@@ -1,11 +1,8 @@
 <div class="tryfortune-popup">
-    <button onclick="closePopup()" class="close-popup-btn">
-            X
+    <button id='roll' class='roll-button'>
+            DOBÁS!
     </button>
     <div class="dice-container">
-        <button id='roll' class='roll-button'>
-            DOBÁS!
-        </button>
         <div id='dice1' class="dice dice-one">
             <div class='side one'>
                 <div class="dot one-1"></div>
@@ -53,7 +50,53 @@
             </div>
         </div>
 
-        
+        <div id='dice2' class="dice dice-two">
+            <div class='side one'>
+                <div class="dot one-1"></div>
+            </div>
+            
+            <!-- nth-child(2) - Hátul = 6-os oldal -->
+            <div class='side six'>
+                <div class="dot six-1"></div>
+                <div class="dot six-2"></div>
+                <div class="dot six-3"></div>
+                <div class="dot six-4"></div>
+                <div class="dot six-5"></div>
+                <div class="dot six-6"></div>
+            </div>
+            
+            <!-- nth-child(6) - Bal = 4-es oldal -->
+            <div class='side four'>
+                <div class="dot four-1"></div>
+                <div class="dot four-2"></div>
+                <div class="dot four-3"></div>
+                <div class="dot four-4"></div>
+            </div>
+            
+            <!-- nth-child(4) - Fent = 5-ös oldal -->
+            <div class='side five'>
+                <div class="dot five-1"></div>
+                <div class="dot five-2"></div>
+                <div class="dot five-3"></div>
+                <div class="dot five-4"></div>
+                <div class="dot five-5"></div>
+            </div>
+            
+            <!-- nth-child(5) - Lent = 2-es oldal -->
+            <div class='side two'>
+                <div class="dot two-1"></div>
+                <div class="dot two-2"></div>
+            </div>
+            
+            
+            <!-- nth-child(3) - Jobb = 3-as oldal -->
+            <div class='side three'>
+                <div class="dot three-1"></div>
+                <div class="dot three-2"></div>
+                <div class="dot three-3"></div>
+            </div>
+        </div> 
+                
     </div>
 
 </div>

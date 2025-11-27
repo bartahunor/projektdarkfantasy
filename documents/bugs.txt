@@ -16,7 +16,7 @@ ESET KEZELÉS
 1. Inventoryban lévő itemek alapján feltétel ellenőrzés - kész
 2. Befejező kártya lekezelése - kész
 3. combat esemény
-4. tryFortune esemény
+4. tryFortune esemény --> rollbutton disable kell, reuslt button css, többszöri tryfortunenél nem jelenik meg az oldal css és js hiba
 5. healthChange esemény
 6. fortuneChange esemény
 7. attackChange esemény
@@ -24,4 +24,3 @@ ESET KEZELÉS
 
 
 
-nincs szobor megszerzés

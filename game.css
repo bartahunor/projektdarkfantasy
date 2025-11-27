@@ -944,13 +944,7 @@ input[type="range"]
 }
 
 /* tryfortune CSS */
-.dice-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: fit fit-content;
-    margin-bottom: 20px;
-}
+
 
 .tryfortune-popup {
     background-image: url(pictures/kockadobas2.png);
@@ -972,6 +966,16 @@ input[type="range"]
     transform: translate(-50%, -50%);
 }
 
+.tryfortune-result{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 78%;
+}
+
 .roll-button {
   padding: 15px 50px;
     color: #2f2f2f;
@@ -984,9 +988,12 @@ input[type="range"]
     outline: none;
     transition: all .2s;
     cursor: pointer;
-    margin-top: 30px;
+    /*margin-top: 50px;*/
     font-family: 'PixelText', serif;
     border: 3px solid #d4a949;
+    position: absolute;
+    top: 20px;
+
 }
 
 .roll-button:hover {
@@ -1004,13 +1011,18 @@ input[type="range"]
 /**/
 .dice-container{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 40px; /* Távolság a két kocka között */
+    gap: 100px; /* Távolság a két kocka között */
     height: auto;
-    margin-bottom: 110px;
-    position: relative;
+    position: absolute;
+    top: 40%;
+
+
+
+
+
 
 }
 .dice {
@@ -1033,11 +1045,6 @@ input[type="range"]
 
 
 
-.dice-two {
-  position: absolute;
-  left: -50px;
-  
-}
 
 .side {
   position: absolute;

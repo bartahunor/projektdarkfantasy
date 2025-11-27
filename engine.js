@@ -7,9 +7,19 @@ async function start() {
   allCards = await response.json();
   console.log('✓ Betöltve!');
 }
-
+function closePopup() {
+    const popupEl = document.getElementById("popuppage");
+    if (popupEl) {
+        popupEl.classList.remove("popuppage-active"); 
+        popupEl.style.display = "none";
+        popupEl.innerHTML = '';
+    }
+}
 
 let inventory = []; // Példa inventory tárgyak
+let fortunepoints = 13; // Példa szerencse pontok
+
+
 
 // Feltétel ellenőrzése - van e az inventory-ban a szükséges tárgy
 function condHaving(condition, inventory) {
@@ -18,9 +28,8 @@ function condHaving(condition, inventory) {
     return hasItem;
 }
 
-
-
 // Szerencse próbálás feltétel ellenőrzése
+let lastDiceRoll = 0;
 async function tryFortune() {
     try {
         const response = await fetch("pieces/tryfortune.html");
@@ -48,39 +57,86 @@ async function tryFortune() {
         // Kocka inicializálása
         initDice();
 
+        const rollButton = document.getElementById('roll');
+        rollButton.addEventListener('click', function() {
+            setTimeout(() => {
+                console.log(lastDiceRoll)
+
+                let fortuneresult = false;
+                if (lastDiceRoll <= fortunepoints) {
+                    fortuneresult = true;
+                    fortunepoints -= 1;
+
+                }
+                else{
+                    fortunepoints -= 1;
+                }
+
+                const tryfortuneresult = document.createElement('div');
+                tryfortuneresult.classList.add('tryfortune-result');
+                tryfortuneresult.innerHTML = `
+                    <div class="tryfortune-result-title">
+                        ${fortuneresult ? 'SZERENCSÉS VAGY' : 'NINCS SZERENCSÉD'}
+                    </div>
+                    <button 
+                        type="button" 
+                        class="tryfortune-result-btn"
+                        onclick="showCard(${fortuneresult ? currentCard.choices[0].target : currentCard.choices[1].target}), closePopup()"
+                    >
+                        ${fortuneresult ? currentCard.choices[0].target : currentCard.choices[1].target}. oldal
+                    </button>
+                `;
+                const tryfortunePopup = document.querySelector('.tryfortune-popup');
+                if (tryfortunePopup) {
+                    tryfortunePopup.appendChild(tryfortuneresult);
+                    console.log("✓ Eredmény hozzáadva!");
+                } else {
+                    console.error("HIBA: tryfortune-popup nem található!");
+                }
+                turnPage();
+
+
+            }, 10);
+        });
+
+
     } catch (err) {
         console.error("Hiba történt betöltés közben:", err);
         alert("Hiba: " + err.message);
     }
 }
 
-function closePopup() {
-    const popupEl = document.getElementById("popuppage");
-    if (popupEl) {
-        popupEl.classList.remove("popuppage-active"); 
-        popupEl.style.display = "none";
-        popupEl.innerHTML = '';
-    }
-}
 
 function initDice() {
     var elDiceOne       = document.getElementById('dice1');
+    var elDiceTwo       = document.getElementById('dice2');
     var elComeOut       = document.getElementById('roll');
 
-    elComeOut.onclick   = function () {rollDice();};
+    elComeOut.onclick = function () {
+        lastDiceRoll = rollDice();
+    };
 
     function rollDice() {
 
         var diceOne   = Math.floor((Math.random() * 6) + 1);
-        console.log(diceOne);
+        var diceTwo   = Math.floor((Math.random() * 6) + 1);
+        
+        console.log(diceOne + ' ' + diceTwo);
 
         for (var i = 1; i <= 6; i++) {
             elDiceOne.classList.remove('show-' + i);
             if (diceOne === i) {
-                elDiceOne.classList.add('show-' + i);
-
+            elDiceOne.classList.add('show-' + i);
             }
         }
+
+        for (var k = 1; k <= 6; k++) {
+            elDiceTwo.classList.remove('show-' + k);
+            if (diceTwo === k) {
+            elDiceTwo.classList.add('show-' + k);
+            }
+        } 
+        return diceOne+diceTwo;
 
     }
 
