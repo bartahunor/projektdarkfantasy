@@ -288,11 +288,13 @@
         "target": 94
       }
     ],
-    "enemy": {
+    "enemy": [
+      {
       "name": "Óriáspók",
       "skill": 9,
       "stamina": 5
-    },
+      }
+    ],
     "action": "combat",
     "items": [],
     "end": false
@@ -658,11 +660,14 @@
         "target": 85
       }
     ],
-    "enemy": {
+    "enemy": [
+      {
         "name": "Tolvaj",
         "skill": 7,
-        "stamina": 6
-    },
+        "stamina": 6,
+        "place": "tunnel"
+      }
+    ],
     "action": "combat",
     "items": [],
     "end": false
@@ -1098,11 +1103,13 @@
         "target": 118
       }
     ],
-    "enemy": {
+    "enemy": [
+      {
       "name": "Törpe",
       "skill": 8,
       "stamina": 5
-    },
+      }
+    ],
     "action": [
       "combat",
       {
@@ -1628,18 +1635,20 @@
   },
   {
     "id": 96,
-    "text": "Az alagút kanyarulata mögül túlvilági ragyogás árad. Ahogy a falra vetült játékot nézed, úgy érzed, a fény magától lüktet és változtatja a színét. Nagyon óvatosan fordulsz be a kanyarban, amin túl igen bizarr látvány fogad. Három nagyon alacsony, ezüstszínű, lebegő köpenybe öltözött alak táncol valamilyen rituális táncot a fény forrása körül. Az üreg falát itt mindenhol tükrök borítják, és a változó színek oda-vissza ugrálnak ezek közt, a lüktető ragyogástól erős szédülés tör rád. A forrás egy hatalmas kristály, mely egy magas talapzaton nyugszik, és képtelen vagy megállapítani, pontosan miféle kö is ez. Egyébként sincs idöd sokat spekulálni ezen, mivel az ezernyi tükörképnek köszönhetően az alakok felfigyelnek egy óvatlan mozdulatodra. A lények dühödten felkiáltva vetik rád magukat. Egy ellenfélként küzdj meg vele. Fényimádók",
+    "text": "Az alagút kanyarulata mögül túlvilági ragyogás árad. Ahogy a falra vetült játékot nézed, úgy érzed, a fény magától lüktet és változtatja a színét. Nagyon óvatosan fordulsz be a kanyarban, amin túl igen bizarr látvány fogad. Három nagyon alacsony, ezüstszínű, lebegő köpenybe öltözött alak táncol valamilyen rituális táncot a fény forrása körül. Az üreg falát itt mindenhol tükrök borítják, és a változó színek oda-vissza ugrálnak ezek közt, a lüktető ragyogástól erős szédülés tör rád. A forrás egy hatalmas kristály, mely egy magas talapzaton nyugszik, és képtelen vagy megállapítani, pontosan miféle kö is ez. Egyébként sincs idöd sokat spekulálni ezen, mivel az ezernyi tükörképnek köszönhetően az alakok felfigyelnek egy óvatlan mozdulatodra. A lények dühödten felkiáltva vetik rád magukat. Egy ellenfélként küzdj meg vele.",
     "choices": [
       {
         "text": "Ha győzöl, lapozz a 191-re.",
         "target": 191
       }
     ],
-    "enemy": {
+    "enemy": [
+      {
       "name": "Fényimádók",
       "skill": 9,
       "stamina": 11
-    },
+      }
+    ],
     "action": "combat",
     "items": [],
     "end": false
@@ -1720,11 +1729,13 @@
         "target": 82
       }
     ],
-    "enemy": {
+    "enemy": [
+      {
       "name": "Iszapsárkány",
       "skill": 10,
       "stamina": 6
-    },
+      }
+    ],
     "action": "combat",
     "items": [],
     "end": false
@@ -2318,11 +2329,13 @@
         "target": 100
       }
     ],
-    "enemy": {
+    "enemy": [
+      {
       "name": "Xlaia",
       "skill": 8,
       "stamina": 7
-    },
+     }
+    ],
     "action": "combat",
     "items": [],
     "end": false
@@ -2635,7 +2648,7 @@
   },
   {
     "id": 155,
-    "text": "A lejtő elég meredek, és már régóta mész, mikor a lépcsők megszűnnek, a járat pedig élesen balra kanyarodik. Fárasztó volt idáig az út, ezért lankad a figyelmed, mikor egy mocskos, dagadt Hobgoblin ugrik eléd. Bandzsa szemeivel az egyik bíbor, a másik zöld &#8211; méreget téged. Ruhái ugyanolyan koszosak, mint ő maga, ráadásul eléggé szakadtak is, a kezében lévő kard azonban borotvaéles, és látszik, hogy gondosan karban tartja. Előre nyújtott fegyverrel közeledik feléd. Hobgoblin",
+    "text": "A lejtő elég meredek, és már régóta mész, mikor a lépcsők megszűnnek, a járat pedig élesen balra kanyarodik. Fárasztó volt idáig az út, ezért lankad a figyelmed, mikor egy mocskos, dagadt Hobgoblin ugrik eléd. Bandzsa szemeivel az egyik bíbor, a másik zöld méreget téged. Ruhái ugyanolyan koszosak, mint ő maga, ráadásul eléggé szakadtak is, a kezében lévő kard azonban borotvaéles, és látszik, hogy gondosan karban tartja. Előre nyújtott fegyverrel közeledik feléd. Hobgoblin",
     "choices": [
       {
         "text": "győzöl",
@@ -2646,11 +2659,13 @@
         "target": 143
       }
     ],
-    "enemy": {
+    "enemy": [
+      {
       "name": "Hobgoblin",
       "skill": 7,
       "stamina": 8
-    },
+      }
+    ],
     "action": "combat",
     "items": [],
     "end": false
@@ -2703,11 +2718,13 @@
         "target": 61
       }
     ],
-    "enemy": {
+    "enemy": [
+      {
       "name": "Galon",
       "skill": 12,
       "stamina": 8
-    },
+      }
+    ],
     "action": "combat",
     "items": [],
     "end": false
@@ -3222,11 +3239,13 @@
         "target": 9
       }
     ],
-    "enemy": {
+    "enemy": [
+      {
       "name": "Iszapsárkány",
       "skill": 9,
       "stamina": 5
-    },
+      }
+    ],
     "action": "combat",
     "items": [],
     "end": false

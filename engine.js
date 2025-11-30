@@ -1,5 +1,13 @@
 let allCards = [];
 let currentCard = null;
+let inventory = []; // Példa inventory tárgyak
+let fortunepoints = 13; // Példa szerencse pontok
+let healthpoints = 20; // Példa életerő pontok
+let attackpoints = 10; // Példa támadó pontok
+
+// Adatok betöltése
+
+
 
 async function start() {
   // Betöltés
@@ -11,13 +19,36 @@ function closePopup() {
     const popupEl = document.getElementById("popuppage");
     if (popupEl) {
         popupEl.classList.remove("popuppage-active"); 
-        popupEl.style.display = "none";
         popupEl.innerHTML = '';
     }
 }
 
-let inventory = []; // Példa inventory tárgyak
-let fortunepoints = 13; // Példa szerencse pontok
+function statAnditemsUpdate() {
+    if (currentCard.items && currentCard.items.length > 0) {    //item hozzáadás az inventory-hoz
+        currentCard.items.forEach(item => {
+            if (!inventory.includes(item)) {
+                inventory.push(item);
+                console.log(`✓ Tárgy hozzáadva: ${item}`);
+            }
+        });
+    }
+
+    if (currentCard.action != null) {   //statok frissítése
+        for (let i; i < currentCard.action.length; i++) {   //stat módosítás
+            const action = currentCard.action[i];
+            if (action.type === 'healthChange') {
+                healthpoints += action.amount;
+            }
+            else if (action.type === 'fortuneChange') {
+                fortunepoints += action.amount;
+            }
+            else if (action.type === 'attackChange') {
+                attackpoints += action.amount;
+            }
+        }
+    }
+}
+
 
 
 
@@ -61,6 +92,8 @@ async function tryFortune() {
         rollButton.addEventListener('click', function() {
             setTimeout(() => {
                 console.log(lastDiceRoll)
+                rollButton.disabled = true; // Gomb letiltása a dobás után
+
 
                 let fortuneresult = false;
                 if (lastDiceRoll <= fortunepoints) {
@@ -143,6 +176,51 @@ function initDice() {
 }
 
 
+async function combat() {
+    try {
+        const response = await fetch("pieces/combat.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: combat.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+        
+        console.log("✓ Harc oldal betöltve.");
+
+
+        const combatFight = document.querySelector('.combat-fight');
+        if (combatFight && currentCard.enemy) {
+            // Példa: különböző hátterek különböző ellenségekhez
+            const background = currentCard.enemy[0].place; // Példa: az első választás célja alapján
+            
+            combatFight.style.backgroundImage = 'url("pictures/' + background + '.png")';
+            combatFight.style.backgroundSize = 'cover';
+            combatFight.style.backgroundPosition = 'center';
+        }
+
+
+
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }
+}
+
+
 
 
 // Oldal lapozása
@@ -170,11 +248,11 @@ function showCard(cardId) {
     let rightPageContent = '';
     
 
-    //Kombinációs kártya kezelése
+    //action feldolgozás
     if (currentCard.action === 'sumCombination' && inventory.includes('Pergamenen lévő számok: 15, 10, 22')) {
         currentCard.choices[0].target = 47;
     }
-
+    statAnditemsUpdate(); 
 
 
 
@@ -189,6 +267,12 @@ function showCard(cardId) {
                     type="button" 
                     class="luck-btn" 
                     onclick="tryFortune()">PRÓBÁLD MEG A SZERENCSÉD</button>`;
+    }
+    else if (currentCard.action === 'combat') {
+        rightPageContent = `<button 
+                    type="button" 
+                    class="combat-btn" 
+                    onclick="combat()">FELKÉSZÜLÉS A HARCRA</button>`;
     }
     else if (currentCard.choices && currentCard.choices.length > 0) {       //Választható opciók szűrése 
         const availableChoices = currentCard.choices.filter(choice => { //EZ EGY TÖMB LESZ!!!!!
