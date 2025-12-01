@@ -292,7 +292,8 @@
       {
       "name": "Óriáspók",
       "skill": 9,
-      "stamina": 5
+      "stamina": 5,
+      "place": "spider_room"
       }
     ],
     "action": "combat",
@@ -1107,7 +1108,8 @@
       {
       "name": "Törpe",
       "skill": 8,
-      "stamina": 5
+      "stamina": 5,
+      "place": "stairs"
       }
     ],
     "action": [
@@ -1646,7 +1648,8 @@
       {
       "name": "Fényimádók",
       "skill": 9,
-      "stamina": 11
+      "stamina": 11,
+      "place": "light"
       }
     ],
     "action": "combat",
@@ -1733,7 +1736,8 @@
       {
       "name": "Iszapsárkány",
       "skill": 10,
-      "stamina": 6
+      "stamina": 6,
+      "place": "dragon"
       }
     ],
     "action": "combat",
@@ -3131,12 +3135,14 @@
       {
         "name": "Első Iszapsárkány",
         "skill": 9,
-        "stamina": 5
+        "stamina": 5,
+        "place": "dragon"
       },
       {
         "name": "Második Iszapsárkány",
         "skill": 10,
-        "stamina": 6
+        "stamina": 6,
+        "place": "dragon"
       }
     ],
     "action": "combat",
@@ -3243,7 +3249,8 @@
       {
       "name": "Iszapsárkány",
       "skill": 9,
-      "stamina": 5
+      "stamina": 5,
+      "place":"dragon"
       }
     ],
     "action": "combat",
