@@ -228,37 +228,40 @@ async function combat() {
             // Példa: különböző hátterek különböző ellenségekhez
             const background3 = currentCard.enemy[0].name; // Példa: az első választás célja alapján
             
-            combatEnemyImg.style.backgroundImage = 'url("pictures/' + background3.toLowerCase() + '.png")';
+            combatEnemyImg.style.backgroundImage = 'url("pieces/monsters/' + background3 + '.png")';
             combatEnemyImg.style.backgroundSize = 'cover';
             combatEnemyImg.style.backgroundPosition = 'center';
-            console.log("✓ Ellenfél kép beállítva" + background3.toLowerCase() +".png");
+            console.log("✓ Ellenfél kép beállítva" + background3 +".png");
         }
         
         /*
         let enemyHealth = currentCard.enemy[0].stamina;
         while (healthpoints != 0 || enemyHealth != 0) {
 
-        }*/
+        }
        console.log(currentCard.enemy.length);
 
         let enemies = currentCard.enemy.length;
         let enemyHealth = 0;
-        while (healthpoints != 0 || enemyHealth != 0) {
-            for (let i = 0; i < currentCard.enemy.length; i++) {
+        for (let i = 0; i < currentCard.enemy.length; i++) {
+            while (healthpoints != 0 || enemyHealth != 0) {
                 enemyHealth = currentCard.enemy[i].stamina;
                 initDice();
 
+                
                 const rollButton = document.getElementById('roll');
                 rollButton.addEventListener('click', function() {
                     setTimeout(() => {
                         console.log(lastDiceRoll)
-                        rollButton.disabled = true; // Gomb letiltása a dobás után
+
 
                     }, 10);
                 });
+                healthpoints = 0; //teszt miatt
             }
-            healthpoints = 0; //teszt miatt
-        }
+                
+        }*/
+
 
 
 
