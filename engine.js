@@ -200,15 +200,64 @@ async function combat() {
         
         console.log("✓ Harc oldal betöltve.");
 
-
-        const combatFight = document.querySelector('.combat-fight');
-        if (combatFight && currentCard.enemy) {
+        
+        const combatFortune = document.querySelector('.combat-fortune');
+        if (combatFortune && currentCard.enemy) {
             // Példa: különböző hátterek különböző ellenségekhez
             const background = currentCard.enemy[0].place; // Példa: az első választás célja alapján
             
-            combatFight.style.backgroundImage = 'url("pictures/' + background + '.png")';
-            combatFight.style.backgroundSize = 'cover';
-            combatFight.style.backgroundPosition = 'center';
+            combatFortune.style.backgroundImage = 'url("pictures/' + background + '.png")';
+            combatFortune.style.backgroundSize = 'cover';
+            combatFortune.style.backgroundPosition = 'center';
+            console.log("✓ Harc háttér beállítva" + background);
+        }
+
+        const combatPlayerImg = document.querySelector('.combat-player-img');
+        if (combatPlayerImg && selectedCharacter) {
+            // Példa: különböző hátterek különböző ellenségekhez
+            const background2 = selectedCharacter.image; // Példa: az első választás célja alapján
+            
+            combatPlayerImg.style.backgroundImage = 'url(' + background2 + ')';
+            combatPlayerImg.style.backgroundSize = 'cover';
+            combatPlayerImg.style.backgroundPosition = 'center';
+            console.log("✓ Játékos kép beállítva " + background2);
+        }
+
+        const combatEnemyImg = document.querySelector('.combat-enemy-img');
+        if (combatEnemyImg && currentCard.enemy) {
+            // Példa: különböző hátterek különböző ellenségekhez
+            const background3 = currentCard.enemy[0].name; // Példa: az első választás célja alapján
+            
+            combatEnemyImg.style.backgroundImage = 'url("pictures/' + background3.toLowerCase() + '.png")';
+            combatEnemyImg.style.backgroundSize = 'cover';
+            combatEnemyImg.style.backgroundPosition = 'center';
+            console.log("✓ Ellenfél kép beállítva" + background3.toLowerCase() +".png");
+        }
+        
+        /*
+        let enemyHealth = currentCard.enemy[0].stamina;
+        while (healthpoints != 0 || enemyHealth != 0) {
+
+        }*/
+       console.log(currentCard.enemy.length);
+
+        let enemies = currentCard.enemy.length;
+        let enemyHealth = 0;
+        while (healthpoints != 0 || enemyHealth != 0) {
+            for (let i = 0; i < currentCard.enemy.length; i++) {
+                enemyHealth = currentCard.enemy[i].stamina;
+                initDice();
+
+                const rollButton = document.getElementById('roll');
+                rollButton.addEventListener('click', function() {
+                    setTimeout(() => {
+                        console.log(lastDiceRoll)
+                        rollButton.disabled = true; // Gomb letiltása a dobás után
+
+                    }, 10);
+                });
+            }
+            healthpoints = 0; //teszt miatt
         }
 
 
