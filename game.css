@@ -473,7 +473,7 @@ body{
 /* kép méret */
 .mini-prev img,
 .mini-next img {
-    width: 40px;               /* itt állítod a nyíl méretét */
+    width: 40px;               
     height: 40px;
     object-fit: contain;
     rotate: 0deg;
@@ -495,7 +495,7 @@ body{
 }
 
 
-/* viewport */
+
 .mini-slider__viewport {
     width: 100%;
     height: 100%;
@@ -503,7 +503,7 @@ body{
     transition: transform 0.4s ease;
 }
 
-/* slide */
+
 .mini-slide {
     min-width: 100%;
     display: flex;
@@ -512,7 +512,7 @@ body{
     flex-direction: column;
 }
 
-/* kör alakú képek */
+
 .mini-slide img {
     width: 60%;
     height: auto;
@@ -585,7 +585,38 @@ body{
 
 
 /*INVENTORI*/
-/* Alapból az egész pointer events none de a tab és az open verzió all tehát kattintható*/
+/*eletero*/
+.statbar {
+    width: 230px;
+    height: 20px;            
+    display: block;
+    overflow: visible;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+
+
+.healthbar svg {
+    transform: scaleY(0.35);   
+    transform-origin: top;
+}
+
+/* kezdő kitöltés */
+.healthbar_fill,
+.healthbar_fill-top {
+    width: 32px;
+    transition: width 0.15s ease-out;
+}
+
+
+.eletero_fill { fill: #9c3b29; }
+.ugyesseg_fill { fill: #419da3; }
+.szerencse_fill { fill: #41921b; }
+
+
+
+
+/*maga az inventory*/
 .inventory-wrapper {
   position: absolute;
   top: 10%;
@@ -604,14 +635,14 @@ body{
     pointer-events: all;
 }
 
-/* FÜL (mindig látszik) */
+
 .inventory-tab {
   position: absolute;
-  right: -40px;
+  right: -45px;
   top: 0;
-  width: 40px;
+  width: 41.8px;
   height: 120px;
-  background:  #463739;
+  background:  #7D6E4E;
   color: white;
   font-size: 26px;
   display: flex;
@@ -626,11 +657,15 @@ body{
 
 /* PANEL – alapból rejtve */
 .inventory-panel {
-  width: 260px;
-  background: #463739;
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  border-radius: 0px 0px 10px 0px;
+  text-align: left;
+  width: 270px;
+  height: 380px;
+  background-image: url('pictures/vegelegeshatter.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: -80px;
+  border-radius: 0px 10px 10px 0px ;
+  padding: 15px;
   opacity: 0;             
   filter: blur(3px);            
   pointer-events: none;
@@ -667,169 +702,23 @@ input[type="range"]
     width: 400px;
 }
 
-.inventory-table
-{
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 36px); 
+    grid-template-rows: repeat(2, 36px);    
+    gap: 3px;
+    
 
 }
 
-.inventory-row
-{
-   display: flex;
-	flex-direction: row;
-	justify-content: flex-start; /* align items in Main Axis */
-	align-items: flex-start; /* align items in Cross Axis */
-	align-content: flex-start; /* Extra space in Cross Axis */
-}
-
-
-.inventory-cell
-{
+.slot {
     width: 36px;
     height: 36px;
-    
-    flex-shrink: 0;
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: center; /* align items in Main Axis */
-    align-items: center; /* align items in Cross Axis */
-    align-content: center; /* Extra space in Cross Axis */
-    
-    background-image: url('pictures/inventoryslot.png');
-    background-position: -229px -331px;
+    background-image: url('pictures/imventoryslooot.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
 }
-
-/* left */
-.inventory-cell:first-child
-{
-    width: 38px;
-    padding-left: 2px;
-    
-    background-position: -190px -331px;
-}
-
-/* right */
-.inventory-cell:last-child
-{
-    width: 38px;
-    padding-right: 2px;
-    
-    background-position: -266px -331px;
-}
-    
-
-/* top ROW */
-.inventory-row:first-child .inventory-cell
-{
-    height: 38px;
-    padding-top: 2px;
-    
-    background-position: -229px -292px;
-}
-
-/* bottom ROW */
-.inventory-row:last-child .inventory-cell
-{
-    height: 38px;
-    padding-bottom: 2px;
-    
-    background-position: -229px -368px;
-}
-
-/* top left */
-.inventory-row:first-child .inventory-cell:first-child
-{
-    width: 38px;
-    height: 38px;
-    
-    background-position: -190px -292px;
-}
-
-/* top right */
-.inventory-row:first-child .inventory-cell:last-child
-{
-    width: 38px;
-    height: 38px;
-    
-    background-position: -266px -292px;
-}
-
-/* bottom left */
-.inventory-row:last-child .inventory-cell:first-child
-{
-    width: 38px;
-    height: 38px;
-    
-    background-position: -190px -368px;
-}
-
-/* bottom right */
-.inventory-row:last-child .inventory-cell:last-child
-{
-    width: 38px;
-    height: 38px;
-    
-    background-position: -266px -368px;
-}
-
-
-/* single horizontal */
-.inventory-row:only-child .inventory-cell
-{
-    height: 40px;
-    
-    background-position: -613px -286px;
-}
-/* single horizontal left */
-.inventory-row:only-child .inventory-cell:first-child
-{
-    width: 38px;
-    height: 40px;
-    
-    background-position: -574px -286px;
-}
-/* single horizontal right */
-.inventory-row:only-child .inventory-cell:last-child
-{
-    width: 38px;
-    height: 40px;
-    
-    background-position: -650px -286px;
-}
-
-/* single vertical */
-.inventory-row .inventory-cell:only-child
-{
-    width: 40px;
-    
-    background-position: -563px -463px;
-}
-/* single vertical top */
-.inventory-row:first-child .inventory-cell:only-child
-{
-    width: 40px;
-    height: 38px;
-    
-    background-position: -563px -424px;
-}
-/* single vertical bottom */
-.inventory-row:last-child .inventory-cell:only-child
-{
-    width: 40px;
-    height: 38px;
-    
-    background-position: -563px -500px;
-}
-
-/* single by singel */
-.inventory-row:only-child .inventory-cell:only-child
-{
-    width: 40px;
-    height: 40px;
-    
-    background-position: -30px -288px;
-}
-
 
 
 /* ITEMS */

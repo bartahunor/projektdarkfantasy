@@ -413,6 +413,17 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+//csúszka
+setStat("eletero", healthpoints);
+setStat("ugyesseg", attackpoints);
+setStat("szerencse", fortunepoints);
+function setStat(name, percent) {
+    const maxWidth = 32;
+    const fill = document.querySelector("." + name + "_fill");
+    const newWidth = (maxWidth * (percent / 100)) + "px";
+    fill.style.width = newWidth;
+}
+
 
 
 
