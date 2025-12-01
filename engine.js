@@ -4,6 +4,7 @@ let inventory = []; // Példa inventory tárgyak
 let fortunepoints = 13; // Példa szerencse pontok
 let healthpoints = 20; // Példa életerő pontok
 let attackpoints = 10; // Példa támadó pontok
+let skillpoints = 10; // Példa ügyesség pontok
 
 // Adatok betöltése
 
@@ -200,16 +201,82 @@ async function combat() {
         
         console.log("✓ Harc oldal betöltve.");
 
-
-        const combatFight = document.querySelector('.combat-fight');
-        if (combatFight && currentCard.enemy) {
+        
+        const combatFortune = document.querySelector('.combat-fortune');
+        if (combatFortune && currentCard.enemy) {
             // Példa: különböző hátterek különböző ellenségekhez
             const background = currentCard.enemy[0].place; // Példa: az első választás célja alapján
             
-            combatFight.style.backgroundImage = 'url("pictures/' + background + '.png")';
-            combatFight.style.backgroundSize = 'cover';
-            combatFight.style.backgroundPosition = 'center';
+            combatFortune.style.backgroundImage = 'url("pictures/' + background + '.png")';
+            combatFortune.style.backgroundSize = 'cover';
+            combatFortune.style.backgroundPosition = 'center';
+            console.log("✓ Harc háttér beállítva " + background +".png");
         }
+
+        const combatPlayerImg = document.querySelector('.combat-player-img');
+        if (combatPlayerImg && selectedCharacter) {
+            // Példa: különböző hátterek különböző ellenségekhez
+            const background2 = selectedCharacter.image; // Példa: az első választás célja alapján
+            
+            combatPlayerImg.style.backgroundImage = 'url(' + background2 + ')';
+            combatPlayerImg.style.backgroundSize = 'cover';
+            combatPlayerImg.style.backgroundPosition = 'center';
+            console.log("✓ Játékos kép beállítva " + background2);
+        }
+
+        const combatEnemyImg = document.querySelector('.combat-enemy-img');
+        if (combatEnemyImg && currentCard.enemy) {
+            // Példa: különböző hátterek különböző ellenségekhez
+            const background3 = currentCard.enemy[0].name; // Példa: az első választás célja alapján
+            
+            combatEnemyImg.style.backgroundImage = 'url("pieces/monsters/' + background3 + '.png")';
+            combatEnemyImg.style.backgroundSize = 'cover';
+            combatEnemyImg.style.backgroundPosition = 'center';
+            console.log("✓ Ellenfél kép beállítva " + background3 +".png");
+        }
+        
+       
+
+        
+        console.log(currentCard.enemy.length);
+
+        let enemyHealth = 0;
+        for (let i = 0; i < currentCard.enemy.length; i++) {
+            while (healthpoints != 0 || enemyHealth != 0) {
+                enemyHealth = currentCard.enemy[i].stamina;
+                
+                initDice();
+                //automatizált körök nincs manuális dobás csak kör indítás a gombbal így kétszer dob kiírja az eredményt és levonja a megfelelő értékeket
+                /*
+                let enemyAttack = currentCard.enemy[i].skill;
+                const rollButton = document.getElementById('roll');
+                rollButton.addEventListener('click', function() {
+                    setTimeout(() => {
+                        console.log(lastDiceRoll)
+                        enemyAttack += lastDiceRoll;
+                        console.log("Enemy Attack: " + enemyAttack);
+                        rollButton.removeEventListener('click', this);
+                    }, 10);
+                });
+
+                let playerAttack = skillpoints;
+                const rollButton2 = document.getElementById('roll');
+                rollButton2.addEventListener('click', function() {
+                    setTimeout(() => {
+                        console.log(lastDiceRoll)
+                        playerAttack += lastDiceRoll;
+                        console.log("Player Attack: " + playerAttack);
+                        rollButton.removeEventListener('click', this);
+                    }, 10);
+                });*/
+
+                break; // ideiglenes kilépés a végtelen ciklusból
+                
+            }
+               
+           console.log("Enemy Health: " + currentCard.enemy[i].stamina);
+        }
+
 
 
 
