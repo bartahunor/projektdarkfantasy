@@ -1035,7 +1035,7 @@ input[type="range"]
 
 /* combat popup */
 .combat-popup {
-    background-color: #D3B683;
+    background-color: #b99f73;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     height: 500px;
@@ -1050,6 +1050,11 @@ input[type="range"]
     transform: translate(-50%, -50%);
     color: white;
     font-family: 'PixelText', serif;
+    background-image: url(pictures/combatbg4.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 3px solid black;
 }
 
 .combat-actions{
@@ -1075,6 +1080,10 @@ input[type="range"]
   border-style: double;
   border-color: black;
   border-width: 8px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .combat-player, .combat-enemy{
@@ -1084,6 +1093,18 @@ input[type="range"]
   flex-direction: column;
   align-items: center;
   padding-top: 40px;
+  /*
+  background-image: url(pictures/combatbg2.png);
+  background-size: 170%;
+  background-position: 100%;
+  background-repeat: no-repeat;*/
+}
+
+.combat-player{
+  /*background-image: url(pictures/combatbg3.png);
+  background-size: 170%;
+  background-position: 0%;
+  background-repeat: no-repeat;*/
 }
 
 .combat-player-img, .combat-enemy-img{
@@ -1093,6 +1114,13 @@ input[type="range"]
   object-fit: cover;
   border: 4px solid #000;
   box-shadow: 0 0 10px #000;
+}
+
+#combat-text{
+  font-size: 2rem;
+  background-color: #000;
+  height: fit-content;
+  width: fit-content;
 }
 
 

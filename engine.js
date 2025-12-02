@@ -27,10 +27,8 @@ function closePopup() {
 function statAnditemsUpdate() {
     if (currentCard.items && currentCard.items.length > 0) {    //item hozzáadás az inventory-hoz
         currentCard.items.forEach(item => {
-            if (!inventory.includes(item)) {
-                inventory.push(item);
-                console.log(`✓ Tárgy hozzáadva: ${item}`);
-            }
+            inventory.push(item);
+            console.log(`✓ Tárgy hozzáadva: ${item}`);
         });
     }
 
@@ -240,105 +238,119 @@ async function combat() {
         
         console.log(currentCard.enemy.length);
 
-        let enemyHealth = 0;
-        for (let i = 0; i < currentCard.enemy.length; i++) {
-            while (healthpoints != 0 || enemyHealth != 0) {
-
-                let currentEnemyIndex = 0;
-                let enemyHealth = currentCard.enemy[currentEnemyIndex].stamina;
-                let firstRoll = 0;
-                let secondRoll = 0;
-                let rollCount = 0;
-
-                const rollButton = document.getElementById('roll');
-                
-                function handleCombatRound() {
-                    rollCount++;
-                    
-                    // Kockadobás animáció
-                    var elDiceOne = document.getElementById('dice1');
-                    var elDiceTwo = document.getElementById('dice2');
-                    var diceOne = Math.floor((Math.random() * 6) + 1);
-                    var diceTwo = Math.floor((Math.random() * 6) + 1);
-                    
-                    console.log('Dobás ' + rollCount + ': ' + diceOne + ' + ' + diceTwo);
-
-                    // Első kocka animáció
-                    for (var i = 1; i <= 6; i++) {
-                        elDiceOne.classList.remove('show-' + i);
-                        if (diceOne === i) {
-                            elDiceOne.classList.add('show-' + i);
-                        }
-                    }
-
-                    // Második kocka animáció
-                    for (var k = 1; k <= 6; k++) {
-                        elDiceTwo.classList.remove('show-' + k);
-                        if (diceTwo === k) {
-                            elDiceTwo.classList.add('show-' + k);
-                        }
-                    }
-
-                    const totalRoll = diceOne + diceTwo;
-
-                    if (rollCount === 1) {
-                        // Első dobás - Ellenfél támadóereje
-                        firstRoll = totalRoll;
-                        console.log('Ellenfél támadása: ' + (currentCard.enemy[currentEnemyIndex].skill + firstRoll));
-                    } else if (rollCount === 2) {
-                        // Második dobás - Játékos támadóereje
-                        secondRoll = totalRoll;
-                        console.log('Játékos támadása: ' + (skillpoints + secondRoll));
-                        
-                        // Támadások kiértékelése
-                        const enemyAttack = currentCard.enemy[currentEnemyIndex].skill + firstRoll;
-                        const playerAttack = skillpoints + secondRoll;
-                        
-                        console.log('--- KÖR EREDMÉNYE ---');
-                        console.log('Ellenfél támadóereje: ' + enemyAttack);
-                        console.log('Játékos támadóereje: ' + playerAttack);
-                        
-                        if (playerAttack > enemyAttack) {
-                            enemyHealth -= 2;
-                            console.log('Játékos sebzett! Ellenfél életereje: ' + enemyHealth);
-                        } else if (enemyAttack > playerAttack) {
-                            healthpoints -= 2;
-                            console.log('Ellenfél sebzett! Játékos életereje: ' + healthpoints);
-                        } else {
-                            console.log('Döntetlen kör, senki nem sérült!');
-                        }
-                        
-                        // Következő kör előkészítése
-                        rollCount = 0;
-                        firstRoll = 0;
-                        secondRoll = 0;
-                        
-                        // Ellenőrzés: vége a harcnak?
-                        if (healthpoints <= 0) {
-                            console.log('JÁTÉKOS MEGHALT!');
-                            rollButton.disabled = true;
-                            // Itt kezeld a játékos halálát
-                        } else if (enemyHealth <= 0) {
-                            console.log('ELLENFÉL LEGYŐZVE!');
-                            currentEnemyIndex++;
-                            if (currentEnemyIndex < currentCard.enemy.length) {
-                                enemyHealth = currentCard.enemy[currentEnemyIndex].stamina;
-                                console.log('Következő ellenfél! Életerő: ' + enemyHealth);
-                            } else {
-                                console.log('MINDEN ELLENFÉL LEGYŐZVE!');
-                                rollButton.disabled = true;
-                                // Itt kezeld a győzelmet
-                            }
-                        }
-                    }
-
-                }
-
-                rollButton.addEventListener('click', handleCombatRound);
-                break; // Kilépünk a while ciklusból, mert az eseménykezelő kezeli a köröket
-            }
+        
             
+
+        let currentEnemyIndex = 0;
+        let enemyHealth = currentCard.enemy[currentEnemyIndex].stamina;
+        let rollCount = 0;
+        let firstRoll = 0;
+        let secondRoll = 0;
+
+        const rollButton = document.getElementById('roll');
+        
+        function handleCombatRound() {
+            rollCount++;
+            
+            // Kockadobás
+            var elDiceOne = document.getElementById('dice1');
+            var elDiceTwo = document.getElementById('dice2');
+            var diceOne = Math.floor((Math.random() * 6) + 1);
+            var diceTwo = Math.floor((Math.random() * 6) + 1);
+            
+            console.log('Dobás ' + rollCount + ': ' + diceOne + ' + ' + diceTwo);
+
+            // Kocka animáció
+            for (var i = 1; i <= 6; i++) {
+                elDiceOne.classList.remove('show-' + i);
+                if (diceOne === i) {
+                    elDiceOne.classList.add('show-' + i);
+                }
+            }
+
+            for (var k = 1; k <= 6; k++) {
+                elDiceTwo.classList.remove('show-' + k);
+                if (diceTwo === k) {
+                    elDiceTwo.classList.add('show-' + k);
+                }
+            }
+
+            const totalRoll = diceOne + diceTwo;
+            let combatText = document.getElementById('combat-text');
+
+            if (rollCount === 1) {
+                // Első dobás - Ellenfél
+                firstRoll = totalRoll;
+                console.log('Ellenfél támadása: ' + (currentCard.enemy[currentEnemyIndex].skill + firstRoll));
+            } else if (rollCount === 2) {
+                // Második dobás - Játékos
+                secondRoll = totalRoll;
+                console.log('Játékos támadása: ' + (skillpoints + secondRoll));
+                
+                // Támadások kiértékelése
+                const enemyAttack = currentCard.enemy[currentEnemyIndex].skill + firstRoll;
+                const playerAttack = skillpoints + secondRoll;
+                
+                console.log('--- KÖR EREDMÉNYE ---');
+                console.log('Ellenfél támadóereje: ' + enemyAttack);
+                console.log('Játékos támadóereje: ' + playerAttack);
+                
+                if (playerAttack > enemyAttack) {
+                    enemyHealth -= 2;
+                    console.log('Játékos sebzett! Ellenfél életereje: ' + enemyHealth);
+                    combatText.innerText = 'Megsebezted az ellenfeled!'
+                } else if (enemyAttack > playerAttack) {
+                    healthpoints -= 2;
+                    console.log('Ellenfél sebzett! Játékos életereje: ' + healthpoints);
+                    combatText.innerText = 'Az ellenfél megsebzett'
+                } else {
+                    console.log('Döntetlen kör, senki nem sérült!');
+                    combatText.innerText = 'Kivédtétek egymás támadását!'
+                }
+                
+                // Következő kör előkészítése
+                rollCount = 0;
+                firstRoll = 0;
+                secondRoll = 0;
+                
+                // Ellenőrzés: vége a harcnak?
+                if (healthpoints <= 0) {
+                    console.log('JÁTÉKOS MEGHALT!');
+                    combatText.innerText = 'Elbuktad a csatát!'
+                    rollButton.disabled = true;
+                    rollButton.removeEventListener('click', handleCombatRound);
+                    // Itt kezeld a játékos halálát
+                    
+                } else if (enemyHealth <= 0) {
+                    console.log('ELLENFÉL LEGYŐZVE!');
+                    combatText.innerText = 'Ellenfél legyőzve!'
+                    currentEnemyIndex++;
+                    
+                    if (currentEnemyIndex < currentCard.enemy.length) {
+                        enemyHealth = currentCard.enemy[currentEnemyIndex].stamina;
+                        console.log('Következő ellenfél! Életerő: ' + enemyHealth);
+                        combatText.innerText = 'Következő ellenfél!'
+                        
+                        // ✅ Ellenfél kép frissítése
+                        const combatEnemyImg = document.querySelector('.combat-enemy-img');
+                        if (combatEnemyImg) {
+                            const newEnemyImage = currentCard.enemy[currentEnemyIndex].name;
+                            combatEnemyImg.style.backgroundImage = 'url("pieces/monsters/' + newEnemyImage + '.png")';
+                            console.log('✓ Új ellenfél képe beállítva: ' + newEnemyImage);
+                        }
+                        
+                    } else {
+                        console.log('MINDEN ELLENFÉL LEGYŐZVE!');
+                        rollButton.disabled = true;
+                        rollButton.removeEventListener('click', handleCombatRound);
+                        // Itt kezeld a győzelmet
+                    }
+                }
+            }
         }
+
+        // ✅ Event listener EGYSZER hozzáadva
+        rollButton.addEventListener('click', handleCombatRound);
         //closePopup();
 
 
