@@ -212,25 +212,29 @@ async function combat() {
         }
 
         const combatPlayerImg = document.querySelector('.combat-player-img');
-        if (combatPlayerImg && selectedCharacter) {
+        const combatPlayerName = document.querySelector('.combat-player-name')
+        if (combatPlayerName && combatPlayerImg && selectedCharacter) {
             // Példa: különböző hátterek különböző ellenségekhez
             const background2 = selectedCharacter.image; // Példa: az első választás célja alapján
-            
             combatPlayerImg.style.backgroundImage = 'url(' + background2 + ')';
             combatPlayerImg.style.backgroundSize = 'cover';
             combatPlayerImg.style.backgroundPosition = 'center';
             console.log("✓ Játékos kép beállítva " + background2);
+
+            combatPlayerName.innerText = selectedCharacter.name;
         }
 
         const combatEnemyImg = document.querySelector('.combat-enemy-img');
+        const combatEnemyName = document.querySelector('.combat-enemy-name')
         if (combatEnemyImg && currentCard.enemy) {
             // Példa: különböző hátterek különböző ellenségekhez
-            const background3 = currentCard.enemy[0].name; // Példa: az első választás célja alapján
-            
+            const background3 = currentCard.enemy[0].name; // Példa: az első választás célja alapján           
             combatEnemyImg.style.backgroundImage = 'url("pieces/monsters/' + background3 + '.png")';
             combatEnemyImg.style.backgroundSize = 'cover';
             combatEnemyImg.style.backgroundPosition = 'center';
             console.log("✓ Ellenfél kép beállítva " + background3 +".png");
+
+            combatEnemyName.innerText = currentCard.enemy[0].name;
         }
         
        
@@ -333,10 +337,12 @@ async function combat() {
                         
                         // ✅ Ellenfél kép frissítése
                         const combatEnemyImg = document.querySelector('.combat-enemy-img');
-                        if (combatEnemyImg) {
+                        const combatEnemyName = document.querySelector('.combat-enemy-name')
+                        if (combatEnemyImg && combatEnemyName) {
                             const newEnemyImage = currentCard.enemy[currentEnemyIndex].name;
                             combatEnemyImg.style.backgroundImage = 'url("pieces/monsters/' + newEnemyImage + '.png")';
                             console.log('✓ Új ellenfél képe beállítva: ' + newEnemyImage);
+                            combatEnemyName.innerText = currentCard.enemy[currentEnemyIndex].name
                         }
                         
                     } else {

@@ -1123,5 +1123,26 @@ input[type="range"]
   width: fit-content;
 }
 
+.combat-player-name, .combat-enemy-name{
+  font-size: 1rem;
+  color: black;
+  height: fit-content;
+  width: fit-content;
+}
+
+
+.combat-player-healthbar, .combat-enemy-healthbar{
+  width: 100%;
+  border: 1px solid red;
+}
+.statbar_combat {
+    width: 150px;
+    height: 20px;            
+    display: block;
+    overflow: visible;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    margin: 0;
+}
 
 
