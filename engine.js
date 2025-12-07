@@ -403,7 +403,6 @@ function showCard(cardId) {
     statAnditemsUpdate(); 
 
 
-
     if (currentCard.end === true) {  //Halál kártya kezelése
         rightPageContent = "Halott vagy. Játék vége.";
     }
@@ -416,7 +415,7 @@ function showCard(cardId) {
                     class="luck-btn" 
                     onclick="tryFortune()">PRÓBÁLD MEG A SZERENCSÉD</button>`;
     }
-    else if (currentCard.action === 'combat') {
+    else if (currentCard.action[0] === 'combat' || currentCard.action === 'combat') {
         rightPageContent = `<button 
                     type="button" 
                     class="combat-btn" 
