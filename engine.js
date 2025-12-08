@@ -543,6 +543,12 @@ function acceptCharacter() {
 
 }
 
+//sima tovább gomb
+
+
+
+
+
 
 /*<div id="chosen-character"></div>     
 function displayChosenCharacter() {

@@ -457,15 +457,17 @@ body{
     width: 100%;
     height: 100%;
     overflow: hidden;
+    margin: 0;    /* nincs felső vagy alsó rés */
+    padding: 0;
 }
 
 .mini-prev, .mini-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: none;          /* háttér NINCS */
-    border: none;              /* keret NINCS */
-    padding: 0;                /* ne legyen extra méret */
+    background: none;          
+    border: none;              
+    padding: 0;            
     cursor: pointer;
     z-index: 50;
 }
@@ -477,6 +479,7 @@ body{
     height: 40px;
     object-fit: contain;
     rotate: 0deg;
+    
 }
 
 .mini-prev {
@@ -521,6 +524,9 @@ body{
     object-fit: cover;
     border: 4px solid #000;
     box-shadow: 0 0 10px #000;
+    margin-top: 7px;
+    
+    
     
 }
 
@@ -530,6 +536,7 @@ body{
 
 .mini-slider p{
   width: 90%;
+  padding-bottom: 8px;
 }
 
 
@@ -537,9 +544,18 @@ body{
 .button-row {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* két szélre teszi */
     margin-top: auto;
-    padding-top: 20px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.gomb-sor{
+    display: flex;
+    justify-content: flex-end; /* gomb a jobb szélre */
+    gap: 10px; /* ha több gomb van, kis távolság */
+    padding-top: 10px;
+    margin-bottom: 10px;
+    margin-top: auto;
 }
 
 .accept-btn {
@@ -569,7 +585,8 @@ body{
     border: 0px;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 8px;
+    border-radius: 8px; 
+    
 }
 
 
@@ -591,8 +608,9 @@ body{
     height: 20px;            
     display: block;
     overflow: visible;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     margin-top: 0px;
+
 }
 
 
@@ -714,10 +732,13 @@ input[type="range"]
 .slot {
     width: 40px;
     height: 40px;
-    background-image: url('pictures/vegesshdow.png');
-    background-size: 100% 100%;
+    background-image: url('pictures/arnyekleci-removebg-preview.png');
+    background-size: 100% 80%;
     background-repeat: no-repeat;
     image-rendering: pixelated;
+    filter: blur(2px);
+    
+    
 }
 
 
@@ -784,6 +805,16 @@ input[type="range"]
     background-position: -442px -34px;
 }
 
+
+/*Statikus oldal*/
+h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+h3{
+  font-weight: bold;
+}
 
 
 
