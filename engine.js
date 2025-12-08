@@ -528,6 +528,11 @@ function acceptCharacter() {
 }
 
 
+
+
+
+
+
 /*<div id="chosen-character"></div>     
 function displayChosenCharacter() {
     if (!selectedCharacter) return;
