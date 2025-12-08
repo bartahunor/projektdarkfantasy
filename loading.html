@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betöltés...</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: #0a0a0a url('https://i.imgur.com/b5nXJzP.png');
+    background-size: 256px;
+    font-family: "VT323", monospace;
+    color: #C69654;
+    image-rendering: pixelated;
+    overflow: hidden;
+}
+
+.loader-container {
+    position: relative;
+    text-align: center;
+    top: 40%;
+}
+
+.loader-text {
+    font-size: 32px;
+    text-shadow: 2px 2px #000;
+    margin-bottom: 20px;
+}
+
+.loader-bar {
+    width: 300px;
+    height: 25px;
+    border: 3px solid #8A6E3E;
+    background: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.loader-fill {
+    height: 100%;
+    background: #C69654;
+    width: 0%;
+    animation: loading 3s linear forwards;
+}
+
+@keyframes loading {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* Runák stílusa */
+.rune {
+    position: absolute;
+    color: #C69654;
+    font-size: 20px;
+    text-shadow: 0 0 5px #fff;
+    opacity: 0;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 0; }
+    25%, 75% { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+<div class="loader-container">
+    <div class="loader-text">A labirintus kapui nyílnak...</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<script>
+// 3 másodperc után átirányítjuk a game.html-re
+setTimeout(() => {
+    window.location.href = "game.html";
+}, 3000);
+
+// Runák létrehozása
+const runeChars = ["ᚠ","ᚢ","ᚦ","ᚨ","ᚱ","ᚲ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ"];
+const body = document.body;
+
+for(let i=0; i<30; i++){
+    const rune = document.createElement("div");
+    rune.className = "rune";
+    rune.textContent = runeChars[Math.floor(Math.random()*runeChars.length)];
+    rune.style.left = Math.random()*100 + "vw";
+    rune.style.top = Math.random()*100 + "vh";
+    rune.style.animationDuration = (0.5 + Math.random()*1.5) + "s";
+    rune.style.fontSize = (16 + Math.random()*24) + "px";
+    body.appendChild(rune);
+}
+</script>
+</body>
+</html>

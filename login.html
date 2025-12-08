@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sötét Fantasy Login</title>
+
+<!-- Ékezetbarát pixel font -->
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #0a0a0a url(pictures/hatter.jpg);
+        background-size: cover;
+        font-family: "VT323", monospace;
+        image-rendering: pixelated;
+        color: #e0d0c0;
+    }
+
+    .container {
+        background: #1a1a1a;
+        padding: 30px;
+        border: 4px solid #8A6E3E;  /* alap keret sötétebb arany */
+        text-align: center;
+        width: 380px;
+        box-shadow:
+            0px 0px 0px 4px #000,
+            0px 0px 0px 8px #8A6E3E,
+            0px 0px 0px 12px #000,
+            0px 0px 20px #1a0000 inset;
+    }
+
+    h2 {
+        font-size: 26px;
+        color: #C69654; /* címsor világos arany */
+        margin-bottom: 25px;
+        text-shadow: 2px 2px #000;
+    }
+
+    input {
+        width: 90%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 3px solid #8A6E3E; /* alap keret */
+        background: #000;
+        color: #cfcfcf;
+        font-family: "VT323", monospace;
+        font-size: 22px;
+        outline: none;
+        box-shadow: 2px 2px #000;
+    }
+
+    input:focus {
+        border-color: #C69654; /* fókusz világos arany */
+        color: #fff;
+    }
+
+    button {
+        width: 95%;
+        padding: 12px;
+        margin-top: 15px;
+        font-family: "VT323", monospace;
+        font-size: 24px;
+        cursor: pointer;
+        border: 3px solid #8A6E3E;
+        background-color: #8A6E3E; /* alap sötétebb arany */
+        color: #000;
+        transition: 0.15s;
+    }
+
+    button:hover {
+        background-color: #C69654; /* hover világos arany */
+        border-color: #C69654;
+        color: #000;
+    }
+
+    .toggle {
+        margin-top: 20px;
+        display: block;
+        cursor: pointer;
+        color: #C69654;
+        font-size: 20px;
+        text-shadow: 1px 1px #000;
+    }
+
+    .toggle:hover {
+        color: #e3b97c; /* hover világosabb */
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2 id="form-title">LÉPJ BE A LABIRINTUSBA</h2>
+
+    <input id="username" type="text" placeholder="Felhasználónév">
+    <input id="password" type="password" placeholder="Jelszó">
+
+    <button id="action-btn">Belépés</button>
+
+    <span class="toggle" id="toggle-mode">Fiók létrehozása</span>
+</div>
+
+<script>
+let isSignup = false;
+
+document.getElementById("toggle-mode").onclick = () => {
+    isSignup = !isSignup;
+    document.getElementById("form-title").textContent =
+        isSignup ? "ÚJ LÉLEK KOVÁCSA" : "LÉPJ BE A LABIRINTUSBA";
+    document.getElementById("action-btn").textContent =
+        isSignup ? "Regisztráció" : "Belépés";
+    document.getElementById("toggle-mode").textContent =
+        isSignup ? "Már van fiókod? Belépés" : "Fiók létrehozása";
+};
+
+document.getElementById("action-btn").onclick = () => {
+    const user = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value.trim();
+
+    if (!user || !pass) {
+        alert("Minden mezőt ki kell töltened!");
+        return;
+    }
+
+    if (isSignup) {
+        localStorage.setItem("user_" + user, pass);
+        alert("A lélek megkovácsolva — most már beléphetsz.");
+    } else {
+        const savedPass = localStorage.getItem("user_" + user);
+        if (savedPass === pass) {
+            window.location.href = "loading.html";
+        } else {
+            alert("Hibás felhasználónév vagy jelszó!");
+        }
+    }
+};
+</script>
+
+</body>
+</html>
