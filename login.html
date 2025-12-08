@@ -136,7 +136,7 @@ document.getElementById("action-btn").onclick = () => {
     } else {
         const savedPass = localStorage.getItem("user_" + user);
         if (savedPass === pass) {
-            alert("A kapuk megnyílnak...");
+            window.location.href = "loading.html";
         } else {
             alert("Hibás felhasználónév vagy jelszó!");
         }
