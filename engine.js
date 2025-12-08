@@ -5,7 +5,7 @@ let inventory = []; // Példa inventory tárgyak
 let fortunepoints = 13; // Példa szerencse pontok
 let healthpoints = 2; // Példa életerő pontok
 let attackpoints = 10; // Példa támadó pontok
-let skillpoints = 10; // Példa ügyesség pontok
+let skillpoints = 2; // Példa ügyesség pontok
 
 // Adatok betöltése
 
@@ -46,6 +46,36 @@ function statAnditemsUpdate() {
                 attackpoints += action.amount;
             }
         }
+    }
+}
+
+async function deathPopup() {
+    try {
+        const response = await fetch("pieces/death.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: death.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+        
+        console.log("✓ Harc oldal betöltve.");
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
     }
 }
 
@@ -238,7 +268,7 @@ async function combat() {
             combatEnemyName.innerText = currentCard.enemy[0].name;
         }
         
-       
+       console.log(currentCard.choices[0].target);
             
 
         let currentEnemyIndex = 0;
@@ -329,16 +359,16 @@ async function combat() {
                     combatText.innerText = 'Elbuktad a csatát!'
                     rollButton.disabled = true;
                     rollButton.removeEventListener('click', handleCombatRound);
-                    const combatEndBtn = document.createElement('div');
-                    combatEndBtn.innerText = `
-                        <button 
-                            type="button" 
-                            class="combat-end-btn"
-                            onclick="closePopup()"
-                        >
-                            TOVÁBB
-                        </button>
-                    `;
+
+                    const combatEndBtn = document.createElement('button');
+                    combatEndBtn.type = 'button';
+                    combatEndBtn.className = 'combat-end-btn';
+                    combatEndBtn.innerText = 'TOVÁBB';
+                    combatEndBtn.onclick = function() {
+                        closePopup(), deathPopup();
+                    };
+                    const combatLog = document.querySelector('.combat-log');
+                    combatLog.appendChild(combatEndBtn);
                     
                 } else if (enemyHealth <= 0) {
                     console.log('ELLENFÉL LEGYŐZVE!');
@@ -365,13 +395,22 @@ async function combat() {
                         console.log('MINDEN ELLENFÉL LEGYŐZVE!');
                         rollButton.disabled = true;
                         rollButton.removeEventListener('click', handleCombatRound);
-                        // Itt kezeld a győzelmet
+
+                        const combatEndBtn = document.createElement('button');
+                        combatEndBtn.type = 'button';
+                        combatEndBtn.className = 'combat-end-btn';
+                        combatEndBtn.innerText = 'TOVÁBB';
+                        combatEndBtn.onclick = function() {
+                            closePopup(), showCard(currentCard.choices[0].target);
+                        };
+                        const combatLog = document.querySelector('.combat-log');
+                        combatLog.appendChild(combatEndBtn);
                     }
                 }
             }
         }
 
-        // ✅ Event listener EGYSZER hozzáadva
+
         rollButton.addEventListener('click', handleCombatRound);
         //closePopup(); + meg a combatText.classList.add('combat-text-div-active')
 
@@ -431,7 +470,7 @@ function showCard(cardId) {
                     class="luck-btn" 
                     onclick="tryFortune()">PRÓBÁLD MEG A SZERENCSÉD</button>`;
     }
-    else if (currentCard.action[0] === 'combat' || currentCard.action === 'combat') {
+    else if (currentCard.action !=null && currentCard.action[0] === 'combat' || currentCard.action === 'combat') {
         rightPageContent = `<button 
                     type="button" 
                     class="combat-btn" 

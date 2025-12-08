@@ -1224,3 +1224,43 @@ h3{
   transition: width .5s linear;
 }
 
+.combat-end-btn{
+  width: fit-content;
+  height: auto;
+  background-color: black;
+}
+
+.death-popup{
+  background-image: url(pictures/skulls2.jpg);
+  background-size: 140%;
+  background-position: center;
+  width: 500px;
+  height: 600px;
+  top: 0;
+  left: 0;
+  position: relative;
+}
+
+.death-popup-title{
+  text-align: center;
+  width: 430px;
+  height: auto;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 13%;
+  left: 8%;
+}
+
+.death-popup-close{
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  background-color: red;
+  color: #000;
+  margin: 5px;
+  border: 2px solid rgb(80, 79, 79);
+  font-size: 1.8rem;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
