@@ -1,8 +1,9 @@
+
 let allCards = [];
 let currentCard = null;
 let inventory = []; // Példa inventory tárgyak
 let fortunepoints = 13; // Példa szerencse pontok
-let healthpoints = 20; // Példa életerő pontok
+let healthpoints = 2; // Példa életerő pontok
 let attackpoints = 10; // Példa támadó pontok
 let skillpoints = 10; // Példa ügyesség pontok
 
@@ -238,18 +239,17 @@ async function combat() {
         }
         
        
-
-        
-        console.log(currentCard.enemy.length);
-
-        
             
 
         let currentEnemyIndex = 0;
         let enemyHealth = currentCard.enemy[currentEnemyIndex].stamina;
+        let enemyStartHealth = currentCard.enemy[currentEnemyIndex].stamina;
+        let playerStartHealth = healthpoints;
         let rollCount = 0;
         let firstRoll = 0;
         let secondRoll = 0;
+        let enemyHealthBar = document.getElementById('ebar');
+        let playerHealthBar = document.getElementById('pbar');
 
         const rollButton = document.getElementById('roll');
         
@@ -286,10 +286,12 @@ async function combat() {
                 // Első dobás - Ellenfél
                 firstRoll = totalRoll;
                 console.log('Ellenfél támadása: ' + (currentCard.enemy[currentEnemyIndex].skill + firstRoll));
+                rollButton.innerText = "ELLENFÉL DOBÁSA";
             } else if (rollCount === 2) {
                 // Második dobás - Játékos
                 secondRoll = totalRoll;
                 console.log('Játékos támadása: ' + (skillpoints + secondRoll));
+                rollButton.innerText = "JÁTÉKOS DOBÁSA";
                 
                 // Támadások kiértékelése
                 const enemyAttack = currentCard.enemy[currentEnemyIndex].skill + firstRoll;
@@ -298,15 +300,19 @@ async function combat() {
                 console.log('--- KÖR EREDMÉNYE ---');
                 console.log('Ellenfél támadóereje: ' + enemyAttack);
                 console.log('Játékos támadóereje: ' + playerAttack);
-                
+
+                combatText.classList.add('combat-text-div-active')
                 if (playerAttack > enemyAttack) {
                     enemyHealth -= 2;
                     console.log('Játékos sebzett! Ellenfél életereje: ' + enemyHealth);
-                    combatText.innerText = 'Megsebezted az ellenfeled!'
+                    combatText.innerText = 'Megsebezted az ellenfeled!';
+                    enemyHealthBar.style.width = enemyHealth / enemyStartHealth * 100 + "%";
+
                 } else if (enemyAttack > playerAttack) {
                     healthpoints -= 2;
                     console.log('Ellenfél sebzett! Játékos életereje: ' + healthpoints);
                     combatText.innerText = 'Az ellenfél megsebzett'
+                    playerHealthBar.style.width = healthpoints / playerStartHealth * 100 + "%";
                 } else {
                     console.log('Döntetlen kör, senki nem sérült!');
                     combatText.innerText = 'Kivédtétek egymás támadását!'
@@ -323,7 +329,16 @@ async function combat() {
                     combatText.innerText = 'Elbuktad a csatát!'
                     rollButton.disabled = true;
                     rollButton.removeEventListener('click', handleCombatRound);
-                    // Itt kezeld a játékos halálát
+                    const combatEndBtn = document.createElement('div');
+                    combatEndBtn.innerText = `
+                        <button 
+                            type="button" 
+                            class="combat-end-btn"
+                            onclick="closePopup()"
+                        >
+                            TOVÁBB
+                        </button>
+                    `;
                     
                 } else if (enemyHealth <= 0) {
                     console.log('ELLENFÉL LEGYŐZVE!');
@@ -334,6 +349,7 @@ async function combat() {
                         enemyHealth = currentCard.enemy[currentEnemyIndex].stamina;
                         console.log('Következő ellenfél! Életerő: ' + enemyHealth);
                         combatText.innerText = 'Következő ellenfél!'
+                        enemyHealthBar.style.width = '100%';
                         
                         // ✅ Ellenfél kép frissítése
                         const combatEnemyImg = document.querySelector('.combat-enemy-img');
@@ -357,7 +373,7 @@ async function combat() {
 
         // ✅ Event listener EGYSZER hozzáadva
         rollButton.addEventListener('click', handleCombatRound);
-        //closePopup();
+        //closePopup(); + meg a combatText.classList.add('combat-text-div-active')
 
 
 

@@ -623,7 +623,7 @@ body{
   right: 0;
   width: 260px;
   height: auto;
-  transform: translateX(0);
+  transform: translateX(-265px);
   transition: transform 0.35s ease;
     pointer-events: none;
 
@@ -631,7 +631,7 @@ body{
 }
 
 .inventory-wrapper.open {
-  transform: translateX(100%);
+  transform: translateX(0);
     pointer-events: all;
 }
 
@@ -1060,9 +1060,9 @@ input[type="range"]
 .combat-actions{
   display: flex;
   flex-direction: column;
-  border-style: double;
+  border-style: solid;
   border-color: black;
-  border-width: 0px 8px 0px 8px;
+  border-width: 0px 3px 0px 3px;
 
 }
 
@@ -1077,9 +1077,9 @@ input[type="range"]
 
 .combat-log{
   height: 150px;
-  border-style: double;
+  /*border-style: double;
   border-color: black;
-  border-width: 8px 0px 0px 0px;
+  border-width: 8px 0px 0px 0px;*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1089,10 +1089,13 @@ input[type="range"]
 .combat-player, .combat-enemy{
   height: 100%;
   width: 250px;
+  min-width: 250px;  /* ✅ Ez megakadályozza a kitágulást */
+  max-width: 250px;  /* ✅ Ez is */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 40px;
+  overflow: hidden;  /* ✅ Ez levágja a kilógó részeket */
   /*
   background-image: url(pictures/combatbg2.png);
   background-size: 170%;
@@ -1114,13 +1117,31 @@ input[type="range"]
   object-fit: cover;
   border: 4px solid #000;
   box-shadow: 0 0 10px #000;
+  margin-bottom: 20px;
+}
+.combat-text-div{
+  background: none;
 }
 
-#combat-text{
-  font-size: 2rem;
-  background-color: #000;
+.combat-text-div-active{
+  font-size: 1.7rem;
   height: fit-content;
   width: fit-content;
+  padding: 10px;
+  text-align: center;
+  background:
+    linear-gradient(to right, black 4px, transparent 4px) 0 0,
+    linear-gradient(to right, black 4px, transparent 4px) 0 100%,
+    linear-gradient(to left, black 4px, transparent 4px) 100% 0,
+    linear-gradient(to left, black 4px, transparent 4px) 100% 100%,
+    linear-gradient(to bottom, black 4px, transparent 4px) 0 0,
+    linear-gradient(to bottom, black 4px, transparent 4px) 100% 0,
+    linear-gradient(to top, black 4px, transparent 4px) 0 100%,
+    linear-gradient(to top, black 4px, transparent 4px) 100% 100%;
+
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+  color: black;
 }
 
 .combat-player-name, .combat-enemy-name{
@@ -1128,21 +1149,47 @@ input[type="range"]
   color: black;
   height: fit-content;
   width: fit-content;
+  margin-bottom: 5px;
 }
 
 
 .combat-player-healthbar, .combat-enemy-healthbar{
-  width: 100%;
-  border: 1px solid red;
-}
-.statbar_combat {
-    width: 150px;
-    height: 20px;            
-    display: block;
-    overflow: visible;
-    margin-bottom: 5px;
-    margin-top: 0px;
-    margin: 0;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.health-bar {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 200px;
+  height: 20px;
+  padding: 5px;
+  background: #000000;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  position: relative;
+}
+.bar {
+  background: #c54;
+  width: 100%;
+  height: 10px;
+  position: relative;
+  
+  transition: width .5s linear;
+}
+
+.hit {
+  background: rgba(255,255,255,0.6);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 0px;
+  
+  transition: width .5s linear;
+}
 
