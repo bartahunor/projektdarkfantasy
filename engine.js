@@ -527,6 +527,7 @@ function acceptCharacter() {
 
 }
 
+//sima tovább gomb
 
 
 
