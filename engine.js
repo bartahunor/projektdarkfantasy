@@ -3,7 +3,7 @@ let allCards = [];
 let currentCard = null;
 let inventory = []; // Példa inventory tárgyak
 let fortunepoints = 13; // Példa szerencse pontok
-let healthpoints = 2; // Példa életerő pontok
+let healthpoints = 10; // Példa életerő pontok
 let attackpoints = 10; // Példa támadó pontok
 let skillpoints = 2; // Példa ügyesség pontok
 
