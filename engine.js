@@ -4,8 +4,8 @@ let currentCard = null;
 let inventory = []; // Példa inventory tárgyak
 let fortunepoints = 13; // Példa szerencse pontok
 let healthpoints = 10; // Példa életerő pontok
-let attackpoints = 10; // Példa támadó pontok
-let skillpoints = 2; // Példa ügyesség pontok
+let skillpoints = 20; // Példa ügyesség pontok
+let startFortunepoints = 13
 
 // Adatok betöltése
 
@@ -43,7 +43,20 @@ function statAnditemsUpdate() {
                 fortunepoints += action.amount;
             }
             else if (action.type === 'attackChange') {
-                attackpoints += action.amount;
+                skillpoints += action.amount;
+            }
+            else if (action.type === "startPointChange") {
+                switch (action.subtype) {
+                    case "fortune":
+                        fortunepoints = startFortunepoints + action.amount;
+                        break;
+                    case "health":
+                        healthpoints = startHealthpoints + action.amount;
+                        break;
+                    case "skill":
+                        skillpoints = startSkillpoints + action.amount;
+                        break;
+                }
             }
         }
     }
@@ -280,6 +293,7 @@ async function combat() {
         let secondRoll = 0;
         let enemyHealthBar = document.getElementById('ebar');
         let playerHealthBar = document.getElementById('pbar');
+        let totalRollCount = 0;
 
         const rollButton = document.getElementById('roll');
         
@@ -311,6 +325,7 @@ async function combat() {
 
             const totalRoll = diceOne + diceTwo;
             let combatText = document.getElementById('combat-text');
+            totalRollCount++;
 
             if (rollCount === 1) {
                 // Első dobás - Ellenfél
@@ -346,6 +361,19 @@ async function combat() {
                 } else {
                     console.log('Döntetlen kör, senki nem sérült!');
                     combatText.innerText = 'Kivédtétek egymás támadását!'
+                }
+
+                if (totalRollCount == 2 && currentCard.choices.length == 2) {
+                    const combatEndBtn = document.createElement('button');
+                    combatEndBtn.type = 'button';
+                    combatEndBtn.className = 'combat-flee-btn';
+                    combatEndBtn.innerText = 'MENEKVÉS';
+                    combatEndBtn.onclick = function() {
+                        closePopup(), showCard(currentCard.choices[1].target);
+                    };
+                    const combatLog = document.querySelector('.combat-log');
+                    combatLog.appendChild(combatEndBtn);
+                    console.log("MENEKVÉS GOMB LEKREÁLVA")
                 }
                 
                 // Következő kör előkészítése

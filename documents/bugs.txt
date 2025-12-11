@@ -1,10 +1,11 @@
 20. kártya a jsonbe --> de kinézet nem tökéletes
 49. kártya a jsonbe
 63. kártya jsonbe
-102. kártya jsonbe
+
 119. kártya jsonbe 
 140. kártya jsonbe
 148. kártya jsonbe
+153. kártya jsonbe
 155. kártya jsonbe
 182. kártya jsonbe
 196. kártya jsonbe

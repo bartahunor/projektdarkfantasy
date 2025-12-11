@@ -1221,7 +1221,7 @@ h3{
 
 
 
-.combat-end-btn{
+.combat-end-btn, .combat-flee-btn{
   margin-top: 10px;
   padding: 5px 15px;
     color: #ebebeb;
@@ -1236,7 +1236,7 @@ h3{
     font-family: 'PixelText', serif;
 }
 
-.combat-end-btn:hover {
+.combat-end-btn:hover, .combat-flee-btn:hover {
     background: #4b4b4b;
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #000000;
