@@ -612,8 +612,30 @@ function acceptCharacter() {
 
 //sima tovább gomb
 
+document.addEventListener("DOMContentLoaded", () => {
+  const carousel = document.querySelector('.carousel');
+  const slides = carousel.querySelectorAll('.carousel-item');
 
+  // Első oldal jobb oldali oldalán legyen tovább gomb
+  const firstRightPage = slides[0].querySelector('.right-page');
+  const btn1 = document.createElement('button');
+  btn1.textContent = 'TOVÁBB';
+  btn1.className = 'btn btn-primary mt-3';
+  btn1.addEventListener('click', () => {
+    slides[1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  });
+  firstRightPage.appendChild(btn1);
 
+  // Második oldal jobb oldali oldalán legyen tovább gomb
+  const secondRightPage = slides[1].querySelector('.right-page');
+  const btn2 = document.createElement('button');
+  btn2.textContent = 'TOVÁBB';
+  btn2.className = 'btn btn-primary mt-3';
+  btn2.addEventListener('click', () => {
+    slides[2].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  });
+  secondRightPage.appendChild(btn2);
+});
 
 
 
