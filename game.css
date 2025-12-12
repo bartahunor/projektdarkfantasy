@@ -643,8 +643,8 @@ body{
   height: auto;
   transform: translateX(-265px);
   transition: transform 0.35s ease;
-    pointer-events: none;
-
+  pointer-events: none;
+  border: 1px solid red;
   overflow: visible;
 }
 
@@ -1277,3 +1277,6 @@ h3{
   cursor: pointer;
 }
 
+.tovabbgomb{
+  z-index: 10000;
+}

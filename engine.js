@@ -457,12 +457,30 @@ async function combat() {
 // Oldal lapozása
 function turnPage() {
     const carousel = document.querySelector('.carousel');
-    const lastItem = carousel.lastElementChild;
+    const items = carousel.querySelectorAll('.carousel-item');
     
-    if (lastItem) {
-        const totalSlides = carousel.querySelectorAll('.carousel-item').length;
-        carousel.style.setProperty('--slides', totalSlides);
-        lastItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    // Megkeressük az aktuálisan látható oldalt
+    let currentIndex = -1;
+    items.forEach((item, index) => {
+        const rect = item.getBoundingClientRect();
+        const carouselRect = carousel.getBoundingClientRect();
+        
+        // Ha az elem látható a carousel-ben
+        if (rect.left >= carouselRect.left - 10 && rect.left <= carouselRect.left + 10) {
+            currentIndex = index;
+        }
+    });
+    
+    // Következő oldalra lépés
+    const nextIndex = currentIndex + 1;
+    
+    if (nextIndex < items.length) {
+        items[nextIndex].scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'nearest', 
+            inline: 'start' 
+        });
+        console.log("lapoztunk")
     }
 }
 
@@ -610,32 +628,6 @@ function acceptCharacter() {
 
 }
 
-//sima tovább gomb
-
-document.addEventListener("DOMContentLoaded", () => {
-  const carousel = document.querySelector('.carousel');
-  const slides = carousel.querySelectorAll('.carousel-item');
-
-  // Első oldal jobb oldali oldalán legyen tovább gomb
-  const firstRightPage = slides[0].querySelector('.right-page');
-  const btn1 = document.createElement('button');
-  btn1.textContent = 'TOVÁBB';
-  btn1.className = 'btn btn-primary mt-3';
-  btn1.addEventListener('click', () => {
-    slides[1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-  });
-  firstRightPage.appendChild(btn1);
-
-  // Második oldal jobb oldali oldalán legyen tovább gomb
-  const secondRightPage = slides[1].querySelector('.right-page');
-  const btn2 = document.createElement('button');
-  btn2.textContent = 'TOVÁBB';
-  btn2.className = 'btn btn-primary mt-3';
-  btn2.addEventListener('click', () => {
-    slides[2].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-  });
-  secondRightPage.appendChild(btn2);
-});
 
 
 
