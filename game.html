@@ -15,7 +15,6 @@
         <h1>AZ ÍTÉLET LABIRINTUSA</h1>
     </div>
     <div class="col-md-12 felulet">
-        <button onclick="turnPage()" class="tovabbgomb"">TOVÁBB</button>
         <div class="container">
             <div class="sprite-wrapper">
                 <div class="book">
@@ -32,7 +31,7 @@
                                     <div class="page right-page">
                                         <h2 style="margin-top: 10px;">HÁTTÉR TÖRTÉNET:</h2>
                                         <p style="margin-bottom: 80px;">A Koponyák Sivatagán átkelve a gazdag Zafirváros felé, egy elf halottját találod, kezében kék gyémánttal. Hirtelen íjakkal körbevesznek az elfek, téged gyanúsítva a gyilkossággal. Az ítélet Labirintusába visznek, ahol minden bűnöst próbára tesznek: egy aranyszobrot kell megtalálni és kijuttatni. Ha sikerül, ártatlannak találnak; ha nem, bűnösnek. A fák között a menet egy hatalmas törzs előtt áll meg – a kéreg kinyílik, feltárva a labirintus bejáratát.</p>
-
+                                        <button onclick="turnPage()" class="tovabbgomb"">TOVÁBB</button>
                                     </div>
                                 </div>
                             </div>
@@ -45,8 +44,8 @@
                                     </div>
 
                                     <div class="page right-page">
-                                        <img src="pictures/kezdoirat.png" alt="motto" style=" width: 300px; margin-top: 100px;">
-
+                                        <img src="pictures/kezdoirat.png" alt="motto" style=" width: 300px; margin-top: 100px; pointer-events: none; z-index: 1;">
+                                        <button onclick="turnPage()" class="tovabbgomb" style="z-index: 1000;">TOVÁBB</button>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +53,7 @@
                                 <div class="page-container">
                                     <div class="page left-page">
                                         <div class="mini-slider">
-                                            <h3 style="margin: 0; padding: 0; text-align: center;">KARAKTER VÁLASZTÁS:</h3>
+                                            <h3 style="margin: 0; padding: 0; text-align: center;">KARAKTER VÁLASZTÁS</h3>
 
                                                 <button class="mini-prev"><img src="selected_characters/play.png" alt=""></button>
                                                 <button class="mini-next"><img src="selected_characters/play.png" alt=""></button>
@@ -108,11 +107,19 @@
                                         
                                     </div>
                                     <div class="page right-page">
-                                        <p>Dobás</p>
-                                        <div class="gomb-sor">
-                                            <button type="button" class="next-btnn" id="nextBtn" style="display: none;" onclick="showCard(41)">TOVÁBB</button>
+                                        <div class="choose-points">
+                                            <h3 style="margin: 0; padding: 0; text-align: center;">PONTOK MEGHATÁROZÁSA</h3>
+                                            <p>Először egy kockával dobsz, a kidobott számhoz 12-őt adunk ez lesz az életerőd. Majd a következő kidobott számhoz 6-ot adunk ez lesz az ügyességi pontjaid. A szerencspontokhoz két kockával dobsz és az eredményhez 6-ot adunk.</p>
+                                            <div class="point-btns">
+                                                <button class="choose-health">ÉLETPONTOK</button>
+                                                <button class="choose-skill">ÜGYESSÉGPONTOK</button>
+                                                <button class="choose-fortune">SZERENCSEPONTOK</button>
+                                            </div>
+
+                                            <div class="gomb-sor">
+                                                <button type="button" class="next-btnn" id="nextBtn" style="display: none;" onclick="showCard(41)">TOVÁBB</button>
+                                            </div>
                                         </div>
-                                    
                                         
                                     </div>
                                 </div>

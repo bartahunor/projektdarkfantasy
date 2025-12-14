@@ -556,6 +556,7 @@ body{
     padding-top: 10px;
     margin-bottom: 10px;
     margin-top: auto;
+    height: 100px;
 }
 
 .accept-btn {
@@ -1221,7 +1222,7 @@ h3{
 
 
 .combat-end-btn, .combat-flee-btn{
-  margin-top: 10px;
+  margin-top: 5px;
   padding: 5px 15px;
     color: #ebebeb;
     background-color: #6d6d6d;
@@ -1235,7 +1236,7 @@ h3{
     font-family: 'PixelText', serif;
 }
 
-.combat-end-btn:hover, .combat-flee-btn:hover {
+.combat-end-btn:hover, .combat-flee-btn:hover, .closecombatfortune-btn:hover {
     background: #4b4b4b;
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #000000;
@@ -1277,16 +1278,27 @@ h3{
 }
 
 .tovabbgomb{
-  z-index: 10000;
+    width: 30%;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 5px;
+    font-family: 'PixelText', serif;
+    background-color: #f1e2b2;
+    color: #A69D7D;
+    text-decoration: none;
+    border: 0px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px; 
 }
 
 
 .combattryfortune-popup {
-    background-image: url(pictures/dragon.png);
-    background-position: bottom center;
+    background-image: url(pictures/combatfortune2.jpg);
+    background-position: top;
     background-repeat: no-repeat;
-    background-size: cover;
-    padding: 30px;
+    background-size: 130%;
+    padding: 10px;
     padding-top: 10px;
     height: 345px;
     width: 500px;
@@ -1315,8 +1327,18 @@ h3{
 .closecombatfortune-btn{
   width: 30px;
   height: 30px;
-  border-radius: 10px;
   cursor: pointer;
+    color: #ebebeb;
+    background-color: #6d6d6d;
+    border: none;
+    font-size: 15px;
+    font-weight: bolder;
+    box-shadow: inset -4px -4px  #292929;
+    /*box-shadow: 0 4px 0 #d4a949;*/
+    outline: none;
+    cursor: pointer;
+    font-family: 'PixelText', serif;
+
 }
 
 .combatfortunecontainer{
@@ -1327,4 +1349,94 @@ h3{
   width: 100%;
   height: 100%;
   padding: 0px 10px 10px 0px;
+}
+
+.combat-fortune-option{
+    width: 130px;
+  height: 30px;
+  cursor: pointer;
+    color: #ebebeb;
+    background-color: #6b01a0;
+    border: none;
+    font-size: 10px;
+    font-weight: bolder;
+    box-shadow: inset -4px -4px  #2d0054;
+    /*box-shadow: 0 4px 0 #d4a949;*/
+    outline: none;
+    cursor: pointer;
+    font-family: 'PixelText', serif;
+}
+
+.combat-fortune-option:hover {
+    background: #451d81;
+    transform: translateY(2px);
+    box-shadow: inset -4px -4px  #1e0039;
+}
+
+.combat-fortune-option:disabled{
+    background: #4d3f63;
+    box-shadow: inset -4px -4px  #33263e;
+    color: #000000;
+}
+
+.point-btns{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  gap: 10px;
+  align-items: center;
+}
+
+.choose-points{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.choose-health, .choose-skill, .choose-fortune{
+      width: 130px;
+  height: 30px;
+  cursor: pointer;
+    color: #ebebeb;
+    background-color: #6b01a0;
+    border: none;
+    font-size: 10px;
+    font-weight: bolder;
+    box-shadow: inset -4px -4px  #2d0054;
+    /*box-shadow: 0 4px 0 #d4a949;*/
+    outline: none;
+    cursor: pointer;
+    font-family: 'PixelText', serif;
+}
+
+.choose-health{
+  background-color: #c81818;
+  box-shadow: inset -4px -4px  #6e0202;
+}
+
+.choose-health:hover {
+    background: #8d1f1f;
+    transform: translateY(2px);
+    box-shadow: inset -4px -4px  #570101;
+}
+
+.choose-skill{
+  background-color: #1b9465;
+  box-shadow: inset -4px -4px  #056a34;
+}
+
+.choose-skill:hover {
+    background: #197240;
+    transform: translateY(2px);
+    box-shadow: inset -4px -4px  #07542f;
+}
+
+.choose-fortune:hover {
+    background: #451d81;
+    transform: translateY(2px);
+    box-shadow: inset -4px -4px  #1e0039;
 }
