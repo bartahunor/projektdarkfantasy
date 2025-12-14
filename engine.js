@@ -17,6 +17,13 @@ async function start() {
   allCards = await response.json();
   console.log('✓ Betöltve!');
 }
+function closeCFPopup() {
+    const popupEl = document.getElementById("fortunepopup");
+    if (popupEl) {
+        popupEl.classList.remove("combattryfortune-popup"); 
+        popupEl.innerHTML = '';
+    }
+}
 function closePopup() {
     const popupEl = document.getElementById("popuppage");
     if (popupEl) {
@@ -129,7 +136,7 @@ async function tryFortune() {
         console.log("✓ Szerencseproba oldal betöltve.");
         
         // Kocka inicializálása
-        initDice();
+        initDice('roll', 'dice1', 'dice2');
 
         const rollButton = document.getElementById('roll');
         rollButton.addEventListener('click', function() {
@@ -183,10 +190,21 @@ async function tryFortune() {
 }
 
 
-function initDice() {
-    var elDiceOne       = document.getElementById('dice1');
-    var elDiceTwo       = document.getElementById('dice2');
-    var elComeOut       = document.getElementById('roll');
+function initDice(buttonid, diceidone, diceidtwo) {
+    var elDiceOne       = document.getElementById(diceidone);
+    var elDiceTwo       = document.getElementById(diceidtwo);
+    var elComeOut       = document.getElementById(buttonid);
+
+// ✅ Biztonság: ha nincs gomb, ne próbáld beállítani
+    if (!elComeOut) {
+        console.warn(`⚠️ FIGYELEM: '${buttonid}' ID-jú gomb nem található!`);
+        return; // Kilép, nem dob hibát
+    }
+
+    if (!elDiceOne || !elDiceTwo) {
+        console.warn('⚠️ FIGYELEM: Kockák nem találhatók!');
+        return;
+    }
 
     elComeOut.onclick = function () {
         lastDiceRoll = rollDice();
@@ -294,6 +312,7 @@ async function combat() {
         let enemyHealthBar = document.getElementById('ebar');
         let playerHealthBar = document.getElementById('pbar');
         let totalRollCount = 0;
+        let combatRoundOutcome = 0;
 
         const rollButton = document.getElementById('roll');
         
@@ -352,27 +371,31 @@ async function combat() {
                     console.log('Játékos sebzett! Ellenfél életereje: ' + enemyHealth);
                     combatText.innerText = 'Megsebezted az ellenfeled!';
                     enemyHealthBar.style.width = enemyHealth / enemyStartHealth * 100 + "%";
+                    combatRoundOutcome = 1;
 
                 } else if (enemyAttack > playerAttack) {
                     healthpoints -= 2;
                     console.log('Ellenfél sebzett! Játékos életereje: ' + healthpoints);
                     combatText.innerText = 'Az ellenfél megsebzett'
                     playerHealthBar.style.width = healthpoints / playerStartHealth * 100 + "%";
+                    combatRoundOutcome = 2;                    
                 } else {
                     console.log('Döntetlen kör, senki nem sérült!');
                     combatText.innerText = 'Kivédtétek egymás támadását!'
+                    combatRoundOutcome = 0;
                 }
 
+                let combatFleeBtn = null
                 if (totalRollCount == 2 && currentCard.choices.length == 2) {
-                    const combatEndBtn = document.createElement('button');
-                    combatEndBtn.type = 'button';
-                    combatEndBtn.className = 'combat-flee-btn';
-                    combatEndBtn.innerText = 'MENEKVÉS';
-                    combatEndBtn.onclick = function() {
+                    combatFleeBtn = document.createElement('button');
+                    combatFleeBtn.type = 'button';
+                    combatFleeBtn.className = 'combat-flee-btn';
+                    combatFleeBtn.innerText = 'MENEKVÉS';
+                    combatFleeBtn.onclick = function() {
                         closePopup(), showCard(currentCard.choices[1].target);
                     };
                     const combatLog = document.querySelector('.combat-log');
-                    combatLog.appendChild(combatEndBtn);
+                    combatLog.appendChild(combatFleeBtn);
                     console.log("MENEKVÉS GOMB LEKREÁLVA")
                 }
                 
@@ -388,6 +411,12 @@ async function combat() {
                     rollButton.disabled = true;
                     rollButton.removeEventListener('click', handleCombatRound);
 
+
+                    const existingFleeBtn = document.querySelector('.combat-flee-btn');
+                    if(existingFleeBtn) {
+                        existingFleeBtn.remove();
+                    }
+
                     const combatEndBtn = document.createElement('button');
                     combatEndBtn.type = 'button';
                     combatEndBtn.className = 'combat-end-btn';
@@ -397,6 +426,8 @@ async function combat() {
                     };
                     const combatLog = document.querySelector('.combat-log');
                     combatLog.appendChild(combatEndBtn);
+
+                    
                     
                 } else if (enemyHealth <= 0) {
                     console.log('ELLENFÉL LEGYŐZVE!');
@@ -424,6 +455,12 @@ async function combat() {
                         rollButton.disabled = true;
                         rollButton.removeEventListener('click', handleCombatRound);
 
+
+                        const existingFleeBtn = document.querySelector('.combat-flee-btn');
+                        if(existingFleeBtn) {
+                            existingFleeBtn.remove();
+                        }
+
                         const combatEndBtn = document.createElement('button');
                         combatEndBtn.type = 'button';
                         combatEndBtn.className = 'combat-end-btn';
@@ -440,7 +477,60 @@ async function combat() {
 
 
         rollButton.addEventListener('click', handleCombatRound);
-        //closePopup(); + meg a combatText.classList.add('combat-text-div-active')
+
+        const combatFortuneBtn = document.getElementById('combatForuneBtn');
+
+        async function combatFortuneDice(outcome) {
+            try {
+                const response = await fetch("pieces/combatTryfortune.html");
+
+                if (!response.ok) {
+                    console.error("Nem sikerült betölteni: combatTryfortune.html");
+                    alert("Hiba: nem sikerült betölteni a fájlt!");
+                    return;
+                }
+
+                const html = await response.text();
+                const popupEl = document.getElementById("fortunepopup");
+                
+                if (!popupEl) {
+                    alert("HIBA: popuppage nem található!");
+                    return;
+                }
+                
+                // HTML betöltése
+                popupEl.innerHTML = html;
+                //popupEl.classList.add("popuppage-active");
+                
+                console.log("✓ Szerencseproba oldal betöltve.");
+                
+                // Kocka inicializálása
+                setTimeout(() => {
+                    initDice('fortuneroll', 'dice3', 'dice4');
+
+                    const rollButton = document.getElementById('fortuneroll');
+                    if (rollButton) {
+                        rollButton.addEventListener('click', function() {
+                            setTimeout(() => {
+                                console.log(lastDiceRoll)
+                                rollButton.disabled = true;
+                                
+                                // ... logika ...
+
+                            }, 10);
+                        });
+                    }
+                }, 50);
+
+
+            } catch (err) {
+                console.error("Hiba történt betöltés közben:", err);
+                alert("Hiba: " + err.message);
+            }
+        }
+        combatFortuneBtn.addEventListener('click', function() {
+            combatFortuneDice(combatRoundOutcome);
+        });
 
 
 

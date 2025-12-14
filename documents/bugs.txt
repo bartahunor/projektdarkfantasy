@@ -3,10 +3,10 @@
 63. kártya jsonbe
 
 119. kártya jsonbe 
-140. kártya jsonbe
+
 148. kártya jsonbe
 153. kártya jsonbe
-155. kártya jsonbe
+
 182. kártya jsonbe
 196. kártya jsonbe
 197. kártya jsonbe
@@ -17,7 +17,7 @@ ESET KEZELÉS
 2. Befejező kártya lekezelése - kész
 3. combat esemény
 4. tryFortune esemény --> rollbutton disable kell, reuslt button css, többszöri tryfortunenél nem jelenik meg az oldal css és js hiba
-5. healthChange esemény
+5. healthChange esemény 
 6. fortuneChange esemény
 7. attackChange esemény
 8. visited cards lekezelése *

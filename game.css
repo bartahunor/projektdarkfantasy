@@ -644,7 +644,6 @@ body{
   transform: translateX(-265px);
   transition: transform 0.35s ease;
   pointer-events: none;
-  border: 1px solid red;
   overflow: visible;
 }
 
@@ -1279,4 +1278,42 @@ h3{
 
 .tovabbgomb{
   z-index: 10000;
+}
+
+
+.combattryfortune-popup {
+    background-image: url(pictures/dragon.png);
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 30px;
+    padding-top: 10px;
+    height: 345px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-color: black;
+    border-width: 0px 3px 0px 3px;
+}
+
+.closecombatfortune{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: start;
+  width: 100%;
+  height: 100%;
+
+}
+
+.closecombatfortune-btn{
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
 }
