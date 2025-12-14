@@ -313,6 +313,7 @@ async function combat() {
         let playerHealthBar = document.getElementById('pbar');
         let totalRollCount = 0;
         let combatRoundOutcome = 0;
+        let combatText = document.getElementById('combat-text');
 
         const rollButton = document.getElementById('roll');
         
@@ -343,8 +344,15 @@ async function combat() {
             }
 
             const totalRoll = diceOne + diceTwo;
-            let combatText = document.getElementById('combat-text');
             totalRollCount++;
+            const combatFortuneBtn = document.getElementById('combatForuneBtn');
+            if (combatFortuneBtn) {
+                if (totalRollCount % 2 === 0 && totalRollCount != 0) {
+                    combatFortuneBtn.disabled = false;
+                } else {
+                    combatFortuneBtn.disabled = true;
+                }
+            }
 
             if (rollCount === 1) {
                 // Első dobás - Ellenfél
@@ -395,7 +403,7 @@ async function combat() {
                         closePopup(), showCard(currentCard.choices[1].target);
                     };
                     const combatLog = document.querySelector('.combat-log');
-                    combatLog.appendChild(combatFleeBtn);
+                    combatLog.insertBefore(combatFleeBtn, combatLog.children[1]);
                     console.log("MENEKVÉS GOMB LEKREÁLVA")
                 }
                 
@@ -425,8 +433,8 @@ async function combat() {
                         closePopup(), deathPopup();
                     };
                     const combatLog = document.querySelector('.combat-log');
-                    combatLog.appendChild(combatEndBtn);
-
+                    combatLog.insertBefore(combatEndBtn, combatLog.children[1]);
+                    combatFortuneBtn.disabled = true;
                     
                     
                 } else if (enemyHealth <= 0) {
@@ -449,6 +457,8 @@ async function combat() {
                             console.log('✓ Új ellenfél képe beállítva: ' + newEnemyImage);
                             combatEnemyName.innerText = currentCard.enemy[currentEnemyIndex].name
                         }
+
+                        combatFortuneBtn.disabled = true;
                         
                     } else {
                         console.log('MINDEN ELLENFÉL LEGYŐZVE!');
@@ -469,7 +479,8 @@ async function combat() {
                             closePopup(), showCard(currentCard.choices[0].target);
                         };
                         const combatLog = document.querySelector('.combat-log');
-                        combatLog.appendChild(combatEndBtn);
+                        combatLog.insertBefore(combatEndBtn, combatLog.children[1]);
+                        combatFortuneBtn.disabled = true;
                     }
                 }
             }
@@ -479,6 +490,7 @@ async function combat() {
         rollButton.addEventListener('click', handleCombatRound);
 
         const combatFortuneBtn = document.getElementById('combatForuneBtn');
+        combatFortuneBtn.disabled = true;
 
         async function combatFortuneDice(outcome) {
             try {
@@ -515,7 +527,42 @@ async function combat() {
                                 console.log(lastDiceRoll)
                                 rollButton.disabled = true;
                                 
-                                // ... logika ...
+                                let fortuneresult = false;
+                                if (lastDiceRoll <= fortunepoints) {
+                                    fortuneresult = true;
+                                    fortunepoints -= 1;
+
+                                }
+                                else{
+                                    fortunepoints -= 1;
+                                }
+
+                                if (outcome == 1) {  //player sebzett
+                                    if (fortuneresult == true) {
+                                        enemyHealth -= 2;
+                                        console.log('Szerencsés vagy! Ellenfél életereje: ' + enemyHealth);
+                                        combatText.innerText = 'Szerencsés extra sebzés!';
+                                    }
+                                    else {
+                                        enemyHealth++;
+                                        console.log('Szerencsés vagy! Ellenfél életereje: ' + enemyHealth);
+                                        combatText.innerText = 'Szerencsétlen extra sebzés!';                                        
+                                    }
+                                    enemyHealthBar.style.width = enemyHealth / enemyStartHealth * 100 + "%";
+                                }
+                                else if (outcome == 2) {  //enemy sebzett
+                                    if (fortuneresult == true) {
+                                        healthpoints++;
+                                        console.log('Szerencsés vagy! Ellenfél életereje: ' + enemyHealth);
+                                        combatText.innerText = 'Szerencsés extra védelem!';
+                                    }
+                                    else {
+                                        enemyHealth--;
+                                        console.log('Szerencsés vagy! Ellenfél életereje: ' + enemyHealth);
+                                        combatText.innerText = 'Szerencsétlen extra védelem!';                                        
+                                    }
+                                    playerHealthBar.style.width = healthpoints / playerStartHealth * 100 + "%";
+                                }
 
                             }, 10);
                         });
@@ -528,7 +575,10 @@ async function combat() {
                 alert("Hiba: " + err.message);
             }
         }
+
+
         combatFortuneBtn.addEventListener('click', function() {
+            combatFortuneBtn.disabled = true; // ✅ Letiltjuk használat után
             combatFortuneDice(combatRoundOutcome);
         });
 
