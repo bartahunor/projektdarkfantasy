@@ -1,12 +1,13 @@
 
 let allCards = [];
 let currentCard = null;
-let inventory = []; // Példa inventory tárgyak
-let fortunepoints = 13; // Példa szerencse pontok
+let inventory = ['manna', 'manna', 'manna', 'manna', 'manna', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'kard', 'bőrvért' ]; // Kezdő inventory tárgyak
+let fortunepoints = 0; // Példa szerencse pontok
 let healthpoints = 0; // Példa életerő pontok
-let skillpoints = 20; // Példa ügyesség pontok
+let skillpoints = 0; // Példa ügyesség pontok
 let startFortunepoints = 0;
 let startHealthpoints = 0;
+let startSkillpoints = 0;
 
 // Adatok betöltése
 
@@ -33,7 +34,46 @@ function closePopup() {
     }
 }
 
-async function chooseHealth() {
+async function choosePotion() {
+    try {
+        const response = await fetch("pieces/health_potion/test.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: test.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+        
+        
+        console.log("✓ Varázsital oldal betöltve.");
+        
+
+
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }       
+}
+const potionChooseBtn = document.getElementById('potionBtn')
+potionChooseBtn.addEventListener('click', function() {
+    choosePotion();
+    potionChooseBtn.disabled = true; // ✅ Letiltjuk használat után
+});/**/
+
+async function chooseFortune() {
     try {
         const response = await fetch("pieces/healthandskill.html");
 
@@ -55,8 +95,136 @@ async function chooseHealth() {
         popupEl.innerHTML = html;
         popupEl.classList.add("popuppage-active");
         
+        const bg = document.querySelector('.healthandskill-popup')
+        bg.style.backgroundImage = 'url("pictures/fortune.png")';
+        
         console.log("✓ Élet- vagy ügyességpont oldal betöltve.");
         initDiceOne();
+        const rollButton = document.getElementById('roll');
+        rollButton.addEventListener('click', function() {
+            setTimeout(() => {
+                console.log(lastDiceRoll)
+                rollButton.disabled = true; // Gomb letiltása a dobás után
+
+                fortunepoints = lastDiceRoll + 6;
+                startFortunepoints = lastDiceRoll + 6;
+
+
+                const yourText = document.getElementById('your-outcome-text')
+                yourText.innerText = "Szerencsepontjaid:"
+                const yourPoint = document.getElementById('your-outcome');
+                yourPoint.innerText = fortunepoints;
+                const closeBtn = document.querySelector('.closepointchoose');
+                closeBtn.style.display = 'block';
+
+                setStat("szerencse", fortunepoints, startFortunepoints);
+
+            }, 10);
+        });
+
+
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }    
+}
+const fortuneChooseBtn = document.getElementById('fortuneBtn')
+fortuneChooseBtn.addEventListener('click', function() {
+    chooseFortune();
+    fortuneChooseBtn.disabled = true; // ✅ Letiltjuk használat után
+});
+
+
+//ÜGYESSÉDI PONTOK KIPÖRGETÉSE
+async function chooseSkill() {
+    try {
+        const response = await fetch("pieces/healthandskill.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: healthandskill.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+        
+        const bg = document.querySelector('.healthandskill-popup')
+        bg.style.backgroundImage = 'url("pictures/skill.png")';
+        
+        console.log("✓ Élet- vagy ügyességpont oldal betöltve.");
+        initDiceOne();
+        const rollButton = document.getElementById('roll');
+        rollButton.addEventListener('click', function() {
+            setTimeout(() => {
+                console.log(lastDiceRoll)
+                rollButton.disabled = true; // Gomb letiltása a dobás után
+
+                skillpoints = lastDiceRoll + 6;
+                startSkillpoints = lastDiceRoll + 6;
+
+
+                const yourText = document.getElementById('your-outcome-text')
+                yourText.innerText = "Ügyességpontjaid:"
+                const yourPoint = document.getElementById('your-outcome');
+                yourPoint.innerText = skillpoints;
+                const closeBtn = document.querySelector('.closepointchoose');
+                closeBtn.style.display = 'block';
+
+                setStat("ugyesseg", skillpoints, startSkillpoints);
+            }, 10);
+        });
+
+
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }    
+}
+const skillChooseBtn = document.getElementById('skillBtn')
+skillChooseBtn.addEventListener('click', function() {
+    chooseSkill();
+    skillChooseBtn.disabled = true; // ✅ Letiltjuk használat után
+    
+
+});
+
+//ÉlET PONTOK KIPÖRGETÉSE
+async function chooseHealth() {
+    try {
+        const response = await fetch("pieces/fortunechoose.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: fortunechoose.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+        
+        console.log("✓ Szerencse oldal betöltve.");
+        initDice('roll', 'dice1', 'dice2');
         const rollButton = document.getElementById('roll');
         rollButton.addEventListener('click', function() {
             setTimeout(() => {
@@ -66,15 +234,15 @@ async function chooseHealth() {
                 healthpoints = lastDiceRoll + 12;
                 startHealthpoints = lastDiceRoll + 12;
 
-                const bg = document.querySelector('.healthandskill-popup')
-                bg.style.backgroundImage = 'url("pictures/health.png")';
 
                 const yourText = document.getElementById('your-outcome-text')
                 yourText.innerText = "Életpontjaid:"
                 const yourPoint = document.getElementById('your-outcome');
                 yourPoint.innerText = healthpoints
+                const closeBtn = document.querySelector('.closepointchoose');
+                closeBtn.style.display = 'block';
 
-
+                setStat("eletero", healthpoints, startHealthpoints);
             }, 10);
         });
 
@@ -88,9 +256,8 @@ async function chooseHealth() {
 const healthChooseBtn = document.getElementById('healthBtn')
 healthChooseBtn.addEventListener('click', function() {
     chooseHealth();
-    combatFortuneBtn.disabled = true; // ✅ Letiltjuk használat után
+    healthChooseBtn.disabled = true; // ✅ Letiltjuk használat után
 });
-
 
 function statAnditemsUpdate() {
     if (currentCard.items && currentCard.items.length > 0) {    //item hozzáadás az inventory-hoz
@@ -101,13 +268,16 @@ function statAnditemsUpdate() {
     }
 
     if (currentCard.action != null) {   //statok frissítése
-        for (let i; i < currentCard.action.length; i++) {   //stat módosítás
+        for (let i = 0; i < currentCard.action.length; i++) {   //stat módosítás
             const action = currentCard.action[i];
             if (action.type === 'healthChange') {
                 healthpoints += action.amount;
+                setStat("eletero", healthpoints, startHealthpoints);
             }
             else if (action.type === 'fortuneChange') {
                 fortunepoints += action.amount;
+                setStat("szerencse", fortunepoints, startFortunepoints);
+
             }
             else if (action.type === 'attackChange') {
                 skillpoints += action.amount;
@@ -116,12 +286,15 @@ function statAnditemsUpdate() {
                 switch (action.subtype) {
                     case "fortune":
                         fortunepoints = startFortunepoints + action.amount;
+                        setStat("szerencse", fortunepoints, startFortunepoints);
                         break;
                     case "health":
                         healthpoints = startHealthpoints + action.amount;
+                        setStat("eletero", healthpoints, startHealthpoints);
                         break;
                     case "skill":
                         skillpoints = startSkillpoints + action.amount;
+                        setStat("ugyesseg", skillpoints, startSkillpoints)
                         break;
                 }
             }
@@ -241,6 +414,7 @@ async function tryFortune() {
 
             }, 10);
         });
+        setStat("szerencse", fortunepoints, startFortunepoints);
 
 
     } catch (err) {
@@ -500,6 +674,7 @@ async function combat() {
                     const combatLog = document.querySelector('.combat-log');
                     combatLog.insertBefore(combatFleeBtn, combatLog.children[1]);
                     console.log("MENEKVÉS GOMB LEKREÁLVA")
+                    healthpoints -= 2;
                 }
                 
                 // Következő kör előkészítése
@@ -578,6 +753,9 @@ async function combat() {
                         combatFortuneBtn.disabled = true;
                     }
                 }
+                
+                setStat("szerencse", fortunepoints, startFortunepoints);
+                setStat("eletero", healthpoints, startHealthpoints);
             }
         }
 
@@ -740,7 +918,9 @@ function showCard(cardId) {
 
 
     if (currentCard.end === true) {  //Halál kártya kezelése
+        deathPopup();
         rightPageContent = "Halott vagy. Játék vége.";
+
     }
     else if (currentCard.end === false && !currentCard.choices) {   //Nyerő kártya kezelése
         rightPageContent = "NYERTÉL.";
@@ -899,18 +1079,43 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 //csúszka
-setStat("eletero", healthpoints);
-setStat("ugyesseg", skillpoints);
-setStat("szerencse", fortunepoints);
-function setStat(name, percent) {
+function setStat(name, percent, startpoint) {
     const maxWidth = 32;
     const fill = document.querySelector("." + name + "_fill");
-    const newWidth = (maxWidth * (percent / 100)) + "px";
+    const newWidth = (maxWidth * (percent / startpoint)) + "px";
     fill.style.width = newWidth;
+    console.log(name + " csúszka beállítva")
 }
 
 
+// Carousel oldal figyelése
+function updateCarouselInteractivity() {
+    const carousel = document.querySelector('.carousel');
+    const items = carousel.querySelectorAll('.carousel-item');
+    
+    items.forEach((item, index) => {
+        const rect = item.getBoundingClientRect();
+        const carouselRect = carousel.getBoundingClientRect();
+        
+        // Ha az oldal látható a carousel-ben
+        const isVisible = rect.left >= carouselRect.left - 10 && 
+                         rect.left <= carouselRect.left + 10;
+        
+        if (isVisible) {
+            item.style.pointerEvents = 'auto';
+            item.style.zIndex = '10';
+        } else {
+            item.style.pointerEvents = 'none';
+            item.style.zIndex = '1';
+        }
+    });
+}
 
+// Figyelés görgéskor
+document.querySelector('.carousel').addEventListener('scroll', updateCarouselInteractivity);
+
+// Indításkor is futtassuk
+document.addEventListener('DOMContentLoaded', updateCarouselInteractivity);
 
 start();  // Indítás
 

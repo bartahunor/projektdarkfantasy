@@ -247,7 +247,6 @@ body{
           display: grid;
           position: absolute;
           grid-area: markers;
-
           grid-auto-flow: column;
           place-self: center;
           overflow: hidden;
@@ -629,8 +628,8 @@ body{
 
 
 .eletero_fill { fill: #9c3b29; }
-.ugyesseg_fill { fill: #419da3; }
-.szerencse_fill { fill: #41921b; }
+.ugyesseg_fill { fill:  #41921b;}
+.szerencse_fill { fill: #4a029c; }
 
 
 
@@ -1341,6 +1340,7 @@ h3{
 
 }
 
+
 .combatfortunecontainer{
   display: flex;
   flex-direction: row;
@@ -1397,7 +1397,7 @@ h3{
   gap: 20px;
 }
 
-.choose-health, .choose-skill, .choose-fortune{
+.choose-health, .choose-skill, .choose-fortune, .potion-btn{
       width: 130px;
   height: 30px;
   cursor: pointer;
@@ -1423,6 +1423,13 @@ h3{
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #570101;
 }
+.choose-health:disabled {
+    background: #7a3d3d;
+    transform: translateY(2px);
+    box-shadow: inset -4px -4px  #3b1d1d;
+    color: #000;
+    cursor: default;
+}
 
 .choose-skill{
   background-color: #1b9465;
@@ -1434,16 +1441,29 @@ h3{
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #07542f;
 }
+.choose-skill:disabled {
+    background: #4d7a61;
+    transform: translateY(2px);
+    box-shadow: inset -4px -4px  #27503c;
+    color: #000;
+    cursor: default;
+}
 
 .choose-fortune:hover {
     background: #451d81;
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #1e0039;
 }
+.choose-fortune:disabled {
+    background: #4d3f63;
+    box-shadow: inset -4px -4px  #33263e;
+    color: #000000;
+    cursor: default;
+}
 
 
-.healthandskill-popup{
-  width: 50%;
+.healthandskill-popup, .choose-fortune-popup{
+  width: 30%;
   height: 40%;
   background-position: center;
   background-size: cover;
@@ -1452,9 +1472,106 @@ h3{
   justify-content: center;
   align-items: center;
   gap: 20px;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
+  position: relative;
+  border-radius: 10px;
+  padding: 10px;
 }
 #your-outcome{
+  position: absolute;
+  top: 88%;
+  font-size: 1.3rem;
+}
+#your-outcome-text{
+  position: absolute;
+  top: 80%;
+  font-size: 1.3rem;
+}
 
+.closepointchoose{
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: #ebebeb;
+  background-color: #6e6e6e;
+  border: none;
+  font-size: 15px;
+  font-weight: bolder;
+  box-shadow: inset -4px -4px  #292929;
+    /*box-shadow: 0 4px 0 #d4a949;*/
+  outline: none;
+  cursor: pointer;
+  font-family: 'PixelText', serif;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: none;
+}
+.closepointchoose:hover {
+    background: #4b4b4b;
+    transform: translateY(2px);
+    box-shadow: inset -4px -4px  #000000;
+}
+
+
+.choose-fortune-popup{
+  background-image: url(pictures/health.png);
+}
+
+.potion-btn{
+  width: fit-content;
+    background-color: #3884c2;
+    box-shadow: inset -4px -4px  #063985;
+  z-index: 1000;
+}
+
+.potion-btn:hover {
+    background: #1d5e83;
+    transform: translateY(2px);
+    box-shadow: inset -4px -4px  #033f4e;
+}
+
+.potion-btn:disabled {
+    background: #5c8399;
+    transform: translateY(2px);
+    box-shadow: inset -4px -4px  #35606b;
+    color: #000;
+}
+
+#potion-popup {
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  display: block;
+  border-radius: 10px;
+  text-align: center;
+  height: 40%;
+  color: black;
+}
+#potion-popup button {
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  height: 70%;
+  border: none;
+}
+#potion-popup button:hover {
+  transform: scale(110%);
+}
+
+
+#potion-popup button img{
+}
+
+.potions{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: auto;
 }

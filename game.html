@@ -31,16 +31,18 @@
                                     <div class="page right-page">
                                         <h2 style="margin-top: 10px;">HÁTTÉR TÖRTÉNET:</h2>
                                         <p style="margin-bottom: 80px;">A Koponyák Sivatagán átkelve a gazdag Zafirváros felé, egy elf halottját találod, kezében kék gyémánttal. Hirtelen íjakkal körbevesznek az elfek, téged gyanúsítva a gyilkossággal. Az ítélet Labirintusába visznek, ahol minden bűnöst próbára tesznek: egy aranyszobrot kell megtalálni és kijuttatni. Ha sikerül, ártatlannak találnak; ha nem, bűnösnek. A fák között a menet egy hatalmas törzs előtt áll meg – a kéreg kinyílik, feltárva a labirintus bejáratát.</p>
-                                        <button onclick="turnPage()" class="tovabbgomb"">TOVÁBB</button>
+                                        <button onclick="turnPage()" class="tovabbgomb">TOVÁBB</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="carousel-item">
                                 <div class="page-container">
                                     <div class="page left-page">
-                                        <h2>JÓ TANÁCSOK A KALANDHOZ:</h2>
-                                        <p>Mielőtt belevágnál ebbe a kalandba, fel kell mérned mennyire vagy erős, illetve gyenge. Van egy kardod, egy pajzsod és egy hátizsákod étellel, itallal az útra. Felkészültél a feladatra, megtanultál a karddal bánni, és keményen edzettél, hogy erős légy.</p>
-                                        <p>Hogy megtudd, milyen hatékonyak voltak előkészületeid, dobókockával állapítsd meg Kezdeti "ügyesség" és "életerő" pontjaidat. Ezen az oldalon találod a Kalandlapot, melyre feljegyezheted kalandod részleteit. Ugyanitt jelölheted "ügyesség" és "életerő" pontjaidat is.</p>
+                                        <h3 style="margin: 0; padding: 0; text-align: center;">ÉTEL ÉS VARÁZSITAL</h3>
+                                        <p>A játékot 5 étkezésre elegendő élelemmel kezded, egy adag élelem elfogyasztásával 4 elvesztett ÉLETERŐ pontot nyersz vissza. és egy adag élelmiszert vesztesz. Ezen kívül magaddal vihetsz egyet az alábbi Varázsitalokból, egy italból kétszer ihatsz. Ne feledd, hosszú út áll előtted, így gondosan osztd be ezeket!</p>
+                                        <div class="point-btns">
+                                            <button class="potion-btn" id="potionBtn">VARÁZSITAL VÁLASZTÁSA</button>
+                                        </div>
                                     </div>
 
                                     <div class="page right-page">
@@ -109,15 +111,15 @@
                                     <div class="page right-page">
                                         <div class="choose-points">
                                             <h3 style="margin: 0; padding: 0; text-align: center;">PONTOK MEGHATÁROZÁSA</h3>
-                                            <p>Először egy kockával dobsz, a kidobott számhoz 12-őt adunk ez lesz az életerőd. Majd a következő kidobott számhoz 6-ot adunk ez lesz az ügyességi pontjaid. A szerencspontokhoz két kockával dobsz és az eredményhez 6-ot adunk.</p>
+                                            <p>Először két kockával dobsz, a kidobott számhoz 12-őt adunk ez lesz az életerőd. Majd wgy kockával dobsz és a számhoz 6-ot adunk ez lesz az ügyességi pontjaid. A szerencspontokhoz is egy kockával dobsz és az eredményhez 6-ot adunk.</p>
                                             <div class="point-btns">
                                                 <button class="choose-health" id="healthBtn">ÉLETPONTOK</button>
-                                                <button class="choose-skill">ÜGYESSÉGPONTOK</button>
-                                                <button class="choose-fortune">SZERENCSEPONTOK</button>
+                                                <button class="choose-skill" id="skillBtn">ÜGYESSÉGPONTOK</button>
+                                                <button class="choose-fortune" id="fortuneBtn">SZERENCSEPONTOK</button>
                                             </div>
 
                                             <div class="gomb-sor">
-                                                <button type="button" class="next-btnn" id="nextBtn" style="display: none;" onclick="showCard(41)">TOVÁBB</button>
+                                                <button type="button" class="next-btnn" id="nextBtn" style="display: none;" onclick="showCard(12)">TOVÁBB</button>
                                             </div>
                                         </div>
                                         
