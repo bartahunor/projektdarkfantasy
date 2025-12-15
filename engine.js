@@ -3,9 +3,10 @@ let allCards = [];
 let currentCard = null;
 let inventory = []; // Példa inventory tárgyak
 let fortunepoints = 13; // Példa szerencse pontok
-let healthpoints = 10; // Példa életerő pontok
+let healthpoints = 0; // Példa életerő pontok
 let skillpoints = 20; // Példa ügyesség pontok
-let startFortunepoints = 13
+let startFortunepoints = 0;
+let startHealthpoints = 0;
 
 // Adatok betöltése
 
@@ -31,6 +32,65 @@ function closePopup() {
         popupEl.innerHTML = '';
     }
 }
+
+async function chooseHealth() {
+    try {
+        const response = await fetch("pieces/healthandskill.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: healthandskill.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+        
+        console.log("✓ Élet- vagy ügyességpont oldal betöltve.");
+        initDiceOne();
+        const rollButton = document.getElementById('roll');
+        rollButton.addEventListener('click', function() {
+            setTimeout(() => {
+                console.log(lastDiceRoll)
+                rollButton.disabled = true; // Gomb letiltása a dobás után
+
+                healthpoints = lastDiceRoll + 12;
+                startHealthpoints = lastDiceRoll + 12;
+
+                const bg = document.querySelector('.healthandskill-popup')
+                bg.style.backgroundImage = 'url("pictures/health.png")';
+
+                const yourText = document.getElementById('your-outcome-text')
+                yourText.innerText = "Életpontjaid:"
+                const yourPoint = document.getElementById('your-outcome');
+                yourPoint.innerText = healthpoints
+
+
+            }, 10);
+        });
+
+
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }    
+}
+const healthChooseBtn = document.getElementById('healthBtn')
+healthChooseBtn.addEventListener('click', function() {
+    chooseHealth();
+    combatFortuneBtn.disabled = true; // ✅ Letiltjuk használat után
+});
+
 
 function statAnditemsUpdate() {
     if (currentCard.items && currentCard.items.length > 0) {    //item hozzáadás az inventory-hoz
@@ -195,7 +255,6 @@ function initDice(buttonid, diceidone, diceidtwo) {
     var elDiceTwo       = document.getElementById(diceidtwo);
     var elComeOut       = document.getElementById(buttonid);
 
-// ✅ Biztonság: ha nincs gomb, ne próbáld beállítani
     if (!elComeOut) {
         console.warn(`⚠️ FIGYELEM: '${buttonid}' ID-jú gomb nem található!`);
         return; // Kilép, nem dob hibát
@@ -231,6 +290,42 @@ function initDice(buttonid, diceidone, diceidtwo) {
             }
         } 
         return diceOne+diceTwo;
+
+    }
+
+}
+
+function initDiceOne() {
+    var elDiceOne       = document.getElementById('dice1');
+    var elComeOut       = document.getElementById('roll');
+
+    if (!elComeOut) {
+        console.warn(`⚠️ FIGYELEM: 'roll' ID-jú gomb nem található!`);
+        return; // Kilép, nem dob hibát
+    }
+
+    if (!elDiceOne) {
+        console.warn('⚠️ FIGYELEM: Kocka nem találhatók!');
+        return;
+    }
+
+    elComeOut.onclick = function () {
+        lastDiceRoll = rollDice();
+    };
+
+    function rollDice() {
+
+        var diceOne   = Math.floor((Math.random() * 6) + 1);
+        
+        console.log(diceOne);
+
+        for (var i = 1; i <= 6; i++) {
+            elDiceOne.classList.remove('show-' + i);
+            if (diceOne === i) {
+            elDiceOne.classList.add('show-' + i);
+            }
+        }
+        return diceOne;
 
     }
 

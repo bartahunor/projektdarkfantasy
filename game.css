@@ -1440,3 +1440,21 @@ h3{
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #1e0039;
 }
+
+
+.healthandskill-popup{
+  width: 50%;
+  height: 40%;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  top: 50%;
+  left: 50%;
+}
+#your-outcome{
+
+}
