@@ -1463,8 +1463,8 @@ h3{
 
 
 .healthandskill-popup, .choose-fortune-popup{
-  width: 30%;
-  height: 40%;
+  width: 40%;
+  height: 50%;
   background-position: center;
   background-size: cover;
   display: flex;
@@ -1543,14 +1543,18 @@ h3{
   position: relative;
   top: 0;
   left: 0;
-  padding: 20px;
   background: white;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   display: block;
   border-radius: 10px;
   text-align: center;
-  height: 40%;
   color: black;
+
+  height: 50%;
+  background-image: url(/pictures/table.png);
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
 }
 #potion-popup button {
   margin: 5px;
@@ -1558,6 +1562,7 @@ h3{
   cursor: pointer;
   height: 70%;
   border: none;
+  background: transparent;
 }
 #potion-popup button:hover {
   transform: scale(110%);
@@ -1565,6 +1570,8 @@ h3{
 
 
 #potion-popup button img{
+  height: 100%;
+
 }
 
 .potions{
@@ -1574,4 +1581,8 @@ h3{
   align-items: center;
   gap: 10px;
   height: auto;
+}
+.potion-description{
+  height: 20%;
+  border-radius: 0px 0px 10px 10px;
 }
