@@ -1845,12 +1845,14 @@
       {
         "name": "Első Ork",
         "skill": 5,
-        "stamina": 6
+        "stamina": 6,
+        "place": "orc"
       },
       {
         "name": "Második Ork",
         "skill": 6,
-        "stamina": 5
+        "stamina": 5,
+        "place": "orc"
       }
     ],
     "action": "combat",
@@ -1901,7 +1903,8 @@
     "enemy": {
       "name": "Tükörkép",
       "skill": "player.skill",
-      "stamina": "player.stamina - 2"
+      "stamina": "player.stamina - 2",
+      "place": "mirror"
     },
     "action": null,
     "items": [],
@@ -2343,7 +2346,8 @@
       {
       "name": "Xlaia",
       "skill": 8,
-      "stamina": 7
+      "stamina": 7,
+      "place": "xlaia_room"
      }
     ],
     "action": "combat",
@@ -2392,12 +2396,14 @@
       {
       "name": "Első Denevér",
       "skill": 5,
-      "stamina": 7
+      "stamina": 7,
+      "place": "batcave"
       },
       {
       "name": "Második Denevér",
       "skill": 6,
-      "stamina": 6
+      "stamina": 6,
+      "place": "batcave"
       }
     ],
     "action": "combat",
@@ -2630,12 +2636,14 @@
       {
         "name": "Első Sündisznó",
         "skill": 7,
-        "stamina": 5
+        "stamina": 5,
+        "place": "hedgehog"
       },
       {
       "name": "Második Sündisznó",
       "skill": 8,
-      "stamina": 5
+      "stamina": 5,
+      "place": "hedgehog"
       }
     ],
     "action": "combat",
@@ -2673,7 +2681,8 @@
       {
       "name": "Hobgoblin",
       "skill": 7,
-      "stamina": 8
+      "stamina": 8,
+      "place": "hobgoblin"
       }
     ],
     "action": "combat",
@@ -2732,7 +2741,8 @@
       {
       "name": "Galon",
       "skill": 12,
-      "stamina": 8
+      "stamina": 8,
+      "place": "galon_room"
       }
     ],
     "action": "combat",
