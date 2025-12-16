@@ -34,6 +34,32 @@ function closePopup() {
     }
 }
 
+function selectDrink(type) {
+    const title = document.getElementById('pt-title');
+    const ptdesc = document.getElementById('pt-desc');
+    switch (type) {
+        case "Életerő itala":
+            title.innerText = "AZ ÉLET ITALA"
+            ptdesc.innerText = "Meleg erő árad szét benned, ahogy az ital életet lehel fáradt testedbe, kezdesz visszatérni önmagadhoz. Visszaállítja életerő pontjaidat, és új esélyt ad a túlélésre.";
+            break;
+        case "Ügyesség itala":
+            title.innerText = "AZ ÜGYESSÉG ITALA"
+            ptdesc.innerText = "Egy korty ebből az italból, és kezed újra biztos, mozdulataid villámgyorssá válnak. Visszaállítja elvesztett ügyesség pontjaidat, hogy ismét magabiztosan nézhess szembe a kihívásokkal";
+            break;
+        case "Szerencse itala":
+            title.innerText = "A SZERENCSE ITALA"
+            ptdesc.innerText = "Ez a ritka főzet megfordítja a sors kerekét, és a véletlen melléd áll. Visszaállítja szerencse pontjaidat, valamint 1-gyel megnöveli Kezdeti szerencsédet.";
+            break;
+    }
+    const accept = document.getElementById('accept-ptn');
+    accept.onclick = () => acceptPotion(type);
+}
+function acceptPotion(potionType){
+    console.log("Elfogadott ital:", potionType);
+    inventory.push(potionType);
+    closePopup();
+}
+
 async function choosePotion() {
     try {
         const response = await fetch("pieces/health_potion/test.html");
@@ -54,13 +80,8 @@ async function choosePotion() {
         
         // HTML betöltése
         popupEl.innerHTML = html;
-        popupEl.classList.add("popuppage-active");
-        
-        
+        popupEl.classList.add("popuppage-active");      
         console.log("✓ Varázsital oldal betöltve.");
-        
-
-
     }
     catch (err) {
         console.error("Hiba történt betöltés közben:", err);
@@ -642,16 +663,20 @@ async function combat() {
                 console.log('Ellenfél támadóereje: ' + enemyAttack);
                 console.log('Játékos támadóereje: ' + playerAttack);
 
+                let damagepoint = 2;
+                if (currentCard.action.subtype === "damagethree") {
+                    damagepoint = 3;
+                }
                 combatText.classList.add('combat-text-div-active')
                 if (playerAttack > enemyAttack) {
-                    enemyHealth -= 2;
+                    enemyHealth -= damagepoint;
                     console.log('Játékos sebzett! Ellenfél életereje: ' + enemyHealth);
                     combatText.innerText = 'Megsebezted az ellenfeled!';
                     enemyHealthBar.style.width = enemyHealth / enemyStartHealth * 100 + "%";
                     combatRoundOutcome = 1;
 
                 } else if (enemyAttack > playerAttack) {
-                    healthpoints -= 2;
+                    healthpoints -= damagepoint;
                     console.log('Ellenfél sebzett! Játékos életereje: ' + healthpoints);
                     combatText.innerText = 'Az ellenfél megsebzett'
                     playerHealthBar.style.width = healthpoints / playerStartHealth * 100 + "%";
@@ -931,7 +956,9 @@ function showCard(cardId) {
                     class="luck-btn" 
                     onclick="tryFortune()">PRÓBÁLD MEG A SZERENCSÉD</button>`;
     }
-    else if (currentCard.action !=null && currentCard.action[0] === 'combat' || currentCard.action === 'combat') {
+    else if (currentCard.action != null && 
+         ((Array.isArray(currentCard.action) && currentCard.action[0]?.type === 'combat') || 
+          currentCard.action.type === 'combat')) {
         rightPageContent = `<button 
                     type="button" 
                     class="combat-btn" 

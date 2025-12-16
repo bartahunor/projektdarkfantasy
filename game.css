@@ -1220,7 +1220,7 @@ h3{
 
 
 
-.combat-end-btn, .combat-flee-btn{
+.combat-end-btn, .combat-flee-btn, #accept-ptn{
   margin-top: 5px;
   padding: 5px 15px;
     color: #ebebeb;
@@ -1235,7 +1235,7 @@ h3{
     font-family: 'PixelText', serif;
 }
 
-.combat-end-btn:hover, .combat-flee-btn:hover, .closecombatfortune-btn:hover {
+.combat-end-btn:hover, .combat-flee-btn:hover, .closecombatfortune-btn:hover, #accept-ptn:hover {
     background: #4b4b4b;
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #000000;
@@ -1539,50 +1539,109 @@ h3{
     color: #000;
 }
 
+
 #potion-popup {
-  position: relative;
-  top: 0;
-  left: 0;
-  background: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  display: block;
-  border-radius: 10px;
   text-align: center;
   color: black;
-
-  height: 50%;
+  height: 70%;
   background-image: url(/pictures/table.png);
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 20px 30px 20px;
+  border-radius: 15px 15px 0 0; /* Felső sarkok lekerekítése */
 }
+
+#potion-popup h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
 #potion-popup button {
-  margin: 5px;
-  padding: 10px 20px;
+  margin: 0;
+  padding: 10px;
   cursor: pointer;
-  height: 70%;
   border: none;
   background: transparent;
+  transition: transform 0.2s ease;
 }
+
 #potion-popup button:hover {
-  transform: scale(110%);
+  transform: scale(1.1);
+}
+#potion-popup button:focus {
+  background-color: rgba(0,0,0,0.3);
+  border: 1px solid rgba(0,0,0,0.6);
+  border-radius: 15px;
 }
 
-
-#potion-popup button img{
+#potion-popup button img {
   height: 100%;
-
+  width: 100%;
+  object-fit: contain;
 }
 
-.potions{
+.potions {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  height: auto;
+  gap: 30px;
+  height: 100%;
+  flex: 1;
 }
-.potion-description{
-  height: 20%;
-  border-radius: 0px 0px 10px 10px;
+
+.potions button {
+  height: 90%; /* Növeltem 80%-ról 90%-ra */
+  max-height: 200px; /* Növeltem 150px-ről 200px-re */
+  width: 180px; /* Fix szélesség a nagyobb mérethez */
 }
+
+.potion-description {
+  height: 30%;
+  background-color: #2C1E31;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 15px 15px; /* Alsó sarkok lekerekítése */
+  text-align: center;
+
+  gap: 5px;
+}
+
+.potion-popuppage {
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: #2C1E31;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 15px;
+  height: 65%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Hogy a belső tartalom is követje a lekerekítést */
+}
+
+#pt-title {
+  font-size: 1.2rem;
+  margin: 0;
+}
+#pt-desc {
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  padding: 0px 20px 0px 20px;
+}
+
+#accept-ptn{
+  width: 30%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  box-shadow: inset -4px -4px  #424040;
+}
+

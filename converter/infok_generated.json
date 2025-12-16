@@ -296,7 +296,10 @@
       "place": "spider_room"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -669,7 +672,10 @@
         "place": "tunnel"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -1113,7 +1119,10 @@
       }
     ],
     "action": [
-      "combat",
+      {
+      "type": "combat",
+      "subtype": ""
+      },
       {
         "type": "healthChange",
         "amount": -1
@@ -1652,7 +1661,10 @@
       "place": "light"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -1740,7 +1752,10 @@
       "place": "dragon"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -1855,7 +1870,10 @@
         "place": "orc"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -2350,7 +2368,10 @@
       "place": "xlaia_room"
      }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -2406,7 +2427,10 @@
       "place": "batcave"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -2646,7 +2670,10 @@
       "place": "hedgehog"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": "damagethree"
+    },
     "items": [],
     "end": false
   },
@@ -2685,7 +2712,10 @@
       "place": "hobgoblin"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -2745,7 +2775,10 @@
       "place": "galon_room"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -3161,7 +3194,10 @@
         "place": "dragon"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },
@@ -3269,7 +3305,10 @@
       "place":"dragon"
       }
     ],
-    "action": "combat",
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },

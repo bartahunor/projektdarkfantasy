@@ -1,9 +1,15 @@
-<div id="potion-popup">
-  <h3>VÁLASSZ EGY ITALT</h3>
-  <div class="potions">
-    <button onclick="selectDrink('Életerő')"><img src="/pieces/health_potion/health_potion.gif" alt="" style="width: 100px;"></button>
-    <button onclick="selectDrink('Ügyesség')"><img src="/pieces/health_potion/agility_potion.gif" alt="" style="width: 100px;"></button>
-    <button onclick="selectDrink('Szerencse')"><img src="/pieces/health_potion/luck_potion.gif" alt="" style="width: 100px;"></button>
+<div class="potion-popuppage">
+  <div id="potion-popup">
+    <h3>VÁLASSZ EGY ITALT</h3>
+    <div class="potions">
+      <button onclick="selectDrink('Életerő itala')"><img src="/pieces/health_potion/health_potion.gif" alt="" style="width: 100px;"></button>
+      <button onclick="selectDrink('Ügyesség itala')"><img src="/pieces/health_potion/agility_potion.gif" alt="" style="width: 100px;"></button>
+      <button onclick="selectDrink('Szerencse itala')"><img src="/pieces/health_potion/luck_potion.gif" alt="" style="width: 100px;"></button>
+    </div>
   </div>
-  <div class="potion-description"></div>
+  <div class="potion-description" id="pt-dsc">
+    <div id="pt-title"></div>
+    <div id="pt-desc"></div>
+  </div>
+  <button id="accept-ptn">ELFOGADÁS</button>
 </div>
