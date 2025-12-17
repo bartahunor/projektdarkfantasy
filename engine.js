@@ -431,11 +431,95 @@ async function tryFortune() {
                     console.error("HIBA: tryfortune-popup nem található!");
                 }
                 turnPage();
-
+                setStat("szerencse", fortunepoints, startFortunepoints);
 
             }, 10);
         });
-        setStat("szerencse", fortunepoints, startFortunepoints);
+        
+
+
+    } catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }
+}
+async function rollTwoDice() {
+    try {
+        const response = await fetch("pieces/tryfortune.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: tryfortune.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+
+        const bg = document.querySelector('.tryfortune-popup');
+        bg.style.background = "url(/pictures/fortune.png)";
+        bg.style.backgroundSize = 'cover';
+        bg.style.backgroundPosition = 'center';
+        bg.style.backgroundRepeat = 'no-repeat';
+        
+        console.log("✓ Két kockás dobás oldal betöltve.");
+        
+        // Kocka inicializálása
+        initDice('roll', 'dice1', 'dice2');
+
+        const rollButton = document.getElementById('roll');
+        rollButton.addEventListener('click', function() {
+            setTimeout(() => {
+                console.log(lastDiceRoll)
+                rollButton.disabled = true; // Gomb letiltása a dobás után
+
+
+                let fortuneresult = false;
+                if (lastDiceRoll <= fortunepoints) {
+                    fortuneresult = true;
+                    fortunepoints -= 1;
+
+                }
+                else{
+                    fortunepoints -= 1;
+                }
+
+                const tryfortuneresult = document.createElement('div');
+                tryfortuneresult.classList.add('tryfortune-result');
+                tryfortuneresult.innerHTML = `
+                    <div class="tryfortune-result-title">
+                        ${fortuneresult ? currentCard.choices[0].target : currentCard.choices[1].target}. OLDALON FOLYTATOD KALANDOD
+                    </div>
+                    <button 
+                        type="button" 
+                        class="tryfortune-result-btn"
+                        onclick="showCard(${fortuneresult ? currentCard.choices[0].target : currentCard.choices[1].target}), closePopup()"
+                    >
+                        TOVÁBB
+                    </button>
+                `;
+                const tryfortunePopup = document.querySelector('.tryfortune-popup');
+                if (tryfortunePopup) {
+                    tryfortunePopup.appendChild(tryfortuneresult);
+                    console.log("✓ Eredmény hozzáadva!");
+                } else {
+                    console.error("HIBA: tryfortune-popup nem található!");
+                }
+                turnPage();
+                setStat("szerencse", fortunepoints, startFortunepoints);
+
+            }, 10);
+        });
+        
 
 
     } catch (err) {
@@ -889,6 +973,73 @@ async function combat() {
     }
 }
 
+async function chooseEnemy() {
+    try {
+        const response = await fetch("pieces/chooseEnemy.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: chooseEnemy.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+
+        const choices = document.querySelector('.enemy-choices');
+        let selectedEnemyIndex = null;
+        for (let i = 0; i < currentCard.enemy.length; i++) {
+            let enemy = document.createElement('button');
+            enemy.classList.add('enemy-choice');
+            enemy.innerHTML = `
+                <img src="/pieces/monsters/${currentCard.enemy[i].name}.png" alt="" class="combat-enemy-img">
+                <div>
+                    ${currentCard.enemy[i].name}                   
+                </div>
+            `;
+            enemy.addEventListener('click', function() {
+                selectedEnemyIndex = i;
+                console.log(`Kiválasztott ellenfél: ${currentCard.enemy[i].name} (index: ${i})`);
+            });
+            choices.appendChild(enemy)
+        }
+        
+        console.log("✓ Ellenfél választás oldal betöltve.");
+
+        const acceptBtn = document.getElementById('accept-enemy');
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', function() {
+                if (selectedEnemyIndex !== null) {
+                    // Ellenfél sorrend megváltoztatása
+                    const selectedEnemy = currentCard.enemy[selectedEnemyIndex];
+                    currentCard.enemy.splice(selectedEnemyIndex, 1); // Eltávolítás eredeti helyéről
+                    currentCard.enemy.unshift(selectedEnemy); // Hozzáadás az elejére
+                    
+                    console.log(`Ellenfél sorrend frissítve. Első ellenfél: ${currentCard.enemy[0].name}`);
+                    closePopup();
+                    combat(); // Harc indítása
+                } else {
+                    alert("Válassz egy ellenfelet!");
+                }
+            });
+        }
+
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }
+}
+
 
 
 
@@ -955,6 +1106,18 @@ function showCard(cardId) {
                     type="button" 
                     class="luck-btn" 
                     onclick="tryFortune()">PRÓBÁLD MEG A SZERENCSÉD</button>`;
+    }
+    else if (currentCard.action === 'rollTwoDice') {
+        rightPageContent = `<button 
+                    type="button" 
+                    class="luck-btn" 
+                    onclick="rollTwoDice()">DÖNTSENEK A KOCKÁK</button>`;
+    }
+    else if (currentCard.action === 'chooseEnemy') {
+        rightPageContent = `<button 
+                    type="button" 
+                    class="luck-btn" 
+                    onclick="chooseEnemy()">VÁLASSZ ELLENFELET</button>`;
     }
     else if (currentCard.action != null && 
          ((Array.isArray(currentCard.action) && currentCard.action[0]?.type === 'combat') || 

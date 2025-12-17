@@ -2572,7 +2572,7 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "rollTwoDice",
     "items": [],
     "end": false
   },
@@ -3194,10 +3194,7 @@
         "place": "dragon"
       }
     ],
-    "action": {
-      "type": "combat",
-      "subtype": ""
-    },
+    "action": "chooseEnemy",
     "items": [],
     "end": false
   },

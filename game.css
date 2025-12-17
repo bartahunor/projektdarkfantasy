@@ -1220,7 +1220,7 @@ h3{
 
 
 
-.combat-end-btn, .combat-flee-btn, #accept-ptn{
+.combat-end-btn, .combat-flee-btn, #accept-ptn, #accept-enemy{
   margin-top: 5px;
   padding: 5px 15px;
     color: #ebebeb;
@@ -1235,7 +1235,7 @@ h3{
     font-family: 'PixelText', serif;
 }
 
-.combat-end-btn:hover, .combat-flee-btn:hover, .closecombatfortune-btn:hover, #accept-ptn:hover {
+.combat-end-btn:hover, .combat-flee-btn:hover, .closecombatfortune-btn:hover, #accept-ptn:hover, #accept-enemy:hover {
     background: #4b4b4b;
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #000000;
@@ -1645,3 +1645,43 @@ h3{
   box-shadow: inset -4px -4px  #424040;
 }
 
+.choose-enemy{
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: red;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 15px;
+  height: 65%;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden; 
+  padding: 30px;
+}
+.enemy-choices{
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  text-align: center;
+}
+#accept-enemy{
+  width: 40%;
+}
+
+.enemy-choice:focus {
+  background-color: rgba(0,0,0,0.3);
+  border: 1px solid rgba(0,0,0,0.6);
+  border-radius: 15px;
+}
+.enemy-choice{
+  font-family: 'PixelText', serif;
+  font-size: 1rem;
+  background: transparent;
+  border: none;
+  padding: 20px;
+}

@@ -4,10 +4,9 @@
 
 119. kártya jsonbe 
 
-148. kártya jsonbe
 
 
-182. kártya jsonbe
+182. kártya jsonbe --> csak háttérkép kell
 196. kártya jsonbe
 197. kártya jsonbe
 
