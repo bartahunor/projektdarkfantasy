@@ -338,7 +338,10 @@
       }
     ],
     "enemy": null,
-    "action": "sumCombination",
+    "action": {
+      "type": "lock",
+      "subtype": 47
+    },
     "items": [],
     "end": false
   },

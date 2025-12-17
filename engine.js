@@ -1040,6 +1040,148 @@ async function chooseEnemy() {
     }
 }
 
+async function lock(rightnum) {
+    try {
+        const response = await fetch("pieces/lock.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: lock.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+
+        
+
+        const wheelsContainer = document.getElementById('wheelsContainer');
+        const currentNumberDisplay = document.getElementById('currentNumber');
+
+        const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        const totalFaces = numbers.length;
+        const anglePerFace = 360 / totalFaces;
+        const numWheels = 2;
+
+        // Minden kerék állapota
+        const wheelStates = Array(numWheels).fill(0).map(() => ({
+        currentRotation: 0,
+        currentNumber: 0
+        }));
+
+        // Egy kerék létrehozása
+        function createWheel(index) {
+        const wheelUnit = document.createElement('div');
+        wheelUnit.className = 'wheel-unit';
+
+        //const label = document.createElement('div');
+        //label.className = 'wheel-label';
+        //label.textContent = index === 0 ? 'Tízes' : 'Egyes';
+
+        const wheelContainer = document.createElement('div');
+        wheelContainer.className = 'wheel-container';
+
+        const indicator = document.createElement('div');
+        indicator.className = 'indicator';
+
+        const wheel = document.createElement('div');
+        wheel.className = 'wheel';
+        wheel.id = `wheel-${index}`;
+
+        // Számok hozzáadása a kerékhez
+        numbers.forEach((num, faceIndex) => {
+            const face = document.createElement('div');
+            face.className = 'wheel-face';
+            face.textContent = num;
+            
+            const rotationY = anglePerFace * faceIndex;
+            const translateZ = 120;
+            
+            face.style.transform = `rotateX(${rotationY}deg) translateZ(${translateZ}px)`;
+            wheel.appendChild(face);
+        });
+
+        wheelContainer.appendChild(indicator);
+        wheelContainer.appendChild(wheel);
+
+        // Gombok
+        const controls = document.createElement('div');
+        controls.className = 'controls';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.innerHTML = '▲';
+        prevBtn.setAttribute('aria-label', 'Előző szám');
+        prevBtn.addEventListener('click', () => rotateWheel(index, 'prev'));
+        prevBtn.classList.add('wheel-btn');
+
+        const nextBtn = document.createElement('button');
+        nextBtn.innerHTML = '▼';
+        nextBtn.setAttribute('aria-label', 'Következő szám');
+        nextBtn.addEventListener('click', () => rotateWheel(index, 'next'));
+        nextBtn.classList.add('wheel-btn');
+
+        controls.appendChild(prevBtn);
+        controls.appendChild(nextBtn);
+
+        //wheelUnit.appendChild(label);
+        wheelUnit.appendChild(wheelContainer);
+        wheelUnit.appendChild(controls);
+
+        return wheelUnit;
+        }
+
+        // Kerék forgatása
+        function rotateWheel(wheelIndex, direction) {
+        const state = wheelStates[wheelIndex];
+        const wheel = document.getElementById(`wheel-${wheelIndex}`);
+
+        if (direction === 'next') {
+            state.currentNumber = (state.currentNumber + 1) % totalFaces;
+            state.currentRotation -= anglePerFace;
+        } else {
+            state.currentNumber = (state.currentNumber - 1 + totalFaces) % totalFaces;
+            state.currentRotation += anglePerFace;
+        }
+
+        wheel.style.transform = `rotateX(${state.currentRotation}deg)`;
+        updateDisplay();
+        }
+
+        // Kijelző frissítése
+        let yournum = 0;
+        function updateDisplay() {
+        const numberString = wheelStates
+            .map(state => numbers[state.currentNumber])
+            .join('');
+        currentNumberDisplay.textContent = numberString;
+            yournum = parseInt(numberString);
+            console.log(yournum);
+        }
+
+        // Inicializálás
+        function init() {
+        for (let i = 0; i < numWheels; i++) {
+            wheelsContainer.appendChild(createWheel(i));
+        }
+        updateDisplay();
+        }
+
+        init();
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }
+}
 
 
 
@@ -1118,6 +1260,12 @@ function showCard(cardId) {
                     type="button" 
                     class="luck-btn" 
                     onclick="chooseEnemy()">VÁLASSZ ELLENFELET</button>`;
+    }
+    else if (currentCard.action != null && currentCard.action.type === 'lock') {
+        rightPageContent = `<button 
+                    type="button" 
+                    class="luck-btn" 
+                    onclick="lock(${currentCard.action.subtype})">ZÁR NYITÁSA</button>`;
     }
     else if (currentCard.action != null && 
          ((Array.isArray(currentCard.action) && currentCard.action[0]?.type === 'combat') || 
