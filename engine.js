@@ -1176,6 +1176,47 @@ async function lock(rightnum) {
         }
 
         init();
+
+
+
+        const acceptnum = document.getElementById('accept-num');
+        const numvalid = document.getElementById('num-valid');
+        const numnext = document.getElementById('num-next');
+        numnext.innerText = currentCard.choices[1].target + ". OLDAL";
+        let currentNextHandler = function() {
+            showCard(currentCard.choices[1].target);
+            closePopup();
+        };
+        numnext.addEventListener('click', currentNextHandler);
+
+        acceptnum.addEventListener('click', function() {
+            // Eltávolítjuk a régi event listenert
+            numnext.removeEventListener('click', currentNextHandler);
+            
+            if (yournum == currentCard.action.subtype) {
+                numvalid.innerText = "HELYES SZÁMKÓD";
+                numnext.innerText = yournum + ". OLDAL";
+                
+                // Új handler a helyes számhoz
+                currentNextHandler = function() {
+                    showCard(yournum);
+                    closePopup();
+                };
+            } else {
+                numvalid.innerText = "HELYTELEN SZÁMKÓD";
+                numnext.innerText = currentCard.choices[1].target + ". OLDAL";
+                
+                // Új handler a helytelen számhoz
+                currentNextHandler = function() {
+                    showCard(currentCard.choices[1].target);
+                    closePopup();
+                };
+            }
+    
+            // Hozzáadjuk az új event listenert
+            numnext.addEventListener('click', currentNextHandler);
+        });
+
     }
     catch (err) {
         console.error("Hiba történt betöltés közben:", err);
