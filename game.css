@@ -1644,7 +1644,8 @@ h3{
   position: relative;
   top: 0;
   left: 0;
-  background-color: red;
+  background-image: url(pictures/kristályoshatter.png);
+  background-size: 100%;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   border-radius: 15px;
   height: 65%;
@@ -1690,7 +1691,9 @@ h3{
   height: 70%;
   width: 50%;
   border-radius: 15px;
-  background-color: lightblue;
+  background-image: url(pictures/ajto);
+  background-size: 95%;
+  background-position-y: 30%;
   padding: 20px;
 }
 
@@ -1815,7 +1818,7 @@ h3{
 
       padding: 25px 50px;
       border-radius: 15px;
-      backdrop-filter: blur(10px);
+      
     }
 
     .number-display {
