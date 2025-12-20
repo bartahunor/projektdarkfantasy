@@ -1,7 +1,7 @@
 
 let allCards = [];
 let currentCard = null;
-let inventory = ['manna', 'manna', 'manna', 'manna', 'manna', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'kard', 'bőrvért' ]; // Kezdő inventory tárgyak
+let inventory = []; // Kezdő inventory tárgyak
 let fortunepoints = 0; // Példa szerencse pontok
 let healthpoints = 0; // Példa életerő pontok
 let skillpoints = 0; // Példa ügyesség pontok
@@ -58,6 +58,35 @@ function selectDrink(type) {
 function acceptPotion(potionType){
     console.log("Elfogadott ital:", potionType);
     inventory.push(potionType);
+
+    const slots = document.querySelectorAll('.inventory-grid .slot');
+    let itemImage = "";
+    switch (potionType) {
+        case "Életerő itala":
+            itemImage = `health_potion.png`;
+            break;
+        case "Ügyesség itala":
+            itemImage = `agility_potion.png`;
+            break;
+        case "Szerencse itala":
+            itemImage = `luck_potion.png`;
+            break;
+    }
+    let emptySlot = null;
+    for (let slot of slots) {
+        if (!slot.querySelector('img')) {
+            emptySlot = slot;
+            break;
+        }
+    }
+        
+    const img = document.createElement('img');
+    img.src = `pictures/${itemImage}`;
+    img.alt = potionType;
+    emptySlot.appendChild(img);
+            
+    // NE adjunk hozzá számlálót, csak akkor, ha később növeljük
+    console.log(`✓ ${potionType} hozzáadva az inventory-hoz (1 db)`);
     closePopup();
 }
 
@@ -286,6 +315,8 @@ function statAnditemsUpdate() {
         currentCard.items.forEach(item => {
             inventory.push(item);
             console.log(`✓ Tárgy hozzáadva: ${item}`);
+            updateInventoryUI(item);
+
         });
     }
 
@@ -320,6 +351,70 @@ function statAnditemsUpdate() {
                         break;
                 }
             }
+        }
+    }
+}
+function updateInventoryUI(itemName) {
+    const slots = document.querySelectorAll('.inventory-grid .slot');
+    
+    // Képfájl neve az item alapján
+    const itemImages = {
+        'aranytallér': 'coin.png',
+        'manna': 'vegsomana.png',
+        'bőrvért': 'ruha.png',
+        'kard': 'kard.png',
+        'Életerő itala': 'health_potion.png',
+        'Ügyességi itala': 'agility_potion.png',
+        'Szerencse itala': 'luck_potion.png'
+        // Add hozzá az összes többi tárgyat is
+    };
+    
+    const itemImage = itemImages[itemName] || `${itemName}.png`;
+    
+    // Ellenőrizzük, hogy már létezik-e ez a tárgy
+    let existingSlot = null;
+    slots.forEach(slot => {
+        const img = slot.querySelector('img');
+        if (img && img.alt === itemName) {
+            existingSlot = slot;
+        }
+    });
+    
+    if (existingSlot) {
+        // Ha már létezik, növeljük a számlálót EGGYEL
+        let counter = existingSlot.querySelector('.item-count');
+        if (!counter) {
+            // Ha még nincs számláló, hozzunk létre egyet 2-vel (mert már volt 1)
+            counter = document.createElement('span');
+            counter.className = 'item-count';
+            counter.textContent = '2';
+            existingSlot.appendChild(counter);
+        } else {
+            // Ha már van számláló, növeljük eggyel
+            const currentCount = parseInt(counter.textContent);
+            counter.textContent = currentCount + 1;
+        }
+        console.log(`✓ ${itemName} számláló frissítve: ${counter.textContent}`);
+    } else {
+        // Ha új tárgy, keressünk egy üres slotot
+        let emptySlot = null;
+        for (let slot of slots) {
+            if (!slot.querySelector('img')) {
+                emptySlot = slot;
+                break;
+            }
+        }
+        
+        if (emptySlot) {
+            const img = document.createElement('img');
+            img.src = `pictures/${itemImage}`;
+            img.alt = itemName;
+            emptySlot.appendChild(img);
+            
+            // NE adjunk hozzá számlálót, csak akkor, ha később növeljük
+            console.log(`✓ ${itemName} hozzáadva az inventory-hoz (1 db)`);
+        } else {
+            console.warn('⚠️ Nincs szabad slot az inventory-ban!');
         }
     }
 }
