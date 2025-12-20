@@ -1445,6 +1445,7 @@ function displayChosenCharacter() {
 
 //inventori
 
+
 document.addEventListener("DOMContentLoaded", function() {
 
   const wrapper = document.getElementById("inventoryWrapper");
