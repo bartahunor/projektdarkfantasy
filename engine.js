@@ -8,6 +8,7 @@ let skillpoints = 0; // Példa ügyesség pontok
 let startFortunepoints = 0;
 let startHealthpoints = 0;
 let startSkillpoints = 0;
+let effects = [];
 
 // Adatok betöltése
 
@@ -409,6 +410,11 @@ async function tryFortune() {
                     fortunepoints -= 1;
                 }
 
+                if(effects.includes("fortuneSixPoints") && fortunepoints < 6) {
+                    fortunepoints = 6;
+                    console.log("Szerencsepontok 6-ra állítva");
+                }
+
                 const tryfortuneresult = document.createElement('div');
                 tryfortuneresult.classList.add('tryfortune-result');
                 tryfortuneresult.innerHTML = `
@@ -493,6 +499,10 @@ async function rollTwoDice() {
                     fortunepoints -= 1;
                 }
 
+                if(effects.includes("fortuneSixPoints") && fortunepoints < 6) {
+                    fortunepoints = 6;
+                    console.log("Szerencsepontok 6-ra állítva");
+                }
                 const tryfortuneresult = document.createElement('div');
                 tryfortuneresult.classList.add('tryfortune-result');
                 tryfortuneresult.innerHTML = `
@@ -568,7 +578,15 @@ function initDice(buttonid, diceidone, diceidtwo) {
             elDiceTwo.classList.add('show-' + k);
             }
         } 
-        return diceOne+diceTwo;
+        if(effects.includes("fortuneChangePlusOne")){
+            console.log("Effekt használva");
+            return diceOne+diceTwo+1;
+            
+        }
+        else {
+            return diceOne+diceTwo;
+        }
+        
 
     }
 
@@ -604,7 +622,13 @@ function initDiceOne() {
             elDiceOne.classList.add('show-' + i);
             }
         }
-        return diceOne;
+        if(effects.includes("fortuneChangePlusOne")){
+            console.log("Effekt használva");
+            return diceOne+1;
+        }
+        else {
+            return diceOne;
+        }
 
     }
 
@@ -736,6 +760,18 @@ async function combat() {
             } else if (rollCount === 2) {
                 // Második dobás - Játékos
                 secondRoll = totalRoll;
+                if (effects.includes("attackChangePlusOne")){
+                    secondRoll++;
+                    console.log("Effekt használva");
+                }
+                if (effects.includes("attackChangeMinusTwo")){
+                    secondRoll-=2;
+                    console.log("Effekt használva");
+                }
+                if (effects.includes("attackChangeMinusOne")){
+                    secondRoll--;
+                    console.log("Effekt használva");
+                }
                 console.log('Játékos támadása: ' + (skillpoints + secondRoll));
                 rollButton.innerText = "JÁTÉKOS DOBÁSA";
                 
@@ -917,6 +953,11 @@ async function combat() {
                                 }
                                 else{
                                     fortunepoints -= 1;
+                                }
+
+                                if(effects.includes("fortuneSixPoints") && fortunepoints < 6) {
+                                    fortunepoints = 6;
+                                    console.log("Szerencsepontok 6-ra állítva");
                                 }
 
                                 if (outcome == 1) {  //player sebzett
@@ -1270,8 +1311,8 @@ function showCard(cardId) {
     
 
     //action feldolgozás
-    if (currentCard.action === 'sumCombination' && inventory.includes('Pergamenen lévő számok: 15, 10, 22')) {
-        currentCard.choices[0].target = 47;
+    if (currentCard.effects) {
+        effects.push(currentCard.effects)
     }
     statAnditemsUpdate(); 
 

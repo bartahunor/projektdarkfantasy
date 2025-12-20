@@ -813,6 +813,7 @@
       }
     ],
     "items": [],
+    "effects": "fortuneSixPoints",
     "end": false
   },
   {
@@ -1227,12 +1228,9 @@
       {
         "type": "fortuneChange",
         "amount": 1
-      },
-      {
-        "type": "attackChange",
-        "amount": 1
       }
     ],
+    "effects": "attackChangePlusOne",
     "end": false
   },
   {
@@ -1555,13 +1553,9 @@
       }
     ],
     "enemy": null,
-    "action": [
-      {
-        "type": "attackChange",
-        "amount": -2
-      }
-    ],
+    "action": [],
     "items": [],
+    "effects": "attackChangeMinusTwo",
     "end": false
   },
   {
@@ -2619,11 +2613,9 @@
       }
     ],
     "enemy": null,
-    "action": {
-      "type": "attackChange",
-      "amount": -1
-    },
+    "action": [],
     "items": [],
+    "effects": "attackChangeMinusOne",
     "end": false
   },
   {
@@ -3454,23 +3446,22 @@
     "text": "A folyadékot elfogyasztva nem érzel semmi különlegeset. Tudtodon kívül azonban elfogyasztottad a Szerencse Elixírjét. Mostantól kezdve valahányszor próbára teszed a SZERENCSÉDET, a dobás értékét megnövelheted 1-el. Hogyha még nem tetted, és most belekóstolnál az első üvegbe, lapozz a 139-re. Ha a másodikat akarod meginni, lapozz a 150-re. Ha folytatnád az utadat keleti irányba, lapozz a 29-re.",
     "choices": [
       {
-        "text": "még nem tetted, és most belekóstolnál az első üvegbe",
+        "text": "Hogyha még nem tetted, és most belekóstolnál az első üvegbe, lapozz a 139-re.",
         "target": 139
       },
       {
-        "text": "a másodikat akarod meginni",
+        "text": "Ha a másodikat akarod meginni, lapozz a 150-re.",
         "target": 150
       },
       {
-        "text": "folytatnád az utadat keleti irányba",
+        "text": "Ha folytatnád az utadat keleti irányba, lapozz a 29-re.",
         "target": 29
       }
     ],
     "enemy": null,
     "action": null,
-    "items": [
-      "üveg"
-    ],
+    "items": [],
+    "effects": "fortuneChangePlusOne",
     "end": false
   },
   {
