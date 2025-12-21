@@ -1347,6 +1347,97 @@ async function chooseEnemy() {
     }
 }
 
+async function looseItems(selectors) {
+    try {
+        const response = await fetch("pieces/looseItems.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: looseItems.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+
+        const selectorArea = document.querySelector('.looseitem-selectors');
+        const hashset = new Set(inventory);
+        for (let i = 0; i < currentCard.action[0].amount; i++) {
+            const selector = document.createElement('div');
+            let selectHTML = `<select class="item-selector" id="selector-${i}">`;
+            selectHTML += `<option value="">-- Válassz tárgyat --</option>`;
+            
+            // HashSet elemei opcióként
+            hashset.forEach(item => {
+                selectHTML += `<option value="${item}">${item}</option>`;
+            });
+            
+            selectHTML += `</select>`;
+            
+            selector.innerHTML = selectHTML;
+            selectorArea.appendChild(selector);
+            console.log("SELECTOR HOZZÁADVA")
+        }
+        const acceptBtn = document.getElementById("accept-itemloose");
+        acceptBtn.addEventListener('click', () => {
+            const selectedItems = [];
+            const failrespond = document.getElementById('itemloose-text');
+            
+            // Minden selector értékének begyűjtése
+            for (let i = 0; i < currentCard.action[0].amount; i++) {
+                const selectElement = document.getElementById(`selector-${i}`);
+                const selectedValue = selectElement.value;
+                
+                if (selectedValue === "") {
+                    failrespond.innerText = "VÁLASSZ KI MINDEN TÁRGYAT!";
+                    return;
+                }
+                
+                selectedItems.push(selectedValue);
+            }
+            const uniqueItems = new Set(selectedItems);
+            if (uniqueItems.size !== selectedItems.length) {
+                failrespond.innerText = "VÁLASSZ KÜLÖNBÖZŐ TÁRGYAKAT!";
+                return;
+            }
+            
+            failrespond.innerText = "TÁRGYAK KIVÁLASZTVA!";
+            console.log("Kiválasztott tárgyak:", selectedItems);
+            
+            // Tárgyak eltávolítása
+            selectedItems.forEach(item => {
+                removeItemFromInventory(item);
+                updateInventoryUIRemove(item);
+            });
+            
+            console.log("Kiválasztott tárgyak:", selectedItems);
+
+
+            const nextBtn = document.getElementById('item-next');
+            nextBtn.innerText = currentCard.choices[0].target + ". OLDAL";
+            nextBtn.style.display = "block";
+            nextBtn.addEventListener('click', () => {
+                showCard(currentCard.choices[0].target);
+                closePopup();
+            });
+            
+        });
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }
+}
+
 async function lock(rightnum) {
     try {
         const response = await fetch("pieces/lock.html");
@@ -1615,6 +1706,12 @@ function showCard(cardId) {
                     class="luck-btn" 
                     onclick="lock(${currentCard.action.subtype})">ZÁR NYITÁSA</button>`;
     }
+    else if (currentCard.action != null && currentCard.action[0].type === 'looseItems') {
+        rightPageContent = `<button 
+                    type="button" 
+                    class="luck-btn" 
+                    onclick="looseItems(${currentCard.action.subtype})">VÁLASZD MEG TÁRGYAID!</button>`;
+    }
     else if (currentCard.action != null && 
          ((Array.isArray(currentCard.action) && currentCard.action[0]?.type === 'combat') || 
           currentCard.action.type === 'combat')) {
@@ -1805,9 +1902,3 @@ document.querySelector('.carousel').addEventListener('scroll', updateCarouselInt
 document.addEventListener('DOMContentLoaded', updateCarouselInteractivity);
 
 start();  // Indítás
-
-
-
-
-
-

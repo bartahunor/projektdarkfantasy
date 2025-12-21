@@ -1064,6 +1064,10 @@
     "enemy": null,
     "action": [
       {
+        "type":"looseItems",
+        "amount": 2
+      },
+      {
         "type":"fortuneChange",
         "amount": -1
       }

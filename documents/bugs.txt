@@ -2,9 +2,10 @@
 
 
 Pergamen.html --> csak háttérkép kell
+63. jsonbe  --> csak háttérkép kell
 
 196. kártya jsonbe
-63. jsonbe  
+
 
 
 ESET KEZELÉS
@@ -18,9 +19,9 @@ ESET KEZELÉS
 8. visited cards lekezelése *
 
 
-<<<<<<< HEAD
+
 Pergamenen lévő számok: 15, 10, 22
-=======
+
 Tárgyak:
 aranytalér
 manna
@@ -41,4 +42,3 @@ ugyesseggyuruje
 
 
 
->>>>>>> ece81b014dab51e5b36431748f14edd61f8cc7cc
