@@ -9,16 +9,50 @@ let startFortunepoints = 0;
 let startHealthpoints = 0;
 let startSkillpoints = 0;
 let effects = [];
+let potionUse = 2;
 
 // Adatok betöltése
 
 
 
+function initializeStartingInventory() {
+    // Kezdő inventory itemek az arrays-ból
+    const startingItems = ['manna', 'manna', 'manna', 'manna', 'manna', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'aranytallér', 'kard', 'bőrvért'];
+    
+    // Már létező slotok lekérése
+    const slots = document.querySelectorAll('.inventory-grid .slot');
+    
+    slots.forEach((slot, index) => {
+        const img = slot.querySelector('img');
+        if (img && startingItems[index]) {
+            const itemName = img.alt; // Az alt attribútumból vesszük az item nevét
+            attachItemListener(slot, itemName);
+            
+            // Hozzáadjuk az inventory tömbhöz is
+            const count = slot.querySelector('.item-count');
+            if (count) {
+                const itemCount = parseInt(count.textContent);
+                for (let i = 0; i < itemCount; i++) {
+                    inventory.push(itemName);
+                }
+            } else {
+                inventory.push(itemName);
+            }
+        }
+    });
+
+    
+    console.log('✓ Kezdő inventory inicializálva:', inventory);
+}
+
+// Hívd meg a start() függvény végén
 async function start() {
-  // Betöltés
-  const response = await fetch('converter/infok_generated.json');
-  allCards = await response.json();
-  console.log('✓ Betöltve!');
+    const response = await fetch('converter/infok_generated.json');
+    allCards = await response.json();
+    console.log('✓ Betöltve!');
+    
+    // ÚJ SOR:
+    initializeStartingInventory();
 }
 function closeCFPopup() {
     const popupEl = document.getElementById("fortunepopup");
@@ -84,6 +118,7 @@ function acceptPotion(potionType){
     img.src = `pictures/${itemImage}`;
     img.alt = potionType;
     emptySlot.appendChild(img);
+    attachItemListener(emptySlot, potionType);
             
     // NE adjunk hozzá számlálót, csak akkor, ha később növeljük
     console.log(`✓ ${potionType} hozzáadva az inventory-hoz (1 db)`);
@@ -357,19 +392,7 @@ function statAnditemsUpdate() {
 function updateInventoryUI(itemName) {
     const slots = document.querySelectorAll('.inventory-grid .slot');
     
-    // Képfájl neve az item alapján
-    const itemImages = {
-        'aranytallér': 'coin.png',
-        'manna': 'vegsomana.png',
-        'bőrvért': 'ruha.png',
-        'kard': 'kard.png',
-        'Életerő itala': 'health_potion.png',
-        'Ügyességi itala': 'agility_potion.png',
-        'Szerencse itala': 'luck_potion.png'
-        // Add hozzá az összes többi tárgyat is
-    };
-    
-    const itemImage = itemImages[itemName] || `${itemName}.png`;
+    const itemImage = `${itemName}.png`;
     
     // Ellenőrizzük, hogy már létezik-e ez a tárgy
     let existingSlot = null;
@@ -409,16 +432,164 @@ function updateInventoryUI(itemName) {
             const img = document.createElement('img');
             img.src = `pictures/${itemImage}`;
             img.alt = itemName;
+            
+            // ✅ ELŐSZÖR RAKD BE A DOM-BA!
             emptySlot.appendChild(img);
             
-            // NE adjunk hozzá számlálót, csak akkor, ha később növeljük
+            // ✅ CSAK UTÁNA HÍVD MEG AZ attachItemListener-T!
+            attachItemListener(emptySlot, itemName);
+            
             console.log(`✓ ${itemName} hozzáadva az inventory-hoz (1 db)`);
         } else {
             console.warn('⚠️ Nincs szabad slot az inventory-ban!');
         }
     }
 }
+function attachItemListener(slot, itemName) {
 
+    const img = slot.querySelector('img');
+    if (!img) return;
+    
+
+    switch(itemName) {
+        case "manna":
+            img.addEventListener('click', function() {
+                if (inventory.includes('manna')) { // Biztonsági ellenőrzés
+                    healthpoints += 4;
+                    setStat("eletero", healthpoints, startHealthpoints);
+                    removeItemFromInventory('manna');
+                    console.log("Étel elfogyasztva, +4 életerő");
+                }
+            });
+            img.style.cursor = 'pointer';
+            break;
+            
+        case "Életerő itala":
+            img.addEventListener('click', function() {
+                if (inventory.includes('Életerő itala')) {
+                    healthpoints = startHealthpoints;
+                    setStat("eletero", healthpoints, startHealthpoints);
+                    
+                    console.log("ITTÁL AZ ITALBÓL")
+                    if (potionUse == 1){
+                        removeItemFromInventory('Életerő itala');
+                        console.log("Életerő ital elfogyasztva");
+                    }
+                    potionUse--;
+                }
+            });
+            img.style.cursor = 'pointer';
+            break;
+            
+        case "Ügyességi itala":
+            img.addEventListener('click', function() {
+                if (inventory.includes('Ügyességi itala')) {
+                    skillpoints = startSkillpoints;
+                    setStat("ugyesseg", skillpoints, startSkillpoints);
+                    console.log("ITTÁL AZ ITALBÓL")
+                    
+                    if (potionUse == 1){
+                        removeItemFromInventory('Ügyességi itala');
+                        console.log("Ügyesség ital elfogyasztva");
+                    }
+                    potionUse--;
+                }
+            });
+            img.style.cursor = 'pointer';
+            break;
+            
+        case "Szerencse itala":
+            img.addEventListener('click', function() {
+                if (inventory.includes('Szerencse itala')) {
+                    startFortunepoints += 1;
+                    fortunepoints = startFortunepoints;
+                    setStat("szerencse", fortunepoints, startFortunepoints);
+                    console.log("ITTÁL AZ ITALBÓL")
+                    
+                    if (potionUse == 1){
+                        removeItemFromInventory('Szerencse itala');
+                        console.log("Szerencse ital elfogyasztva, +1 max szerencse");
+                    }
+                    potionUse--;
+                }
+            });
+            img.style.cursor = 'pointer';
+            break;
+        case "Pergamen":
+            img.addEventListener('click', function() {
+                if (inventory.includes('Pergamen')) { // Biztonsági ellenőrzés
+                    console.log("Pergamenre kattinva")
+                    pergamenPopup();
+                }
+            });
+            img.style.cursor = 'pointer';
+            break;
+    }
+}
+function removeItemFromInventory(itemName) {
+    const index = inventory.indexOf(itemName);
+    if (index > -1) {
+        inventory.splice(index, 1);
+        updateInventoryUIRemove(itemName);
+        console.log(`✓ ${itemName} eltávolítva az inventory-ból`);
+    }
+}
+
+function updateInventoryUIRemove(itemName) {
+    const slots = document.querySelectorAll('.inventory-grid .slot');
+    
+    slots.forEach(slot => {
+        const img = slot.querySelector('img');
+        if (img && img.alt === itemName) {
+            const counter = slot.querySelector('.item-count');
+            const remainingCount = inventory.filter(i => i === itemName).length;
+            
+            if (remainingCount > 1) {
+                // Ha még van több, csak csökkentjük a számlálót
+                if (counter) {
+                    counter.textContent = remainingCount;
+                }
+            } else if (remainingCount === 1) {
+                // Ha már csak 1 maradt, eltávolítjuk a számlálót
+                if (counter) {
+                    counter.remove();
+                }
+            } else {
+                // Ha már nincs több, töröljük az egész slotot
+                slot.innerHTML = '';
+            }
+        }
+    });
+}
+async function pergamenPopup() {
+    try {
+        const response = await fetch("pieces/pergamen.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: pergamen.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+        
+        console.log("✓ Pergamen oldal betöltve.");
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }
+}
 async function deathPopup() {
     try {
         const response = await fetch("pieces/death.html");
@@ -441,7 +612,7 @@ async function deathPopup() {
         popupEl.innerHTML = html;
         popupEl.classList.add("popuppage-active");
         
-        console.log("✓ Harc oldal betöltve.");
+        console.log("✓ Halál oldal betöltve.");
     }
     catch (err) {
         console.error("Hiba történt betöltés közben:", err);
