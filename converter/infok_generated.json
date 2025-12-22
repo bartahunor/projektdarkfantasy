@@ -3441,7 +3441,7 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "doorBreak",
     "items": [],
     "end": false
   },

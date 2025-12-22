@@ -803,6 +803,109 @@ async function rollTwoDice() {
         alert("Hiba: " + err.message);
     }
 }
+async function doorBreak() {
+    try {
+        const response = await fetch("pieces/healthandskill.html");
+
+        if (!response.ok) {
+            console.error("Nem sikerült betölteni: healthandskill.html");
+            alert("Hiba: nem sikerült betölteni a fájlt!");
+            return;
+        }
+
+        const html = await response.text();
+        const popupEl = document.getElementById("popuppage");
+        
+        if (!popupEl) {
+            alert("HIBA: popuppage nem található!");
+            return;
+        }
+        
+        // HTML betöltése
+        popupEl.innerHTML = html;
+        popupEl.classList.add("popuppage-active");
+        
+        const bg = document.querySelector('.healthandskill-popup')
+        bg.style.backgroundImage = 'url("pictures/ajtotores2.gif")';
+        
+        console.log("✓ Élet- vagy ügyességpont oldal betöltve.");
+        initDiceOne();
+        const rollButton = document.getElementById('roll');
+        rollButton.addEventListener('click', function() {
+            setTimeout(() => {
+                console.log(lastDiceRoll)
+                let doorbreak = false;
+                if (lastDiceRoll >= 5) {
+                    doorbreak = true;
+                    fortunepoints -= 1;
+
+                }
+                else{
+                    fortunepoints -= 1;
+                    healthpoints -= 2;
+                }
+
+                if(effects.includes("fortuneSixPoints") && fortunepoints < 6) {
+                    fortunepoints = 6;
+                    console.log("Szerencsepontok 6-ra állítva");
+                }
+
+
+
+                let nextBtn = "";
+                let actiontitle = "";
+                if (healthpoints > 0 && doorbreak == false) {
+                    actiontitle = "PRÓBÁLKOZZ TOVÁBB!";
+                    nextBtn = `<button 
+                        type="button" 
+                        class="doorbreak-result-btn"
+                        onclick=""
+                    >
+                        TOVÁBB
+                    </button>`
+                }
+                else if( healthpoints == 0) {
+                    nextBtn = `<button 
+                        type="button" 
+                        class="doorbreak-result-btn"
+                        onclick="closePopup(), deathPopup()"
+                    >
+                        TOVÁBB
+                    </button>`;
+                    actiontitle = "ERŐD ELHAGYOTT, MEGHALTÁL!";
+                    rollButton.disabled = true;
+                }
+                else{
+                    nextBtn = `<button 
+                        type="button" 
+                        class="doorbreak-result-btn"
+                        onclick="showCard(${currentCard.choices[0].target}),closePopup()"
+                    >
+                        TOVÁBB
+                    </button>`
+                    actiontitle = "BEJUTOTTÁL AZ AJTÓN!";
+                    rollButton.disabled = true;
+                }
+
+                const yourText = document.getElementById('your-outcome-text')
+                yourText.innerText = actiontitle
+                const yourPoint = document.getElementById('your-outcome');
+                yourPoint.innerHTML = nextBtn;
+                const closeBtn = document.querySelector('.closepointchoose');
+                closeBtn.style.display = 'block';
+
+                setStat("szerencse", fortunepoints, startFortunepoints);
+                setStat("eletero", healthpoints, startHealthpoints);
+            }, 10);
+        });
+
+
+    }
+    catch (err) {
+        console.error("Hiba történt betöltés közben:", err);
+        alert("Hiba: " + err.message);
+    }    
+}
 
 
 function initDice(buttonid, diceidone, diceidtwo) {
@@ -1700,17 +1803,25 @@ function showCard(cardId) {
                     class="luck-btn" 
                     onclick="chooseEnemy()">VÁLASSZ ELLENFELET</button>`;
     }
+    else if (currentCard.action === 'doorBreak') {
+        rightPageContent = `<button 
+                    type="button" 
+                    class="luck-btn" 
+                    onclick="doorBreak()">TÖRD BE AZ AJTÓT!</button>`;
+    }
     else if (currentCard.action != null && currentCard.action.type === 'lock') {
         rightPageContent = `<button 
                     type="button" 
                     class="luck-btn" 
                     onclick="lock(${currentCard.action.subtype})">ZÁR NYITÁSA</button>`;
     }
-    else if (currentCard.action != null && currentCard.action[0].type === 'looseItems') {
+    else if (currentCard.action != null && 
+         ((Array.isArray(currentCard.action) && currentCard.action[0]?.type === 'looseItems') || 
+          currentCard.action.type === 'looseItems')) {
         rightPageContent = `<button 
                     type="button" 
                     class="luck-btn" 
-                    onclick="looseItems(${currentCard.action.subtype})">VÁLASZD MEG TÁRGYAID!</button>`;
+                    onclick="looseItems(${currentCard.action[0].amount})">VÁLASZD MEG TÁRGYAID!</button>`;
     }
     else if (currentCard.action != null && 
          ((Array.isArray(currentCard.action) && currentCard.action[0]?.type === 'combat') || 

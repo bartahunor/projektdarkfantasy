@@ -1217,7 +1217,7 @@ h3{
 
 
 
-.combat-end-btn, .combat-flee-btn, #accept-ptn, #accept-enemy, #accept-num, #num-next, .close-pergamen-popup, #accept-itemloose, #item-next{
+.combat-end-btn, .combat-flee-btn, #accept-ptn, #accept-enemy, #accept-num, #num-next, .close-pergamen-popup, #accept-itemloose, #item-next, .doorbreak-result-btn{
   margin-top: 5px;
   padding: 5px 15px;
     color: #ebebeb;
@@ -1232,7 +1232,7 @@ h3{
     font-family: 'PixelText', serif;
 }
 
-.combat-end-btn:hover, .combat-flee-btn:hover, .closecombatfortune-btn:hover, #accept-ptn:hover, #accept-enemy:hover, #accept-num:hover, #num-next:hover, .close-pergamen-popup:hover, #accept-itemloose:hover, #item-next:hover {
+.combat-end-btn:hover, .combat-flee-btn:hover, .closecombatfortune-btn:hover, #accept-ptn:hover, #accept-enemy:hover, #accept-num:hover, #num-next:hover, .close-pergamen-popup:hover, #accept-itemloose:hover, #item-next:hover, .doorbreak-result-btn:hover {
     background: #4b4b4b;
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #000000;
