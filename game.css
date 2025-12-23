@@ -600,6 +600,14 @@ body{
     transform: translateY(-2px);   
 }
 
+.tovabbgomb {
+  transition: all 0.3s ease;
+}
+
+.tovabbgomb:hover{
+    box-shadow: 0 0 10px 3px #A69D7D; 
+    transform: translateY(-2px);   
+}
 
 /*INVENTORI*/
 /*eletero*/
@@ -1285,7 +1293,12 @@ h3{
     border: 0px;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 8px; 
+    border-radius: 8px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    
+    
+  
 }
 
 
@@ -1903,7 +1916,8 @@ h3{
   height: 60%;
   width: 40%;
   border-radius: 15px;
-  background-color: red;
+  background-image: url(pictures/valasztoshatter.png);
+  background-size: cover;
   padding: 20px;
 }
 .looseitem-selectors {
