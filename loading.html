@@ -13,7 +13,7 @@ body {
     background: #0a0a0a url('https://i.imgur.com/b5nXJzP.png');
     background-size: 256px;
     font-family: "VT323", monospace;
-    color: #C69654;
+    color: #ba5c66;
     image-rendering: pixelated;
     overflow: hidden;
 }
@@ -26,14 +26,14 @@ body {
 
 .loader-text {
     font-size: 32px;
-    text-shadow: 2px 2px #000;
+    text-shadow: 2px 2px #36191c;
     margin-bottom: 20px;
 }
 
 .loader-bar {
     width: 300px;
     height: 25px;
-    border: 3px solid #8A6E3E;
+    border: 3px solid #6a353a;
     background: #1a1a1a;
     position: relative;
     overflow: hidden;
@@ -42,7 +42,7 @@ body {
 
 .loader-fill {
     height: 100%;
-    background: #C69654;
+    background: #9b4d55;
     width: 0%;
     animation: loading 3s linear forwards;
 }
@@ -52,14 +52,14 @@ body {
     100% { width: 100%; }
 }
 
-/* Runák stílusa */
+
 .rune {
     position: absolute;
-    color: #C69654;
-    font-size: 20px;
-    text-shadow: 0 0 5px #fff;
+    color: #5F2F34;
+    font-size: 40px;
+    text-shadow: 0 0 5px #ffffff;
     opacity: 0;
-    animation: blink 1s infinite;
+    animation: blink 5s infinite;
 }
 
 @keyframes blink {
@@ -71,7 +71,9 @@ body {
 
 <body>
 <div class="loader-container">
-    <div class="loader-text">A labirintus kapui nyílnak...</div>
+    <div class="loader-text">
+        <h2>Az Elfeledett Oldalak életre kelnek.</h2>
+        <p>Az árnyak suttognak az oldalak között. <br>Olvasd… ha mered.</p></div>
     <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
 
@@ -79,7 +81,7 @@ body {
 // 3 másodperc után átirányítjuk a game.html-re
 setTimeout(() => {
     window.location.href = "game.html";
-}, 3000);
+}, 4000);
 
 // Runák létrehozása
 const runeChars = ["ᚠ","ᚢ","ᚦ","ᚨ","ᚱ","ᚲ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ"];

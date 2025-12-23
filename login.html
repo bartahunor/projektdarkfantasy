@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sötét Fantasy Login</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Jacquard+24&display=swap" rel="stylesheet">
+<title>Az Elfeledett Oldalak</title>
 
 <!-- Ékezetbarát pixel font -->
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
@@ -20,24 +24,31 @@
         font-family: "VT323", monospace;
         image-rendering: pixelated;
         color: #e0d0c0;
+        flex-direction: column;
+    }
+    .egesz{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .konyvkep{
+       
     }
 
     .container {
         background: #1a1a1a;
         padding: 30px;
-        border: 4px solid #8A6E3E;  /* alap keret sötétebb arany */
         text-align: center;
-        width: 380px;
-        box-shadow:
-            0px 0px 0px 4px #000,
-            0px 0px 0px 8px #8A6E3E,
-            0px 0px 0px 12px #000,
-            0px 0px 20px #1a0000 inset;
+        width: 335px;
+        height: 433px;
+        background-image: url(pictures/83699ac3965fc80.png);
+        background-size: cover;
     }
 
     h2 {
         font-size: 26px;
-        color: #C69654; /* címsor világos arany */
+        color: #c6626d; /* címsor világos arany */
         margin-bottom: 25px;
         text-shadow: 2px 2px #000;
     }
@@ -46,9 +57,9 @@
         width: 90%;
         padding: 12px;
         margin: 10px 0;
-        border: 3px solid #8A6E3E; /* alap keret */
+        border: 3px solid #462226; /* alap keret */
         background: #000;
-        color: #cfcfcf;
+        color: #c6626d;
         font-family: "VT323", monospace;
         font-size: 22px;
         outline: none;
@@ -56,8 +67,8 @@
     }
 
     input:focus {
-        border-color: #C69654; /* fókusz világos arany */
-        color: #fff;
+        border-color: #5F2F34; /* fókusz világos arany */
+        color: #c6626d;
     }
 
     button {
@@ -67,15 +78,15 @@
         font-family: "VT323", monospace;
         font-size: 24px;
         cursor: pointer;
-        border: 3px solid #8A6E3E;
-        background-color: #8A6E3E; /* alap sötétebb arany */
+        border: 3px solid #5F2F34;
+        background-color: #5F2F34; /* alap sötétebb arany */
         color: #000;
         transition: 0.15s;
     }
 
     button:hover {
-        background-color: #C69654; /* hover világos arany */
-        border-color: #C69654;
+        background-color: #462226; /* hover világos arany */
+        border-color: #462226;
         color: #000;
     }
 
@@ -83,60 +94,126 @@
         margin-top: 20px;
         display: block;
         cursor: pointer;
-        color: #C69654;
+        color: #190c0d;
         font-size: 20px;
-        text-shadow: 1px 1px #000;
+        font-size: 25px;
     }
 
     .toggle:hover {
-        color: #e3b97c; /* hover világosabb */
+        color: #c6626d; /* hover világosabb */
     }
+
+
 
 </style>
 </head>
 
 <body>
+    
 
-<div class="container">
-    <h2 id="form-title">LÉPJ BE A LABIRINTUSBA</h2>
+    <div class="egesz">
+        <div class="konyvkep">
+            <img src="pictures/csukott könyv vegleges.png" alt="" style="width: 550px;">
+        </div>
 
-    <input id="username" type="text" placeholder="Felhasználónév">
-    <input id="password" type="password" placeholder="Jelszó">
+        <div class="container">
+            <h2 id="form-title">BEJELENTKEZÉS</h2>
 
-    <button id="action-btn">Belépés</button>
+            <input id="username" type="text" placeholder="Felhasználónév">
+            <input id="password" type="password" placeholder="Jelszó">
+            <input id="email" type="email" placeholder="Email cím" style="display:none;">
 
-    <span class="toggle" id="toggle-mode">Fiók létrehozása</span>
-</div>
+            <button id="action-btn">Belépés</button>
+
+            <span class="toggle" id="toggle-mode">Fiók létrehozása</span>
+        </div>
+
+    </div>
 
 <script>
 let isSignup = false;
 
 document.getElementById("toggle-mode").onclick = () => {
     isSignup = !isSignup;
+
     document.getElementById("form-title").textContent =
-        isSignup ? "ÚJ LÉLEK KOVÁCSA" : "LÉPJ BE A LABIRINTUSBA";
+        isSignup ? "REGISZTRÁCIÓ" : "LÉPJ BE A LABIRINTUSBA";
+
     document.getElementById("action-btn").textContent =
         isSignup ? "Regisztráció" : "Belépés";
+
     document.getElementById("toggle-mode").textContent =
         isSignup ? "Már van fiókod? Belépés" : "Fiók létrehozása";
+
+    document.getElementById("email").style.display =
+        isSignup ? "block" : "none";
 };
 
 document.getElementById("action-btn").onclick = () => {
     const user = document.getElementById("username").value.trim();
     const pass = document.getElementById("password").value.trim();
+    const email = document.getElementById("email").value.trim();
 
-    if (!user || !pass) {
+    if (!user || !pass || (isSignup && !email)) {
         alert("Minden mezőt ki kell töltened!");
         return;
     }
 
+    function showBookSelector() {
+    document.querySelector(".container").innerHTML = `
+        <h2>VÁLASSZ KRÓNIKÁT</h2>
+
+        <select id="bookSelect" style="
+            width:90%;
+            padding:12px;
+            font-size:22px;
+            background:#000;
+            color:#c6626d;
+            border:3px solid #462226;
+            font-family:'VT323', monospace;
+            box-shadow:2px 2px #000;
+        ">
+            <option value="">-- Válassz könyvet --</option>
+            <option value="itelet">Az Ítélet Labirintusa</option>
+            <option value="arnyak">Az Árnyak Ösvénye</option>
+            <option value="vegzet">A Végzet Lapjai</option>
+        </select>
+
+        <button id="startGameBtn" style="margin-top:25px;">
+            Játék kezdete
+        </button>
+    `;
+
+    document.getElementById("startGameBtn").onclick = () => {
+        const selected = document.getElementById("bookSelect").value;
+
+        if (!selected) {
+            alert("Válassz egy krónikát!");
+            return;
+        }
+
+        // később ebből tudod, melyik könyv töltődjön
+        localStorage.setItem("selectedBook", selected);
+
+        window.location.href = "loading.html";
+    };
+}
+
     if (isSignup) {
+        if (localStorage.getItem("user_" + user)) {
+            alert("Ez a felhasználónév már létezik!");
+            return;
+        }
+
         localStorage.setItem("user_" + user, pass);
-        alert("A lélek megkovácsolva — most már beléphetsz.");
+        localStorage.setItem("email_" + user, email);
+
+        alert("Fiókod elkészült.");
     } else {
         const savedPass = localStorage.getItem("user_" + user);
+
         if (savedPass === pass) {
-            window.location.href = "loading.html";
+            showBookSelector();
         } else {
             alert("Hibás felhasználónév vagy jelszó!");
         }
