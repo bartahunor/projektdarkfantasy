@@ -10,6 +10,7 @@ let startHealthpoints = 0;
 let startSkillpoints = 0;
 let effects = [];
 let potionUse = 2;
+visitedCards = [];
 
 // Adatok betöltése
 
@@ -888,7 +889,7 @@ async function doorBreak() {
                 }
 
                 const yourText = document.getElementById('your-outcome-text')
-                yourText.innerText = actiontitle
+                yourText.innerText = actiontitle;
                 const yourPoint = document.getElementById('your-outcome');
                 yourPoint.innerHTML = nextBtn;
                 const closeBtn = document.querySelector('.closepointchoose');
@@ -1766,6 +1767,7 @@ function showCard(cardId) {
         return;
     }
     console.log('Kártya:', currentCard.id);
+    visitedCards.push(currentCard.id);
 
     let rightPageContent = '';
     
@@ -1786,76 +1788,106 @@ function showCard(cardId) {
         rightPageContent = "NYERTÉL.";
     }
     else if (currentCard.action === 'tryFortune') {
-        rightPageContent = `<button 
-                    type="button" 
-                    class="luck-btn" 
-                    onclick="tryFortune()">PRÓBÁLD MEG A SZERENCSÉD</button>`;
+        rightPageContent = `
+            <div class="right-page-btns">
+                <button 
+                type="button" 
+                class="next-btn" 
+                onclick="tryFortune()">PRÓBÁLD MEG A SZERENCSÉD</button>
+            </div>`;
     }
     else if (currentCard.action === 'rollTwoDice') {
-        rightPageContent = `<button 
-                    type="button" 
-                    class="luck-btn" 
-                    onclick="rollTwoDice()">DÖNTSENEK A KOCKÁK</button>`;
+        rightPageContent = `
+            <div class="right-page-btns">
+                <button 
+                type="button" 
+                class="next-btn" 
+                onclick="rollTwoDice()">DÖNTSENEK A KOCKÁK</button>
+            </div>`;
     }
     else if (currentCard.action === 'chooseEnemy') {
-        rightPageContent = `<button 
-                    type="button" 
-                    class="luck-btn" 
-                    onclick="chooseEnemy()">VÁLASSZ ELLENFELET</button>`;
+        rightPageContent = `
+            <div class="right-page-btns">
+                <button 
+                type="button" 
+                class="next-btn" 
+                onclick="chooseEnemy()">VÁLASSZ ELLENFELET</button>
+            </div>`;
     }
     else if (currentCard.action === 'doorBreak') {
-        rightPageContent = `<button 
-                    type="button" 
-                    class="luck-btn" 
-                    onclick="doorBreak()">TÖRD BE AZ AJTÓT!</button>`;
+        rightPageContent = `
+            <div class="right-page-btns">
+                <button 
+                type="button" 
+                class="next-btn" 
+                onclick="doorBreak()">TÖRD BE AZ AJTÓT!</button>
+            </div>`;
     }
     else if (currentCard.action != null && currentCard.action.type === 'lock') {
-        rightPageContent = `<button 
-                    type="button" 
-                    class="luck-btn" 
-                    onclick="lock(${currentCard.action.subtype})">ZÁR NYITÁSA</button>`;
+        rightPageContent = `
+            <div class="right-page-btns">
+                <button 
+                type="button" 
+                class="next-btn" 
+                onclick="lock(${currentCard.action.subtype})">ZÁR NYITÁSA</button>
+            </div>`;
     }
     else if (currentCard.action != null && 
          ((Array.isArray(currentCard.action) && currentCard.action[0]?.type === 'looseItems') || 
           currentCard.action.type === 'looseItems')) {
-        rightPageContent = `<button 
-                    type="button" 
-                    class="luck-btn" 
-                    onclick="looseItems(${currentCard.action[0].amount})">VÁLASZD MEG TÁRGYAID!</button>`;
+        rightPageContent = `
+            <div class="right-page-btns">
+                <button 
+                type="button" 
+                class="next-btn" 
+                onclick="looseItems(${currentCard.action[0].amount})">VÁLASZD MEG TÁRGYAID!</button>
+            </div>`;
     }
     else if (currentCard.action != null && 
          ((Array.isArray(currentCard.action) && currentCard.action[0]?.type === 'combat') || 
           currentCard.action.type === 'combat')) {
-        rightPageContent = `<button 
-                    type="button" 
-                    class="combat-btn" 
-                    onclick="combat()">FELKÉSZÜLÉS A HARCRA</button>`;
+        rightPageContent = `
+            <div class="right-page-btns">
+                <button 
+                type="button" 
+                class="next-btn" 
+                onclick="combat()">FELKÉSZÜLÉS A HARCRA</button>
+            </div>`;
     }
     else if (currentCard.choices && currentCard.choices.length > 0) {       //Választható opciók szűrése 
         const availableChoices = currentCard.choices.filter(choice => { //EZ EGY TÖMB LESZ!!!!!
             if (choice.condition && choice.condition.includes('tombNev')) {
                 return condHaving(choice.condition, inventory); 
             }
+            if (visitedCards.includes(choice.target)) {
+                return false;
+            }
+
             return true; // Ha nincs feltétel, mindig elérhető
         });
 
 
-        rightPageContent = `
+        rightPageContent1 = `
             ${currentCard.choices ? currentCard.choices.map((choice, index) => 
                 `<p>${index + 1}. ${choice.text}</p>`
             ).join('') : ''}
-                        
-            ${currentCard.choices.map((choice) => {
-                const isAvailable = availableChoices.includes(choice);
-                return `<button 
-                    type="button" 
-                    class="next-btn${isAvailable ? '' : '.disabled'}" 
-                    onclick="showCard(${choice.target})"
-                    ${isAvailable ? '' : 'disabled'}
-                >${String(choice.target)}.</button>`;
-            }).join('')}
+        `;
+             
+        rightPageContent2 = `
+            <div class="right-page-btns">
+                ${currentCard.choices.map((choice) => {
+                    const isAvailable = availableChoices.includes(choice);
+                    return `<button 
+                        type="button" 
+                        class="next-btn" 
+                        onclick="showCard(${choice.target})"
+                        ${isAvailable ? '' : 'disabled'}
+                    >${String(choice.target)}.</button>`;
+                }).join('')}
+            </div>
         `;
         
+        rightPageContent = rightPageContent1 + rightPageContent2;
     }
     
 
@@ -1872,7 +1904,7 @@ function showCard(cardId) {
                 </div>
             </div>
             <div class="page right-page">
-                <div>
+                <div style="height:100%;">
                     ${rightPageContent}                   
                 </div>
             </div>

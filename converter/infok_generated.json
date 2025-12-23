@@ -1227,13 +1227,11 @@
       }
     ],
     "enemy": null,
-    "action": null,
-    "items": [
-      {
+    "action": {
         "type": "fortuneChange",
         "amount": 1
-      }
-    ],
+      },
+    "items": [],
     "effects": "attackChangePlusOne",
     "end": false
   },
@@ -2058,7 +2056,7 @@
         "target": 12
       },
       {
-        "text": "bezárnád a csapóajtót és az ajtón kilépve észak felé távoznál",
+        "text": "Amennyiben még nem ittad meg a folyadékot, és most felhajtanád, lapozz a 71-re.",
         "target": 71
       },
       {

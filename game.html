@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="col-md-12 fejlec">
-        <h1>AZ ELFElEDETT OLDAlAK</h1>
+        <h1>AZ ELFELEDETT OLDALAK</h1>
     </div>
     <div class="col-md-12 felulet">
         <div class="container">
@@ -31,7 +31,9 @@
                                     <div class="page right-page">
                                         <h2 style="margin-top: 10px;">HÁTTÉR TÖRTÉNET:</h2>
                                         <p style="margin-bottom: 80px;">A Koponyák Sivatagán átkelve a gazdag Zafirváros felé, egy elf halottját találod, kezében kék gyémánttal. Hirtelen íjakkal körbevesznek az elfek, téged gyanúsítva a gyilkossággal. Az ítélet Labirintusába visznek, ahol minden bűnöst próbára tesznek: egy aranyszobrot kell megtalálni és kijuttatni. Ha sikerül, ártatlannak találnak; ha nem, bűnösnek. A fák között a menet egy hatalmas törzs előtt áll meg – a kéreg kinyílik, feltárva a labirintus bejáratát.</p>
-                                        <button onclick="turnPage()" class="tovabbgomb">TOVÁBB</button>
+                                        <div class="gomb-sor">
+                                            <button onclick="turnPage()" class="tovabbgomb" style="z-index: 1000;">TOVÁBB</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +49,10 @@
 
                                     <div class="page right-page">
                                         <img src="pictures/kezdoirat.png" alt="motto" style=" width: 300px; margin-top: 100px; pointer-events: none; z-index: 1;">
-                                        <button onclick="turnPage()" class="tovabbgomb" style="z-index: 1000;">TOVÁBB</button>
+                                        <div class="gomb-sor">
+                                            <button onclick="turnPage()" class="tovabbgomb" style="z-index: 1000;">TOVÁBB</button>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +125,7 @@
 
                                             <div class="gomb-sor">
 
-                                                <button type="button" class="next-btnn" id="nextBtn" style="display: none;" onclick="showCard(63)">TOVÁBB</button>
+                                                <button type="button" class="next-btnn" id="nextBtn" style="display: none;" onclick="showCard(50)">TOVÁBB</button>
 
                                             </div>
                                         </div>
