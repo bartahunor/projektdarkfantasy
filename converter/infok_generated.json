@@ -1064,6 +1064,10 @@
     "enemy": null,
     "action": [
       {
+        "type":"looseItems",
+        "amount": 2
+      },
+      {
         "type":"fortuneChange",
         "amount": -1
       }
@@ -3437,7 +3441,7 @@
       }
     ],
     "enemy": null,
-    "action": null,
+    "action": "doorBreak",
     "items": [],
     "end": false
   },

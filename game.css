@@ -651,13 +651,13 @@ body{
   height: auto;
   transform: translateX(-265px);
   transition: transform 0.35s ease;
-  pointer-events: none;
+
   overflow: visible;
 }
 
 .inventory-wrapper.open {
   transform: translateX(0);
-    pointer-events: all;
+
 }
 
 
@@ -741,6 +741,7 @@ input[type="range"]
   width: 40px;
   height: 40px;
   margin-bottom: 10px;
+  z-index: 1;
 }
 .slot::before {
   content: "";
@@ -769,14 +770,15 @@ input[type="range"]
   transform: translateX(-50%);
   width: 35px;
 
-  z-index: 1;        /* BLUR FÖLÖTT */
+  z-index: 100;        /* BLUR FÖLÖTT */
   image-rendering: pixelated;
+  cursor: pointer;
   
 }
 
 .slot img {
   width: 42px;
-  pointer-events: none;
+  pointer-events:all;
 }
 
 .item-count {
@@ -798,7 +800,7 @@ input[type="range"]
   text-align: center;
 
   border-radius: 6px;
-  z-index: 2;
+  z-index: 200;
   pointer-events: none;
 }
 
@@ -1223,7 +1225,7 @@ h3{
 
 
 
-.combat-end-btn, .combat-flee-btn, #accept-ptn, #accept-enemy, #accept-num, #num-next{
+.combat-end-btn, .combat-flee-btn, #accept-ptn, #accept-enemy, #accept-num, #num-next, .close-pergamen-popup, #accept-itemloose, #item-next, .doorbreak-result-btn{
   margin-top: 5px;
   padding: 5px 15px;
     color: #ebebeb;
@@ -1238,7 +1240,7 @@ h3{
     font-family: 'PixelText', serif;
 }
 
-.combat-end-btn:hover, .combat-flee-btn:hover, .closecombatfortune-btn:hover, #accept-ptn:hover, #accept-enemy:hover, #accept-num:hover, #num-next:hover {
+.combat-end-btn:hover, .combat-flee-btn:hover, .closecombatfortune-btn:hover, #accept-ptn:hover, #accept-enemy:hover, #accept-num:hover, #num-next:hover, .close-pergamen-popup:hover, #accept-itemloose:hover, #item-next:hover, .doorbreak-result-btn:hover {
     background: #4b4b4b;
     transform: translateY(2px);
     box-shadow: inset -4px -4px  #000000;
@@ -1884,3 +1886,87 @@ h3{
 #accept-num{
   margin-bottom: 20px;
 }
+
+.pergamen-popup{
+  width: 500px;
+  height: 600px;
+  top: 0;
+  left: 0;
+  position: relative;
+  background-image: url(/pictures/batcave.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.close-pergamen-popup{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.looseitem-popup {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+  width: 40%;
+  border-radius: 15px;
+  background-color: red;
+  padding: 20px;
+}
+.looseitem-selectors {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 5%;
+    gap: 10px;
+    height: 60%;
+    width: 100%;
+}
+
+.item-selector {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    color: #000;
+    font-family: 'PixelText', serif;
+}
+
+.item-selector:hover {
+    border-color: #666;
+}
+
+.item-selector:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 5px rgba(0, 102, 204, 0.5);
+}
+
+.looseitem-btns{
+    position: relative;
+    padding-top: 10%;
+    gap: 10px;
+    height: 40%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#item-next{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: none;
+  width: 20%;
+  font-size: 0.8rem;
+}
+
