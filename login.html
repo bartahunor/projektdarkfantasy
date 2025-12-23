@@ -14,6 +14,7 @@
 
 <style>
     body {
+        /*
         margin: 0;
         height: 100vh;
         display: flex;
@@ -25,6 +26,30 @@
         image-rendering: pixelated;
         color: #e0d0c0;
         flex-direction: column;
+        */
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .felulet{
+    background-image: url(pictures/hatter.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: calc(100vh - 80px);
+    background-color: black;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem;
+    height: 750px;
+    width: auto;
     }
     .egesz{
         display: flex;
@@ -32,9 +57,31 @@
         align-items: center;
     }
 
-    .konyvkep{
-       
+    .fejlec{
+    height: auto;
+    min-height: 80px;
+    background-color: black;
+    font-family: "Jacquard 24", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    text-align: center;
+    font-size: 3rem;
+    padding-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
     }
+
+    .fejlec h1{
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+        border-bottom: 5px solid rgb(232, 229, 229);
+        display: inline-block;
+    }
+
 
     .container {
         background: #1a1a1a;
@@ -44,6 +91,7 @@
         height: 433px;
         background-image: url(pictures/83699ac3965fc80.png);
         background-size: cover;
+        font-family: "VT323", monospace;
     }
 
     h2 {
@@ -103,123 +151,42 @@
         color: #c6626d; /* hover világosabb */
     }
 
+    #form-title {
+        font-family: "VT323", monospace;
+    }
+
 
 
 </style>
 </head>
 
 <body>
-    
+    <div class="col-md-12 fejlec">
+        <h1>AZ ELFELEDETT OLDALAK</h1>
+    </div>
+    <div class="col-md-12 felulet">
 
-    <div class="egesz">
-        <div class="konyvkep">
-            <img src="pictures/csukott könyv vegleges.png" alt="" style="width: 550px;">
+        <div class="egesz">
+            <div class="konyvkep">
+                <img src="pictures/csukott könyv vegleges.png" alt="" style="width: 550px;">
+            </div>
+
+            <div class="container">
+                <h2 id="form-title">BEJELENTKEZÉS</h2>
+
+                <input id="username" type="text" placeholder="Felhasználónév">
+                <input id="password" type="password" placeholder="Jelszó">
+                <input id="email" type="email" placeholder="Email cím" style="display:none;">
+
+                <button id="action-btn">Belépés</button>
+
+                <span class="toggle" id="toggle-mode">Fiók létrehozása</span>
+            </div>
+
         </div>
-
-        <div class="container">
-            <h2 id="form-title">BEJELENTKEZÉS</h2>
-
-            <input id="username" type="text" placeholder="Felhasználónév">
-            <input id="password" type="password" placeholder="Jelszó">
-            <input id="email" type="email" placeholder="Email cím" style="display:none;">
-
-            <button id="action-btn">Belépés</button>
-
-            <span class="toggle" id="toggle-mode">Fiók létrehozása</span>
-        </div>
-
     </div>
 
-<script>
-let isSignup = false;
-
-document.getElementById("toggle-mode").onclick = () => {
-    isSignup = !isSignup;
-
-    document.getElementById("form-title").textContent =
-        isSignup ? "REGISZTRÁCIÓ" : "LÉPJ BE A LABIRINTUSBA";
-
-    document.getElementById("action-btn").textContent =
-        isSignup ? "Regisztráció" : "Belépés";
-
-    document.getElementById("toggle-mode").textContent =
-        isSignup ? "Már van fiókod? Belépés" : "Fiók létrehozása";
-
-    document.getElementById("email").style.display =
-        isSignup ? "block" : "none";
-};
-
-document.getElementById("action-btn").onclick = () => {
-    const user = document.getElementById("username").value.trim();
-    const pass = document.getElementById("password").value.trim();
-    const email = document.getElementById("email").value.trim();
-
-    if (!user || !pass || (isSignup && !email)) {
-        alert("Minden mezőt ki kell töltened!");
-        return;
-    }
-
-    function showBookSelector() {
-    document.querySelector(".container").innerHTML = `
-        <h2>VÁLASSZ KRÓNIKÁT</h2>
-
-        <select id="bookSelect" style="
-            width:90%;
-            padding:12px;
-            font-size:22px;
-            background:#000;
-            color:#c6626d;
-            border:3px solid #462226;
-            font-family:'VT323', monospace;
-            box-shadow:2px 2px #000;
-        ">
-            <option value="">-- Válassz könyvet --</option>
-            <option value="itelet">Az Ítélet Labirintusa</option>
-            <option value="arnyak">Az Árnyak Ösvénye</option>
-            <option value="vegzet">A Végzet Lapjai</option>
-        </select>
-
-        <button id="startGameBtn" style="margin-top:25px;">
-            Játék kezdete
-        </button>
-    `;
-
-    document.getElementById("startGameBtn").onclick = () => {
-        const selected = document.getElementById("bookSelect").value;
-
-        if (!selected) {
-            alert("Válassz egy krónikát!");
-            return;
-        }
-
-        // később ebből tudod, melyik könyv töltődjön
-        localStorage.setItem("selectedBook", selected);
-
-        window.location.href = "loading.html";
-    };
-}
-
-    if (isSignup) {
-        if (localStorage.getItem("user_" + user)) {
-            alert("Ez a felhasználónév már létezik!");
-            return;
-        }
-
-        localStorage.setItem("user_" + user, pass);
-        localStorage.setItem("email_" + user, email);
-
-        alert("Fiókod elkészült.");
-    } else {
-        const savedPass = localStorage.getItem("user_" + user);
-
-        if (savedPass === pass) {
-            showBookSelector();
-        } else {
-            alert("Hibás felhasználónév vagy jelszó!");
-        }
-    }
-};
-</script>
+<script src="main.js"></script>
 
 </body>
 </html>

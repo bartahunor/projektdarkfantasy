@@ -1923,7 +1923,10 @@
       "stamina": "player.stamina - 2",
       "place": "mirror"
     },
-    "action": null,
+    "action": {
+      "type": "combat",
+      "subtype": ""
+    },
     "items": [],
     "end": false
   },

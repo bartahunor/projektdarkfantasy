@@ -827,7 +827,7 @@ async function doorBreak() {
         popupEl.classList.add("popuppage-active");
         
         const bg = document.querySelector('.healthandskill-popup')
-        bg.style.backgroundImage = 'url("pictures/ajtotores2.gif")';
+        bg.style.backgroundImage = 'url("pictures/ajtotores3.gif")';
         
         console.log("✓ Élet- vagy ügyességpont oldal betöltve.");
         initDiceOne();
@@ -885,6 +885,20 @@ async function doorBreak() {
                         TOVÁBB
                     </button>`
                     actiontitle = "BEJUTOTTÁL AZ AJTÓN!";
+                    const video = document.createElement('video');
+                    video.muted = true;
+                    video.playsInline = true;
+                    video.preload = 'auto';
+                    video.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;';
+                    video.src = 'pictures/ajtotoresvideo.mp4';
+                    
+                    // Lejátszás amikor betöltött
+                    video.addEventListener('canplaythrough', () => {
+                        bg.style.backgroundImage = 'none';
+                        video.play();
+                    }, { once: true });
+                    
+                    bg.prepend(video);
                     rollButton.disabled = true;
                 }
 
