@@ -1,10 +1,11 @@
-119. kártya jsonbe --> kártya tipikus eset
+119. kártya jsonbe --> kártya tipikus eset visited card esemény
+könyvbeli szám gombook
+converter
 
 
 Pergamen.html --> csak háttérkép kell
 63. jsonbe  --> csak háttérkép kell
-
-196. kártya jsonbe
+196. kártya jsonbe --> csak háttérkép kell
 
 
 
