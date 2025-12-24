@@ -48,7 +48,16 @@ function initializeStartingInventory() {
 
 // Hívd meg a start() függvény végén
 async function start() {
-    const response = await fetch('converter/infok_generated.json');
+    const selectedBook = localStorage.getItem("selectedBook");
+
+    if (selectedBook) {
+        console.log("A felhasználó ezt a könyvet választotta:", selectedBook);
+
+    } else {
+        console.log("Nincs kiválasztott könyv!");
+    }
+
+    const response = await fetch('bookshelf/' + selectedBook + '.json');
     allCards = await response.json();
     console.log('✓ Betöltve!');
     
@@ -1085,6 +1094,10 @@ async function combat() {
             
 
         let currentEnemyIndex = 0;
+         if (currentCard.action.subtype === "yourself") {
+                currentCard.enemy[currentEnemyIndex].skill = skillpoints;
+                currentCard.enemy[currentEnemyIndex].stamina = healthpoints - 2;
+        }
         let enemyHealth = currentCard.enemy[currentEnemyIndex].stamina;
         let enemyStartHealth = currentCard.enemy[currentEnemyIndex].stamina;
         let playerStartHealth = healthpoints;
@@ -1795,11 +1808,25 @@ function showCard(cardId) {
 
     if (currentCard.end === true) {  //Halál kártya kezelése
         deathPopup();
-        rightPageContent = "Halott vagy. Játék vége.";
+        rightPageContent = `
+            <div class="right-page-btns">
+                <button 
+                type="button" 
+                class="next-btn" 
+                onclick="window.location.href = 'login.html#bookSelect';"
+                >VISSZA MENÜHÖZ</button>
+            </div>`;
 
     }
     else if (currentCard.end === false && !currentCard.choices) {   //Nyerő kártya kezelése
-        rightPageContent = "NYERTÉL.";
+        rightPageContent = `
+            <div class="right-page-btns">
+                <button 
+                type="button" 
+                class="next-btn" 
+                onclick="window.location.href = 'login.html#bookSelect';"
+                >VISSZA MENÜHÖZ</button>
+            </div>`;
     }
     else if (currentCard.action === 'tryFortune') {
         rightPageContent = `
