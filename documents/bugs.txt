@@ -1,6 +1,6 @@
 
 110. oldal --> Tükörkép.png kell
-converter --> javított generálás fájl helyes elhelyezése és elnevezése
+converter --> javított generálás fájl 
 nyerés, vesztés oldal
 
 

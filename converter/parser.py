@@ -57,10 +57,22 @@ def parse_adventure_text(text):
             # Feltétel keresése (pl. "van nálad")
             condition = None
             if 'van nálad' in choice_text.lower():
-                item_match = re.search(r'van nálad (?:egy )?([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű]+)', choice_text, re.IGNORECASE)
+                item_match = re.search(r'van nálad (?:egy )?([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\s]+)', choice_text, re.IGNORECASE)
                 if item_match:
-                    item_name = item_match.group(1).lower()
-                    condition = f"has_item:{item_name}"
+                    item_name = item_match.group(1).strip().lower()
+                    condition = f"tombNev.includes('{item_name}')"
+            
+            # Nincs nálad tárgy?
+            elif 'nincs' in choice_text.lower() and ('nálad' in choice_text.lower()):
+                item_match = re.search(r'nincs nálad (?:egy )?([A-ZÁÉÍÓÖŐÚÜŰ][a-záéíóöőúüű\s]+)', choice_text, re.IGNORECASE)
+                if item_match:
+                    item_name = item_match.group(1).strip().lower()
+                    condition = f"!tombNev.includes('{item_name}')"
+            
+            elif 'szerencséd van' in choice_text.lower() or 'szerencsés vagy' in choice_text.lower():
+                condition = "fortunresult == true"  
+            elif 'nincs szerencséd' in choice_text.lower() or 'nem' in choice_text.lower():
+                condition = "fortunresult == false"
             
             choice = {
                 "text": choice_text,
@@ -144,15 +156,17 @@ def main():
     Főprogram - beolvassa a szöveget és létrehozza a JSON-t
     """
     
-    # Beolvasás fájlból - automatikus fájlkeresés
     import os
     import glob
     
-    # Keress .txt fájlokat
-    txt_files = glob.glob('*.txt')
+    # A script mappája (converter mappa)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Keress .txt fájlokat a script mappájában
+    txt_files = glob.glob(os.path.join(script_dir, '*.txt'))
     
     if not txt_files:
-        print("❌ Nem található .txt fájl a mappában!")
+        print(f"❌ Nem található .txt fájl ebben a mappában: {script_dir}")
         print("Hozz létre egy .txt fájlt a kalandkönyv szövegével.")
         return
     
@@ -160,7 +174,7 @@ def main():
     if len(txt_files) > 1:
         print("📁 Több .txt fájl található:")
         for i, f in enumerate(txt_files, 1):
-            print(f"  {i}. {f}")
+            print(f"  {i}. {os.path.basename(f)}")
         choice = input("Melyiket dolgozzam fel? (szám): ")
         try:
             input_file = txt_files[int(choice) - 1]
@@ -169,9 +183,13 @@ def main():
     else:
         input_file = txt_files[0]
     
-    output_file = 'infok_generated.json'
+    # Output fájl a bookshelf mappába
+    input_filename = os.path.basename(input_file)
+    output_folder = os.path.join(script_dir, '..', 'bookshelf')
+    os.makedirs(output_folder, exist_ok=True)  # Létrehozza, ha nincs meg
+    output_file = os.path.join(output_folder, input_filename.replace('.txt', '.json'))
     
-    print(f"📖 Feldolgozom: {input_file}")
+    print(f"📖 Feldolgozom: {input_filename}")
     
     try:
         with open(input_file, 'r', encoding='utf-8') as f:
@@ -201,10 +219,8 @@ def main():
         
     except FileNotFoundError:
         print(f"❌ Hiba: {input_file} nem található!")
-        print(f"Hozz létre egy {input_file} fájlt a szöveggel.")
     except Exception as e:
         print(f"❌ Hiba történt: {e}")
-
 
 if __name__ == "__main__":
     main()
