@@ -96,7 +96,7 @@
 
     h2 {
         font-size: 26px;
-        color: #c6626d; /* címsor világos arany */
+        color: #c6626d; 
         margin-bottom: 25px;
         text-shadow: 2px 2px #000;
     }
@@ -105,7 +105,7 @@
         width: 90%;
         padding: 12px;
         margin: 10px 0;
-        border: 3px solid #462226; /* alap keret */
+        border: 3px solid #462226; 
         background: #000;
         color: #c6626d;
         font-family: "VT323", monospace;
@@ -115,7 +115,7 @@
     }
 
     input:focus {
-        border-color: #5F2F34; /* fókusz világos arany */
+        border-color: #5F2F34; 
         color: #c6626d;
     }
 
@@ -127,13 +127,13 @@
         font-size: 24px;
         cursor: pointer;
         border: 3px solid #5F2F34;
-        background-color: #5F2F34; /* alap sötétebb arany */
+        background-color: #5F2F34; 
         color: #000;
         transition: 0.15s;
     }
 
     button:hover {
-        background-color: #462226; /* hover világos arany */
+        background-color: #462226; 
         border-color: #462226;
         color: #000;
     }
@@ -148,13 +148,33 @@
     }
 
     .toggle:hover {
-        color: #c6626d; /* hover világosabb */
+        color: #c6626d; 
     }
 
     #form-title {
         font-family: "VT323", monospace;
     }
 
+    .container {
+    position: relative; 
+}
+
+.music-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    image-rendering: pixelated;
+    opacity: 0.8;
+}
+
+.music-icon:hover {
+    opacity: 1;
+}
 
 
 </style>
@@ -181,10 +201,21 @@
                 <button id="action-btn">Belépés</button>
 
                 <span class="toggle" id="toggle-mode">Fiók létrehozása</span>
+
+                <img
+                    src="pictures/sound_off.png"
+                    id="musicToggle"
+                    class="music-icon"
+                    alt="Zene ki/be"
+                    style="background-color: #ffffff; border-radius: 10%; width: 24px; height: 24px; margin-bottom: 7px; margin-right: 7px;">
             </div>
 
         </div>
     </div>
+
+    <audio id="bgMusic" loop>
+        <source src="pictures/Tortoise I.mp3" type="audio/mpeg">
+    </audio>
 
 <script src="main.js"></script>
 

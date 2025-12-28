@@ -112,3 +112,62 @@ function showStatus(message, type) {
     }
 }
 
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicToggle");
+
+let musicOn = true;
+const DEFAULT_VOLUME = 0.04;
+let fadeInterval = null;
+let musicStarted = false;
+
+function startMusic() {
+    if (musicStarted) return;
+
+    music.volume = DEFAULT_VOLUME;
+    music.play().then(() => {
+        fadeIn();
+        musicBtn.src = "pictures/sound_on.png";
+        musicStarted = true;
+    }).catch(() => {});
+}
+
+
+document.addEventListener("click", startMusic, { once: true });
+musicBtn.addEventListener("click", () => {
+    if (!musicOn) {
+        music.volume = DEFAULT_VOLUME;
+        music.play();
+        fadeIn();
+        musicBtn.src = "pictures/sound_on.png";
+        musicOn = true;
+    } else {
+        fadeOut();
+        musicBtn.src = "pictures/sound_off.png";
+        musicOn = false;
+    }
+});
+function fadeIn() {
+    clearInterval(fadeInterval);
+    fadeInterval = setInterval(() => {
+        if (music.volume < 0.04) {
+            music.volume += 0.04;
+        } else {
+            music.volume = DEFAULT_VOLUME;
+            clearInterval(fadeInterval);
+        }
+    }, 100);
+}
+
+function fadeOut() {
+    clearInterval(fadeInterval);
+    fadeInterval = setInterval(() => {
+        if (music.volume > 0.04) {
+            music.volume -= 0.04;
+        } else {
+            music.pause();
+            music.volume = 0;
+            clearInterval(fadeInterval);
+        }
+    }, 100);
+}
+

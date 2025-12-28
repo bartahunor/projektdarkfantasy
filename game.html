@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="game.css">
     <title>Az Elfeledett Oldalak</title>
 </head>
+
 <body>
     <div class="col-md-12 fejlec">
         <h1>AZ ELFELEDETT OLDALAK</h1>
@@ -127,7 +128,7 @@
 
                                             <div class="gomb-sor">
 
-                                                <button type="button" class="next-btnn" id="nextBtn" style="display: none;" onclick="showCard(3)">TOVÁBB</button>
+                                                <button type="button" class="next-btnn" id="nextBtn" style="display: none;" onclick="showCard(110)">TOVÁBB</button>
 
                                             </div>
                                         
@@ -146,8 +147,17 @@
                     <div class="inventory-wrapper" id="inventoryWrapper">
                         <div class="inventory-tab" id="inventoryTab"><img src="pictures/Bundle_JE2_BE2.png" style="width: 40px;" ></div>
                         <div class="inventory-panel" id="inventoryPanel">
-                            <p style="margin-bottom: 0px; text-align: center;">INVENTORY</p>
-                            <div class="eletero">
+                            <div class="inventory-header">
+                                    <span>INVENTORY</span>
+                                    <img 
+                                        src="pictures/sound_off.png"
+                                        id="musicToggle"
+                                        class="music-icon"
+                                        alt="Zene"
+                                        style="background-color: #ffffff; border-radius: 10%; width: 24px; height: 24px; margin-top: 5px; margin-right: 5px;" 
+                                    >
+                                </div>
+                                <div class="eletero">
                                 <p style="font-size: 12px; display: inline-block;">Életerő</p>
                                 <svg class="statbar eletero_bar" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 -0.5 38 9" shape-rendering="crispEdges" preserveAspectRatio="none">
@@ -222,6 +232,9 @@
         <div id="popuppage"></div>
     </div>
     </div>
+    <audio id="bgMusic" loop>
+        <source src="pictures/jatekhanng.m4a" type="audio/mpeg">
+    </audio>
 
 
 
