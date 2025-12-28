@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "text": "Az ajtó egy tágas terembe nyílik, melynek északi oldalán egy újabb kijárat van, egy lelógó kötél szomszédságában. Csapdának nem látod jelét, így áthaladsz a szobán és leveszed a kötelet. Lenyomod a kilincset, de így sem sikerül előrébb jutnod &#8211; alighanem zárva van. Ha van nálad egy Aranykulcs, lapozz a 110-re. Hogyha nincs, úgy távozol a szobából és folytatod az utadat északi irányba lapozz a 14-re.",
+    "choices": [
+      {
+        "text": "van nálad egy Aranykulcs",
+        "target": 110,
+        "condition": "tombNev.includes('aranykulcs')"
+      },
+      {
+        "text": "Hogyha nincs, úgy távozol a szobából és folytatod az utadat északi irányba lapozz a 2-re.",
+        "target": 2,
+        "condition": "!tombNev.includes('aranykulcs')"
+      }
+    ],
+    "enemy": null,
+    "action": null,
+    "items": ["kötél"],
+    "end": false
+  },
+  {
+    "id": 2,
+    "text": "Az áramlat túl erős, és tovább sodor egy hid alá. Magad elött megpillantasz egy sziklát, és megpróbálod elkapni. Tedd próbára SZERENCSED! Ha szerencséd van, lapozz a 92-re Ha nincs, lapozz a 132-re.",
+    "choices": [
+      {
+        "text": "Ha szerencséd van, lapozz a 3-re.",
+        "condition": "fortunresult == true",
+        "target": 3
+      },
+      {
+        "text": "Ha nincs, lapozz a 3-re.",
+        "condition": "fortunresult == false",
+        "target": 3
+      }
+    ],
+    "enemy": null,
+    "action": "tryFortune",
+    "items": [],
+    "end": false
+  },
+  {
+    "id": 3,
+    "text": "Mikor megbillentél, két tárgy kiesett a hátizsákodból (te választhatod ki, melyek legyenek ezek). Vesztesz 1 SZERENCSE pontot. Az északi járaton át folytatod az utad. Lapozz az 52-re.",
+    "choices": [
+      {
+        "text": "Lapozz a 4-re",
+        "target": 4
+      }
+    ],
+    "enemy": null,
+    "action": [
+      {
+        "type":"looseItems",
+        "amount": 2
+      },
+      {
+        "type":"fortuneChange",
+        "amount": -1
+      }
+    ],
+    "items": [],
+    "end": false
+  },
+  {
+    "id": 4,
+    "text": "A sárból két Iszapsárkány feje emelkedik ki. A szemöldökükből kinövő csápok zöld fénnyel izzanak, miközben áldozatuk után kutatnak. Óriási szájuk kinyílik, és bűzös gázfelhő ölel körbe. A szörnyek mély levegőt vesznek, közben pedig eredeti méretük kétszeresére nőnek meg. Elöhúzod kardodat és reméled, elég szerencsés, erős és ügyes vagy, hogy megóvd magad a rád leselkedő veszélytől. Mindkét ellenfeled külön-külön támad rád minden körben, neked azonban el kell döntened, melyikükkel akarsz harcolni. A kiválasztott Iszapsárkánnyal a szokott módon küzdj meg. A másik ellen ugyanúgy dobj támadódobást, azonban ha a te Támadóértéked a magasabb, nem okozol neki sebzést, csupán kivéded az ő támadását. Ha az ő Támadóértéke a nagyobb, a szokásos módon okoz neked sebesülést. Ha mindkét bestiát sikerül legyőznöd, lapozz a 74-re.",
+    "choices": [
+      {
+        "text": "Ha nyersz, lapozz a 5-re.",
+        "target": 5
+      }
+    ],
+    "enemy": [
+      {
+        "name": "Első Iszapsárkány",
+        "skill": 5,
+        "stamina": 5,
+        "place": "dragon"
+      },
+      {
+        "name": "Második Iszapsárkány",
+        "skill": 6,
+        "stamina": 6,
+        "place": "dragon"
+      }
+    ],
+    "action": "chooseEnemy",
+    "items": [],
+    "end": false
+  },
+  {
+    "id": 5,
+    "text": "A tetemet átkutatva 2 Aranytallért és egy darab pergament találsz, melyre három számot írtak. Fogalmad sincs, mit jelenthetnek. de úgy gondolod, egy zár kombinációja lehet talán éppen azé, amelyik a Szobrot védi. A számok rendre 15, 10 és 22. Úgy döntesz, jól megjegyzed öket, mert mindig fennáll a veszélye annak, hogy elveszted a papírdarabot. Északi irányba folytatod az utadat. Lapozz a 143-ra.",
+    "choices": [
+      {
+        "text": "Lapozz a 6-ra",
+        "target": 6
+      }
+    ],
+    "enemy": null,
+    "action": null,
+    "items": [ "aranytallér", "aranytallér", "Pergamen"],
+    "end": false
+  },
+  {
+    "id": 6,
+    "text": "Az alagút egy súlyos ajtóban ér véget, ami le van zárva. De nem kulccsal: három tekerő gombot látsz rajta. Ha ismered a kinyitásához szükséges kombinációt, add össze a számokat, és lapozz az így kapott fejezetpontra. Ha nem tudod, vissza kell térned a homokos folyópartra és valahol máshol kell próbálkoznod lapozz a 76-ra.",
+    "choices": [
+      {
+        "text": "Ha ismered a kinyitásához szükséges kombinációt, add össze a számokat, és lapozz az így kapott fejezetpontra.",
+        "condition": "tombNev.includes('Pergamenen lévő számok: 15, 10, 22')",
+        "target": ""  
+      },
+      {
+        "text": "Lapozz a 76-re",
+        "target": 76
+      }
+    ],
+    "enemy": null,
+    "action": {
+      "type": "lock",
+      "subtype": 47
+    },
+    "items": [],
+    "end": false
+  },
+  {
+    "id": 47,
+    "text": "Ahogy óvatosan a drótok között lépkedve eléred a Szobrot, az hirtelen eltünik! A következő pillanatban vészjósló morajlás hangzik fel a fejed fölött, és ahogy arra nézel, látod, hogy hatalmas szikladarabok kezdenek feléd zuhanni. A hatalmas súly porrá örli csontjaidat. Kalandod itt véget ér.",
+    "choices": null,
+    "enemy": null,
+    "action": null,
+    "items": [],
+    "end": true
+  }
+]

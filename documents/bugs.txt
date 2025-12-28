@@ -1,9 +1,5 @@
 
 110. oldal --> Tükörkép.png kell
-converter --> javított generálás fájl 
-nyerés, vesztés oldal
-
-
 
 
 
@@ -11,12 +7,12 @@ nyerés, vesztés oldal
 ESET KEZELÉS
 1. Inventoryban lévő itemek alapján feltétel ellenőrzés - kész
 2. Befejező kártya lekezelése - kész
-3. combat esemény
+3. combat esemény - kész
 4. tryFortune esemény - kész
 5. healthChange esemény - kész
 6. fortuneChange esemény - kész
 7. attackChange esemény - kész
-8. visited cards lekezelése *
+8. visited cards lekezelése - kész
 
 
 

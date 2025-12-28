@@ -46,6 +46,7 @@ document.getElementById("action-btn").onclick = () => {
             ">
                 <option value="">-- Válassz könyvet --</option>
                 <option value="Az Ítélet Labirintusa">Az Ítélet Labirintusa</option>
+                <option value="RÖVID BEMUTATÓ">RÖVID BEMUTATÓ</option>
                 <option value="Anakendis Sötét Krónikái">Anakendis Sötét Krónikái</option>
                 <option value="A Dervis Köve">A Dervis Köve</option>
             </select>

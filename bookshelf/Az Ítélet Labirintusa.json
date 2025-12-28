@@ -2791,11 +2791,12 @@
       {
         "text": "Ha rajtad van a Lebegés Köpenye lapozz a 43-ra.",
         "target": 43,
-        "condition": "has_item:lebegeskopenye"
+        "condition": "tombNev.includes('lebegeskopenye')"
       },
       {
         "text": "Ha nincs, zuhanni kezdesz lefelé lapozz a 115-re.",
-        "target": 115
+        "target": 115,
+        "condition": "!tombNev.includes('lebegeskopenye')"
       }
     ],
     "enemy": null,

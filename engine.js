@@ -1109,6 +1109,8 @@ async function combat() {
         let totalRollCount = 0;
         let combatRoundOutcome = 0;
         let combatText = document.getElementById('combat-text');
+        let playerattackpt = document.getElementById('combat-player-attackpt');
+        let enemyattackpt = document.getElementById('combat-enemy-attackpt');
 
         const rollButton = document.getElementById('roll');
         
@@ -1153,6 +1155,7 @@ async function combat() {
                 // Első dobás - Ellenfél
                 firstRoll = totalRoll;
                 console.log('Ellenfél támadása: ' + (currentCard.enemy[currentEnemyIndex].skill + firstRoll));
+                enemyattackpt.innerText = 'TÁMADÓPONTOK: ' + (currentCard.enemy[currentEnemyIndex].skill + firstRoll);
                 rollButton.innerText = "ELLENFÉL DOBÁSA";
             } else if (rollCount === 2) {
                 // Második dobás - Játékos
@@ -1170,6 +1173,7 @@ async function combat() {
                     console.log("Effekt használva");
                 }
                 console.log('Játékos támadása: ' + (skillpoints + secondRoll));
+                playerattackpt.innerText = 'TÁMADÓPONTOK: ' + (skillpoints + secondRoll);
                 rollButton.innerText = "JÁTÉKOS DOBÁSA";
                 
                 // Támadások kiértékelése
@@ -1187,6 +1191,7 @@ async function combat() {
                 combatText.classList.add('combat-text-div-active')
                 if (playerAttack > enemyAttack) {
                     enemyHealth -= damagepoint;
+                    if (enemyHealth < 0) enemyHealth = 0;
                     console.log('Játékos sebzett! Ellenfél életereje: ' + enemyHealth);
                     combatText.innerText = 'Megsebezted az ellenfeled!';
                     enemyHealthBar.style.width = enemyHealth / enemyStartHealth * 100 + "%";
@@ -1194,6 +1199,7 @@ async function combat() {
 
                 } else if (enemyAttack > playerAttack) {
                     healthpoints -= damagepoint;
+                    if (healthpoints < 0) healthpoints = 0;
                     console.log('Ellenfél sebzett! Játékos életereje: ' + healthpoints);
                     combatText.innerText = 'Az ellenfél megsebzett'
                     playerHealthBar.style.width = healthpoints / playerStartHealth * 100 + "%";
@@ -1202,6 +1208,7 @@ async function combat() {
                     console.log('Döntetlen kör, senki nem sérült!');
                     combatText.innerText = 'Kivédtétek egymás támadását!'
                     combatRoundOutcome = 0;
+                    combatFortuneBtn.disabled = true;
                 }
 
                 let combatFleeBtn = null
@@ -1217,6 +1224,8 @@ async function combat() {
                     combatLog.insertBefore(combatFleeBtn, combatLog.children[1]);
                     console.log("MENEKVÉS GOMB LEKREÁLVA")
                     healthpoints -= 2;
+                    setStat("szerencse", fortunepoints, startFortunepoints);
+                    setStat("eletero", healthpoints, startHealthpoints);
                 }
                 
                 // Következő kör előkészítése
@@ -1807,15 +1816,16 @@ function showCard(cardId) {
 
 
     if (currentCard.end === true) {  //Halál kártya kezelése
-        deathPopup();
         rightPageContent = `
             <div class="right-page-btns">
                 <button 
                 type="button" 
                 class="next-btn" 
-                onclick="window.location.href = 'login.html#bookSelect';"
-                >VISSZA MENÜHÖZ</button>
+                onclick="deathPopup()"
+                >TOVÁBB</button>
             </div>`;
+        healthpoints = 0;
+        setStat("eletero", healthpoints, startHealthpoints);
 
     }
     else if (currentCard.end === false && !currentCard.choices) {   //Nyerő kártya kezelése
