@@ -127,6 +127,20 @@
   },
   {
     "id": 47,
+    "text": "Amennyire csak tudod, puha ruhadarabokkal béleled ki a vállad, behúzod a nyakad és az ajtónak rontasz. Dobj egy kockával. Ha az eredmény 1-4. megsérültél és vesztesz 2 ÉLETERŐ pontot. Ha azonban 5-öt vagy 6-ot dobtál, sikerült betörnöd az ajtót lapozz a 158-ra. Egészen addig kell próbálkoznod. míg ez nem sikerül.",
+    "choices": [
+      {
+        "text": "Lapozz a 7-re",
+        "target": 7
+      }
+    ],
+    "enemy": null,
+    "action": "doorBreak",
+    "items": [],
+    "end": false
+  },
+  {
+    "id": 7,
     "text": "Ahogy óvatosan a drótok között lépkedve eléred a Szobrot, az hirtelen eltünik! A következő pillanatban vészjósló morajlás hangzik fel a fejed fölött, és ahogy arra nézel, látod, hogy hatalmas szikladarabok kezdenek feléd zuhanni. A hatalmas súly porrá örli csontjaidat. Kalandod itt véget ér.",
     "choices": null,
     "enemy": null,
