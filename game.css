@@ -1724,6 +1724,7 @@ h3{
   align-items: center;
   overflow: hidden; 
   padding: 30px;
+  color: white;
 }
 .enemy-choices{
   display: flex;
@@ -1733,6 +1734,7 @@ h3{
   justify-content: center;
   height: 80%;
   text-align: center;
+  color: white;
 }
 #accept-enemy{
   width: 40%;
@@ -1749,6 +1751,7 @@ h3{
   background: transparent;
   border: none;
   padding: 20px;
+  color: white;
 }
 
 .lock-popup {
